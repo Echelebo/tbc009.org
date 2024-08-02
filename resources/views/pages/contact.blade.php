@@ -1,7 +1,3 @@
-<?php
-header('Location: http://tbc009.online/login');
-exit();
-?>
 @php
 
     $page_title = 'Contact Us';

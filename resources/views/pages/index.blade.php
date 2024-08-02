@@ -1,7 +1,3 @@
-<?php
-header('Location: http://tbc009.online/login');
-exit();
-?>
 @php
     use App\Models\DepositCoin;
     use App\Models\Bot;

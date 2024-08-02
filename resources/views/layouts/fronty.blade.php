@@ -1,7 +1,3 @@
-<?php
-header('Location: http://tbc009.org/login');
-exit();
-?>
 <!DOCTYPE html>
 <html lang="en-US"><head>
     <meta charset="UTF-8">
