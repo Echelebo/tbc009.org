@@ -142,7 +142,7 @@
 
                                             <div id="selected-to-currency" class="selected d-flex gap-20" data-bs-toggle="modal" data-bs-target=".bd-example-modal-sm-to">
                                                                                                 <button type="button" class="btn btn-primary md:ms-2">
-                                                    <img id="seleceted-to-image" class="img-fluid rounded-icon set-imgTo" src="https://demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png">
+                                                    <img id="seleceted-to-image" class="img-fluid rounded-icon set-imgTo" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png">
                                                     <span id="to-selected" class="set-coinnameTo px-2">LTC </span>
                                                 </button>
                                                                                             </div>
