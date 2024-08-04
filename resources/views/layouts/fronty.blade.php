@@ -1,62 +1,26 @@
 <!DOCTYPE html>
-<html lang="en-US"><head>
+
+<html lang="en" class="scrol-pt">
+    <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Exchange | TBC009</title>
-    <meta name="description" content="Official TBC009 Exchange!">
-    <link rel="stylesheet" href="/themekit/css/bootstrap-grid.css" type="text/css" media="all">
-    <link rel="stylesheet" href="/themekit/css/style.css" type="text/css" media="all">
-    <link rel="stylesheet" href="/skin.css?v=4" type="text/css" media="all">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="Zw0tjR1I5l9mXyBV9qCscb624B7hUCPy5NZjfjVm">
+    <meta name="description" content="TBC009 Exchange, TBC009 wallet, Recover your TBC coin">
+    <meta name="keywords" content="">
+    <title>Crypto Exchange</title>
+    <script src="/demo.paymoney.techvill.net/public/frontend/templates/js/flashesh-dark.min.js"></script>
+<link rel="stylesheet" href="/demo.paymoney.techvill.net/public/dist/libraries/bootstrap-5.0.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/demo.paymoney.techvill.net/public/frontend/templates/css/style.min.css">
+<link rel="stylesheet" href="/demo.paymoney.techvill.net/public/frontend/templates/css/owl-css/owl.min.css">
+<link rel="stylesheet" href="/demo.paymoney.techvill.net/public/dist/plugins/select2-4.1.0-rc.0/css/select2.min.css">
+<link rel="shortcut icon" href="/demo.paymoney.techvill.net/public/uploads/logos/1530689937_favicon.png">
 
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/' . site('favicon')) }}">
-    <link rel="icon" href="{{ asset('assets/images/' . site('favicon')) }}">
+    <link rel="stylesheet" href="/demo.paymoney.techvill.net/Modules/CryptoExchange/Resources/assets/landing/css/style.min.css">
+    <link rel="stylesheet" href="/demo.paymoney.techvill.net/Modules/CryptoExchange/Resources/assets/landing/css/scrolling.min.css">
 
-    <style>
-        body {
-            text-align: center;
-        }
-
-        #boxcoin-exchange {
-            margin: 0 auto 60px auto;
-            text-align: left;
-        }
-
-        .logo {
-            max-width: 100px;
-            margin: 60px auto 0 auto;
-        }
-    </style>
-<link href="/admin_exchange/css/client.css?v=1.2.4" type="text/css" rel="stylesheet">
-
-<link href="/admin_exchange/apps/exchange/exchange.css?v=1.2.4" type="text/css" rel="stylesheet">
-
-<!-- imported from user layout -->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="{{ asset('assets/css/gradient.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    {{-- material icon cdn --}}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    {{-- sweet alert css --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
-
-    {{-- datatable cdn  --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.dataTables.min.css">
-
-    {{-- owl carrousel --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-
-<!-- End of imported from user layout -->
-
-
+</head>
+<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0" data-new-gr-c-s-check-loaded="14.1190.0" data-gr-ext-installed="">
 <style>
 
     .sidenav {
@@ -124,8 +88,9 @@
 }
 
 </style>
-
 </head>
+
+
 <body class="bg-image bg-fixed" data-img-src="/prime/images/forbanner.jpg" data-new-gr-c-s-check-loaded="14.1159.0"
 data-gr-ext-installed=""
 style="background-image: url(&quot;/prime/images/forbanner.jpg&quot;); position: relative; min-height: 100%; top: 0px;">
@@ -154,6 +119,7 @@ style="background-image: url(&quot;/prime/images/forbanner.jpg&quot;); position:
 </div>
 
 </div>
+
 
 
 

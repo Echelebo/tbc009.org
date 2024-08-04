@@ -1,118 +1,540 @@
 @extends('layouts.fronty')
 
 @section('contents')
-<hr class="space">
-    <div id="boxcoin-exchange-init">
-        <div id="boxcoin-exchange" class="bxc-box">
-        <div id="bxc-panel-start" class="bxc-panel bxc-active">
-            <div class="bxc-title">
-                You send<i id="bxc-invert" class="bxc-icon-shuffle bxc-active"></i>
-            </div>
-            <div id="bxc-send" class="bxc-input bxc-input-select bxc-active">
-                <div class="bxc-1">
-                    <input id="bxc-send-amount" type="number" autocomplete="one-time-code">
-                    <div data-value="btc" data-crypto="true" data-network="btc" data-name="Bitcoin">
-                        <img src="https://boxcoin.dev/demo/admin_exchange/media/icon-btc.svg" alt="btc">
-                        <span>btc</span>
+<div class="navandbody-section p-main" id="crypto-front-initiate">
+        <!-- TBC exchange section -->
+        <div>
+            <div class="container-fluid px-240p pb-10 row-head">
+                <div class="row">
+                    <div class="col-lg-6  col-sm-12 col-sm-12 col-xs-12 mw-auto">
+                        <div class="pt-95">
+                            <p class="f-21 OpenSans-600 color-CD aos-init aos-animate" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                                THE SAFEST &amp; MOST RELIABLE</p>
+                            <p class="bold-text p-0">
+                                <span class="crypto-text OpenSans-700 color-E8">TBC</span><br>
+                                <span class="exchange-text OpenSans-700 color-FF">EXCHANGE</span>
+                            </p>
+                            <div class="OpenSans-400 font-20 text-width color-CD">
+                                Buy, sell, and exchange most valued cryptocurrency "The Billion Coin" easily, safely &amp; securely with low fees in just a few minutes.
+                            </div>
+                            <p class="OpenSans-400 font-16 col-md-11 mulish4 c-blue2"></p>
+                            <p class="font-22 OpenSans-600 c-blue2 mt-38 color-E8">Let's Get Started..</p>
+                            <div class="button-widths d-flex justify-content-between align-items-center mt-14 cursor-pointer btn-animate text-light">
+
+                                <div class="ml-27p svg-img-parent">
+                                    <div class="svg-img">
+                                        <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="54" height="54" rx="6" fill="none"></rect>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8181 39.1818C15.4164 38.7801 15.4164 38.1289 15.8181 37.7273L34.7272 18.8182C35.1288 18.4165 35.7801 18.4165 36.1817 18.8182C36.5834 19.2198 36.5834 19.8711 36.1817 20.2727L17.2726 39.1818C16.871 39.5835 16.2198 39.5835 15.8181 39.1818Z" fill="#403E5B"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.2441 19.5454C24.2441 18.9774 24.7046 18.5169 25.2727 18.5169L35.4545 18.5169C36.0225 18.5169 36.483 18.9774 36.483 19.5454L36.483 29.7273C36.483 30.2953 36.0225 30.7558 35.4545 30.7558C34.8864 30.7558 34.426 30.2953 34.426 29.7273L34.426 20.574L25.2727 20.574C24.7046 20.574 24.2441 20.1135 24.2441 19.5454Z" fill="#403E5B"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="bxc-2">
-                    <div class="bxc-2-1">
-                        <i class="bxc-icon-search"></i>
-                        <input class="bxc-search-input" type="text" name="bxc-search" placeholder="Search..." autocomplete="one-time-code">
-                        <i class="bxc-icon-close"></i>
+                    <div class="col-lg-6">
+    <div class="row">
+        <div class="col-md-12 p-1-res">
+            <div class="pt-80">
+                                                    <nav class="nav-dimension">
+                        <div class="navmp nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link c-off-white padding-a OpenSans-700 crypto crypto_swap active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" data-type="crypto_swap">Crypto Swap </a>
+
+                        </div>
+                    </nav>
+
+                <form action="#" method="POST" accept-charset="UTF-8" id="crypto-send-form">
+                    <input type="hidden" name="_token" value="Zw0tjR1I5l9mXyBV9qCscb624B7hUCPy5NZjfjVm" autocomplete="off">                    <input type="hidden" name="from_type" id="from_type" value="crypto_swap">
+
+                    <div class="tab-content tab-dimension mt-n3" id="nav-tabContent">
+                        <div class="box-shadow tabpan-rad tab-pane  show active bg-light bg-5B" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                            <!-- You Send Section -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="boxdiv yousend-top bg-light mx-28 mt-35 box-bg-one">
+                                        <div class="d-flex justify-content-between">
+
+                                            <!-- You Send Amount -->
+                                            <div class="mt-2 mt-n8-res w-100">
+                                                <span class="font-14 OpenSans-400 c-blue2 pl-20 color-E8">You Send</span>
+                                                <br>
+                                                <input type="text" class="form-control custom-height w-100 input-customization s-font-24 c-blue2 mulish4 pl-20 mt-n3 color-E8" autocomplete="off" name="send_amount" id="send_amount" value="0.05000000" onkeypress="return isNumberOrDecimalPointKey(this, event);" oninput="restrictNumberToPrefdecimalOnSendInput(this)">
+                                            </div>
+
+                                            <!-- Button trigger modal -->
+                                                <div id="selected-from-currency" class="selected d-flex gap-20" data-bs-toggle="modal" data-bs-target=".bd-example-modal-sm">
+                                                                                                            <button type="button" class="btn btn-primary md:ms-2">
+                                                            <img id="seleceted-from-image" class="img-fluid rounded-icon set-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/1671520294.png">
+                                                            <span class="set-coinname px-2" id="from-selected">ETH</span>
+                                                        </button>
+                                                                                                    </div>
+
+                                                <input type="hidden" name="from_currency" id="fromCurrencyId" value="11">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <!-- Limit Fees Estimated Text -->
+                            <div class="row">
+                                <div class="col-md-10 col-10 parent-2">
+                                    <div class="ul-one ul-ml-51 dot display-hide">
+                                    </div>
+                                    <div class="d-flex align-items-center dot dot-message display-hide">
+                                        <div class="ul-two ul-ml-47 dot display-hide">
+                                        </div>
+
+                                        <p class="mb-unset OpenSans-400 font-13 c-blue2 pl-16 send_amount_error"></p>
+                                    </div>
+
+                                    <div class="ul-three ul-ml-51">
+                                    </div>
+                                    <div class="d-flex align-items-center h-9p">
+                                        <div class="ul-four ul-ml-47">
+                                        </div>
+                                        <p class="mb-unset OpenSans-400 font-13 c-blue2 pl-16">
+                                            Fees : <span class="exchange_fee">0.00125</span>
+                                        </p>
+                                    </div>
+                                    <div class="ul-five ul-ml-51">
+                                    </div>
+                                    <div class="d-flex align-items-center h-9p">
+                                        <div class="ul-six ul-ml-47">
+                                        </div>
+                                        <p class="mb-unset OpenSans-400 font-13 c-blue2 pl-16">
+                                            Estimated rate : <span class="rate">18.58000000</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="ul-seven ul-ml-51">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-2 d-flex align-items-center">
+                                    <div class="buy-sell-btn display-flex justify-content-center align-items-center switch-box display-hide cur-pointer">
+                                        <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.75 0C12.3358 0 12 0.373096 12 0.833333C12 1.29357 12.3358 1.66667 12.75 1.66667H15.75C15.9489 1.66667 16.1397 1.75446 16.2803 1.91074C16.421 2.06702 16.5 2.27899 16.5 2.5V17.4164L13.4226 14.2511C13.0972 13.9163 12.5695 13.9163 12.2441 14.2511C11.9186 14.5858 11.9186 15.1285 12.2441 15.4632L16.4107 19.7489C16.6068 19.9506 16.8761 20.0308 17.1305 19.9895C17.1694 19.9964 17.2093 20 17.25 20C17.6095 20 17.9098 19.719 17.983 19.344L21.7559 15.4632C22.0814 15.1285 22.0814 14.5858 21.7559 14.2511C21.4305 13.9163 20.9028 13.9163 20.5774 14.2511L18 16.9021V2.5C18 1.83696 17.7629 1.20107 17.341 0.732233C16.919 0.263392 16.3467 0 15.75 0H12.75ZM4.62801 4.01042C4.396 3.97235 4.1488 4.03861 3.96967 4.20921L0.21967 7.78064C-0.0732233 8.05958 -0.0732233 8.51184 0.21967 8.79079C0.512563 9.06974 0.987437 9.06974 1.28033 8.79079L4 6.20063V20.625C4 21.2549 4.23705 21.859 4.65901 22.3044C5.08097 22.7498 5.65326 23 6.25 23H9.25C9.66421 23 10 22.6456 10 22.2083C10 21.7711 9.66421 21.4167 9.25 21.4167H6.25C6.05109 21.4167 5.86032 21.3333 5.71967 21.1848C5.57902 21.0363 5.5 20.835 5.5 20.625V6.67682L7.71967 8.79079C8.01256 9.06974 8.48744 9.06974 8.78033 8.79079C9.07322 8.51184 9.07322 8.05958 8.78033 7.78064L5.487 4.64413C5.42152 4.27741 5.11645 4 4.75 4C4.70846 4 4.66771 4.00356 4.62801 4.01042Z" fill="currentColor" fill-opacity="0.6"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- You Get Section -->
+                            <div class="row pb-36">
+                                <div class="col-md-12">
+                                    <div class="boxdiv bg-light mx-28 box-bg-two">
+                                        <div class="d-flex justify-content-between">
+
+                                            <!-- You Get Amount -->
+                                            <div class="mt-2 mt-n8-res w-100">
+                                                <span class="font-14 poppins5 c-blue2 pl-20">You Get</span>
+                                                <br>
+                                                <input type="text" class="form-control custom-height w-100 input-customization s-font-24 c-blue2 mulish4 pl-20 mt-n3" autocomplete="off" name="get_amount" id="get_amount" value="0.1" onkeypress="return isNumberOrDecimalPointKey(this, event);" oninput="restrictNumberToPrefdecimalOnReceiveInput(this)">
+                                            </div>
+
+
+
+                                            <div id="selected-to-currency" class="selected d-flex gap-20" data-bs-toggle="modal" data-bs-target=".bd-example-modal-sm-to">
+                                                                                                <button type="button" class="btn btn-primary md:ms-2">
+                                                    <img id="seleceted-to-image" class="img-fluid rounded-icon set-imgTo" src="https://demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png">
+                                                    <span id="to-selected" class="set-coinnameTo px-2">LTC </span>
+                                                </button>
+                                                                                            </div>
+
+                                            <input type="hidden" id="toCurrencyId" name="to_currency" value="8">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Exchange Button -->
+                            <div class="row pb-36">
+                                <div class="col-md-12">
+                                    <div class="mx-28 exchangebutton-2 text-center d-grid">
+                                        <button type="submit" class="btn-lg btn-block btn cur-pointer btn-bg-color" id="crypto_buy_sell_button">
+                                            <div class="spinner spinner-border text-white spinner-border-sm mx-2 d-none">
+                                                <span class="visually-hidden"></span>
+                                            </div>
+                                            <span class="exc-font-22 OpenSans-600 c-white" id="rp_text">Swap</span>
+                                            <span id="rightAngleSvgIcon"><svg class="position-relative ms-1 rtl-wrap-one nscaleX-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11648 12.216C3.81274 11.9123 3.81274 11.4198 4.11648 11.1161L8.23317 6.99937L4.11648 2.88268C3.81274 2.57894 3.81274 2.08647 4.11648 1.78273C4.42022 1.47899 4.91268 1.47899 5.21642 1.78273L9.88309 6.4494C10.1868 6.75314 10.1868 7.2456 9.88309 7.54934L5.21642 12.216C4.91268 12.5198 4.42022 12.5198 4.11648 12.216Z" fill="currentColor"></path>
+                            </svg></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bxc-2-2 bxc-scrollbar">
-                        <span class="bxc-title-ul bxc-title-cryptocurrencies">
-                            Cryptocurrencies                        </span>
-                        <div class="bxc-select-ul"><div data-value="btc" data-crypto="true" data-network="btc" data-name="Bitcoin" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-btc.svg" alt="btc"><div><span>Bitcoin</span><span>BTC • Bitcoin</span></div></div><div data-value="eth" data-crypto="true" data-network="eth" data-name="Ethereum" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-eth.svg" alt="eth"><div><span>Ethereum</span><span>ETH • Ethereum</span></div></div><div data-value="usdt" data-crypto="true" data-network="eth" data-name="Tether" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-usdt.svg" alt="usdt"><div><span>Tether</span><span>USDT • Ethereum</span></div></div><div data-value="usdc" data-crypto="true" data-network="eth" data-name="USD Coin" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-usdc.svg" alt="usdc"><div><span>USD Coin</span><span>USDC • Ethereum</span></div></div><div data-value="link" data-crypto="true" data-network="eth" data-name="Chainlink" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-link.svg" alt="link"><div><span>Chainlink</span><span>LINK • Ethereum</span></div></div><div data-value="shib" data-crypto="true" data-network="eth" data-name="Shiba Inu" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-shib.svg" alt="shib"><div><span>Shiba Inu</span><span>SHIB • Ethereum</span></div></div><div data-value="bat" data-crypto="true" data-network="eth" data-name="Basic Attention Token" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-bat.svg" alt="bat"><div><span>Basic Attention Token</span><span>BAT • Ethereum</span></div></div><div data-value="usdt_tron" data-crypto="true" data-network="trx" data-name="Tether" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-usdt_tron.svg" alt="usdt_tron"><div><span>Tether</span><span>USDT • Tron</span></div></div><div data-value="bnb" data-crypto="true" data-network="bsc" data-name="BNB" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-bnb.svg" alt="bnb"><div><span>BNB</span><span>BNB • Binance Chain</span></div></div><div data-value="busd" data-crypto="true" data-network="bsc" data-name="Binance USD" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-busd.svg" alt="busd"><div><span>Binance USD</span><span>BUSD • Binance Chain</span></div></div><div data-value="usdt_bsc" data-crypto="true" data-network="bsc" data-name="Tether" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-usdt_bsc.svg" alt="usdt_bsc"><div><span>Tether</span><span>USDT • Binance Chain</span></div></div><div data-value="xrp" data-crypto="true" data-network="xrp" data-name="XRP" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-xrp.svg" alt="xrp"><div><span>XRP</span><span>XRP • XRP</span></div></div><div data-value="ltc" data-crypto="true" data-network="ltc" data-name="Litecoin" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-ltc.svg" alt="ltc"><div><span>Litecoin</span><span>LTC • Litecoin</span></div></div><div data-value="doge" data-crypto="true" data-network="doge" data-name="Dogecoin" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-doge.svg" alt="doge"><div><span>Dogecoin</span><span>DOGE • Dogecoin</span></div></div><div data-value="bch" data-crypto="true" data-network="bch" data-name="Bitcoin Cash" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-bch.svg" alt="bch"><div><span>Bitcoin Cash</span><span>BCH • Bitcoin Cash</span></div></div><div data-value="algo" data-crypto="true" data-network="algo" data-name="Algorand" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-algo.svg" alt="algo"><div><span>Algorand</span><span>ALGO • Algorand</span></div></div></div>                        <span class="bxc-title-ul bxc-title-currencies">
-                            Currencies                        </span>
-                        <div class="bxc-select-ul"><div data-value="aed" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ae.svg" alt="AED"><div><span>United Arab Emirates Dirham</span><span>AED</span></div></div><div data-value="afn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/af.svg" alt="AFN"><div><span>Afghan Afghani</span><span>AFN</span></div></div><div data-value="all" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/al.svg" alt="ALL"><div><span>Albanian Lek</span><span>ALL</span></div></div><div data-value="amd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/am.svg" alt="AMD"><div><span>Armenian Dram</span><span>AMD</span></div></div><div data-value="ang" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/an.svg" alt="ANG"><div><span>Netherlands Antillean Guilder</span><span>ANG</span></div></div><div data-value="aoa" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ao.svg" alt="AOA"><div><span>Angolan Kwanza</span><span>AOA</span></div></div><div data-value="ars" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ar.svg" alt="ARS"><div><span>Argentine Peso</span><span>ARS</span></div></div><div data-value="aud" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/au.svg" alt="AUD"><div><span>Australian Dollar</span><span>AUD</span></div></div><div data-value="awg" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/aw.svg" alt="AWG"><div><span>Aruban Florin</span><span>AWG</span></div></div><div data-value="azn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/az.svg" alt="AZN"><div><span>Azerbaijani Manat</span><span>AZN</span></div></div><div data-value="bam" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ba.svg" alt="BAM"><div><span>Bosnia-Herzegovina Convertible Mark</span><span>BAM</span></div></div><div data-value="bbd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bb.svg" alt="BBD"><div><span>Barbadian Dollar</span><span>BBD</span></div></div><div data-value="bdt" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bd.svg" alt="BDT"><div><span>Bangladeshi Taka</span><span>BDT</span></div></div><div data-value="bgn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bg.svg" alt="BGN"><div><span>Bulgarian Lev</span><span>BGN</span></div></div><div data-value="bif" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bi.svg" alt="BIF"><div><span>Burundian Franc</span><span>BIF</span></div></div><div data-value="bmd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bm.svg" alt="BMD"><div><span>Bermudan Dollar</span><span>BMD</span></div></div><div data-value="bnd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bn.svg" alt="BND"><div><span>Brunei Dollar</span><span>BND</span></div></div><div data-value="bob" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bo.svg" alt="BOB"><div><span>Bolivian Boliviano</span><span>BOB</span></div></div><div data-value="brl" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/br.svg" alt="BRL"><div><span>Brazilian Real</span><span>BRL</span></div></div><div data-value="bsd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bs.svg" alt="BSD"><div><span>Bahamian Dollar</span><span>BSD</span></div></div><div data-value="bwp" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bw.svg" alt="BWP"><div><span>Botswanan Pula</span><span>BWP</span></div></div><div data-value="byn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/by.svg" alt="BYN"><div><span>Belarusian Ruble</span><span>BYN</span></div></div><div data-value="bzd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/bz.svg" alt="BZD"><div><span>Belize Dollar</span><span>BZD</span></div></div><div data-value="cad" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ca.svg" alt="CAD"><div><span>Canadian Dollar</span><span>CAD</span></div></div><div data-value="cdf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/cd.svg" alt="CDF"><div><span>Congolese Franc</span><span>CDF</span></div></div><div data-value="chf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ch.svg" alt="CHF"><div><span>Swiss Franc</span><span>CHF</span></div></div><div data-value="clp" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/cl.svg" alt="CLP"><div><span>Chilean Peso</span><span>CLP</span></div></div><div data-value="cny" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/cn.svg" alt="CNY"><div><span>Chinese Yuan</span><span>CNY</span></div></div><div data-value="cop" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/co.svg" alt="COP"><div><span>Colombian Peso</span><span>COP</span></div></div><div data-value="crc" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/cr.svg" alt="CRC"><div><span>Costa Rican Colón</span><span>CRC</span></div></div><div data-value="cve" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/cv.svg" alt="CVE"><div><span>Cape Verdean Escudo</span><span>CVE</span></div></div><div data-value="czk" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/cz.svg" alt="CZK"><div><span>Czech Republic Koruna</span><span>CZK</span></div></div><div data-value="djf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/dj.svg" alt="DJF"><div><span>Djiboutian Franc</span><span>DJF</span></div></div><div data-value="dkk" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/dk.svg" alt="DKK"><div><span>Danish Krone</span><span>DKK</span></div></div><div data-value="dop" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/do.svg" alt="DOP"><div><span>Dominican Peso</span><span>DOP</span></div></div><div data-value="dzd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/dz.svg" alt="DZD"><div><span>Algerian Dinar</span><span>DZD</span></div></div><div data-value="egp" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/eg.svg" alt="EGP"><div><span>Egyptian Pound</span><span>EGP</span></div></div><div data-value="etb" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/et.svg" alt="ETB"><div><span>Ethiopian Birr</span><span>ETB</span></div></div><div data-value="eur" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/eu.svg" alt="EUR"><div><span>Euro</span><span>EUR</span></div></div><div data-value="fjd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/fj.svg" alt="FJD"><div><span>Fijian Dollar</span><span>FJD</span></div></div><div data-value="fkp" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/fk.svg" alt="FKP"><div><span>Falkland Islands Pound</span><span>FKP</span></div></div><div data-value="gbp" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/gb.svg" alt="GBP"><div><span>British Pound Sterling</span><span>GBP</span></div></div><div data-value="gel" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ge.svg" alt="GEL"><div><span>Georgian Lari</span><span>GEL</span></div></div><div data-value="gip" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/gi.svg" alt="GIP"><div><span>Gibraltar Pound</span><span>GIP</span></div></div><div data-value="gmd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/gm.svg" alt="GMD"><div><span>Gambian Dalasi</span><span>GMD</span></div></div><div data-value="gnf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/gn.svg" alt="GNF"><div><span>Guinean Franc</span><span>GNF</span></div></div><div data-value="gtq" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/gt.svg" alt="GTQ"><div><span>Guatemalan Quetzal</span><span>GTQ</span></div></div><div data-value="gyd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/gy.svg" alt="GYD"><div><span>Guyanaese Dollar</span><span>GYD</span></div></div><div data-value="hkd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/hk.svg" alt="HKD"><div><span>Hong Kong Dollar</span><span>HKD</span></div></div><div data-value="hnl" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/hn.svg" alt="HNL"><div><span>Honduran Lempira</span><span>HNL</span></div></div><div data-value="htg" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ht.svg" alt="HTG"><div><span>Haitian Gourde</span><span>HTG</span></div></div><div data-value="huf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/hu.svg" alt="HUF"><div><span>Hungarian Forint</span><span>HUF</span></div></div><div data-value="idr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/id.svg" alt="IDR"><div><span>Indonesian Rupiah</span><span>IDR</span></div></div><div data-value="ils" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/il.svg" alt="ILS"><div><span>Israeli New Sheqel</span><span>ILS</span></div></div><div data-value="inr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/in.svg" alt="INR"><div><span>Indian Rupee</span><span>INR</span></div></div><div data-value="isk" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/is.svg" alt="ISK"><div><span>Icelandic Króna</span><span>ISK</span></div></div><div data-value="jmd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/jm.svg" alt="JMD"><div><span>Jamaican Dollar</span><span>JMD</span></div></div><div data-value="jpy" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/jp.svg" alt="JPY"><div><span>Japanese Yen</span><span>JPY</span></div></div><div data-value="kes" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ke.svg" alt="KES"><div><span>Kenyan Shilling</span><span>KES</span></div></div><div data-value="kgs" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/kg.svg" alt="KGS"><div><span>Kyrgystani Som</span><span>KGS</span></div></div><div data-value="khr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/kh.svg" alt="KHR"><div><span>Cambodian Riel</span><span>KHR</span></div></div><div data-value="kmf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/km.svg" alt="KMF"><div><span>Comorian Franc</span><span>KMF</span></div></div><div data-value="krw" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/kr.svg" alt="KRW"><div><span>South Korean Won</span><span>KRW</span></div></div><div data-value="kyd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ky.svg" alt="KYD"><div><span>Cayman Islands Dollar</span><span>KYD</span></div></div><div data-value="kzt" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/kz.svg" alt="KZT"><div><span>Kazakhstani Tenge</span><span>KZT</span></div></div><div data-value="lak" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/la.svg" alt="LAK"><div><span>Laotian Kip</span><span>LAK</span></div></div><div data-value="lbp" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/lb.svg" alt="LBP"><div><span>Lebanese Pound</span><span>LBP</span></div></div><div data-value="lkr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/lk.svg" alt="LKR"><div><span>Sri Lankan Rupee</span><span>LKR</span></div></div><div data-value="lrd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/lr.svg" alt="LRD"><div><span>Liberian Dollar</span><span>LRD</span></div></div><div data-value="lsl" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ls.svg" alt="LSL"><div><span>Lesotho Loti</span><span>LSL</span></div></div><div data-value="mad" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ma.svg" alt="MAD"><div><span>Moroccan Dirham</span><span>MAD</span></div></div><div data-value="mdl" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/md.svg" alt="MDL"><div><span>Moldovan Leu</span><span>MDL</span></div></div><div data-value="mga" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mg.svg" alt="MGA"><div><span>Malagasy Ariary</span><span>MGA</span></div></div><div data-value="mkd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mk.svg" alt="MKD"><div><span>Macedonian Denar</span><span>MKD</span></div></div><div data-value="mmk" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mm.svg" alt="MMK"><div><span>Myanma Kyat</span><span>MMK</span></div></div><div data-value="mnt" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mn.svg" alt="MNT"><div><span>Mongolian Tugrik</span><span>MNT</span></div></div><div data-value="mop" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mo.svg" alt="MOP"><div><span>Macanese Pataca</span><span>MOP</span></div></div><div data-value="mur" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mu.svg" alt="MUR"><div><span>Mauritian Rupee</span><span>MUR</span></div></div><div data-value="mvr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mv.svg" alt="MVR"><div><span>Maldivian Rufiyaa</span><span>MVR</span></div></div><div data-value="mwk" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mw.svg" alt="MWK"><div><span>Malawian Kwacha</span><span>MWK</span></div></div><div data-value="mxn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mx.svg" alt="MXN"><div><span>Mexican Peso</span><span>MXN</span></div></div><div data-value="myr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/my.svg" alt="MYR"><div><span>Malaysian Ringgit</span><span>MYR</span></div></div><div data-value="mzn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/mz.svg" alt="MZN"><div><span>Mozambican Metical</span><span>MZN</span></div></div><div data-value="nad" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/na.svg" alt="NAD"><div><span>Namibian Dollar</span><span>NAD</span></div></div><div data-value="ngn" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ng.svg" alt="NGN"><div><span>Nigerian Naira</span><span>NGN</span></div></div><div data-value="nio" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ni.svg" alt="NIO"><div><span>Nicaraguan Córdoba</span><span>NIO</span></div></div><div data-value="nok" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/no.svg" alt="NOK"><div><span>Norwegian Krone</span><span>NOK</span></div></div><div data-value="npr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/np.svg" alt="NPR"><div><span>Nepalese Rupee</span><span>NPR</span></div></div><div data-value="nzd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/nz.svg" alt="NZD"><div><span>New Zealand Dollar</span><span>NZD</span></div></div><div data-value="pab" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/pa.svg" alt="PAB"><div><span>Panamanian Balboa</span><span>PAB</span></div></div><div data-value="pen" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/pe.svg" alt="PEN"><div><span>Peruvian Nuevo Sol</span><span>PEN</span></div></div><div data-value="pgk" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/pg.svg" alt="PGK"><div><span>Papua New Guinean Kina</span><span>PGK</span></div></div><div data-value="php" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ph.svg" alt="PHP"><div><span>Philippine Peso</span><span>PHP</span></div></div><div data-value="pkr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/pk.svg" alt="PKR"><div><span>Pakistani Rupee</span><span>PKR</span></div></div><div data-value="pln" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/pl.svg" alt="PLN"><div><span>Polish Zloty</span><span>PLN</span></div></div><div data-value="pyg" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/py.svg" alt="PYG"><div><span>Paraguayan Guarani</span><span>PYG</span></div></div><div data-value="qar" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/qa.svg" alt="QAR"><div><span>Qatari Rial</span><span>QAR</span></div></div><div data-value="ron" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ro.svg" alt="RON"><div><span>Romanian Leu</span><span>RON</span></div></div><div data-value="rsd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/rs.svg" alt="RSD"><div><span>Serbian Dinar</span><span>RSD</span></div></div><div data-value="rub" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ru.svg" alt="RUB"><div><span>Russian Ruble</span><span>RUB</span></div></div><div data-value="rwf" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/rw.svg" alt="RWF"><div><span>Rwandan Franc</span><span>RWF</span></div></div><div data-value="sar" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sa.svg" alt="SAR"><div><span>Saudi Riyal</span><span>SAR</span></div></div><div data-value="sbd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sb.svg" alt="SBD"><div><span>Solomon Islands Dollar</span><span>SBD</span></div></div><div data-value="scr" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sc.svg" alt="SCR"><div><span>Seychellois Rupee</span><span>SCR</span></div></div><div data-value="sek" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/se.svg" alt="SEK"><div><span>Swedish Krona</span><span>SEK</span></div></div><div data-value="sgd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sg.svg" alt="SGD"><div><span>Singapore Dollar</span><span>SGD</span></div></div><div data-value="sll" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sl.svg" alt="SLL"><div><span>Sierra Leonean Leone</span><span>SLL</span></div></div><div data-value="sos" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/so.svg" alt="SOS"><div><span>Somali Shilling</span><span>SOS</span></div></div><div data-value="srd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sr.svg" alt="SRD"><div><span>Surinamese Dollar</span><span>SRD</span></div></div><div data-value="szl" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/sz.svg" alt="SZL"><div><span>Swazi Lilangeni</span><span>SZL</span></div></div><div data-value="thb" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/th.svg" alt="THB"><div><span>Thai Baht</span><span>THB</span></div></div><div data-value="tjs" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/tj.svg" alt="TJS"><div><span>Tajikistani Somoni</span><span>TJS</span></div></div><div data-value="top" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/to.svg" alt="TOP"><div><span>Tongan Pa'anga</span><span>TOP</span></div></div><div data-value="try" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/tr.svg" alt="TRY"><div><span>Turkish Lira</span><span>TRY</span></div></div><div data-value="ttd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/tt.svg" alt="TTD"><div><span>Trinidad and Tobago Dollar</span><span>TTD</span></div></div><div data-value="twd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/tw.svg" alt="TWD"><div><span>New Taiwan Dollar</span><span>TWD</span></div></div><div data-value="tzs" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/tz.svg" alt="TZS"><div><span>Tanzanian Shilling</span><span>TZS</span></div></div><div data-value="uah" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ua.svg" alt="UAH"><div><span>Ukrainian Hryvnia</span><span>UAH</span></div></div><div data-value="ugx" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ug.svg" alt="UGX"><div><span>Ugandan Shilling</span><span>UGX</span></div></div><div data-value="usd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/us.svg" alt="USD"><div><span>United States Dollar</span><span>USD</span></div></div><div data-value="uyu" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/uy.svg" alt="UYU"><div><span>Uruguayan Peso</span><span>UYU</span></div></div><div data-value="uzs" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/uz.svg" alt="UZS"><div><span>Uzbekistan Som</span><span>UZS</span></div></div><div data-value="vnd" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/vn.svg" alt="VND"><div><span>Vietnamese Dong</span><span>VND</span></div></div><div data-value="vuv" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/vu.svg" alt="VUV"><div><span>Vanuatu Vatu</span><span>VUV</span></div></div><div data-value="wst" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ws.svg" alt="WST"><div><span>Samoan Tala</span><span>WST</span></div></div><div data-value="yer" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/ye.svg" alt="YER"><div><span>Yemeni Rial</span><span>YER</span></div></div><div data-value="zar" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/za.svg" alt="ZAR"><div><span>South African Rand</span><span>ZAR</span></div></div><div data-value="zmw" data-currency="true" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/flags/zm.svg" alt="ZMW"><div><span>Zambian Kwacha</span><span>ZMW</span></div></div></div>                    </div>
-                </div>
+                </form>
+
             </div>
-            <div id="bxc-error-pay" class="bxc-error"></div>
-            <div class="bxc-title">
-                You get            </div>
-            <div id="bxc-get" class="bxc-input bxc-input-select bxc-active">
-                <div class="bxc-1">
-                    <input id="bxc-get-amount" type="number" autocomplete="one-time-code">
-                    <div data-crypto="true" data-value="btc" data-network="btc" data-name="Bitcoin">
-                        <img src="https://boxcoin.dev/demo/admin_exchange/media/icon-btc.svg" alt="btc">
-                        <span>btc</span>
-                    </div>
-                </div>
-                <div class="bxc-2">
-                    <div class="bxc-2-1">
-                        <i class="bxc-icon-search"></i>
-                        <input class="bxc-search-input" type="text" name="bxc-search" placeholder="Search..." autocomplete="one-time-code">
-                        <i class="bxc-icon-close"></i>
-                    </div>
-                    <div class="bxc-2-2 bxc-scrollbar">
-                        <div class="bxc-select-ul"><div data-value="btc" data-crypto="true" data-network="btc" data-name="Bitcoin" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-btc.svg" alt="btc"><div><span>Bitcoin</span><span>BTC • Bitcoin</span></div></div><div data-value="eth" data-crypto="true" data-network="eth" data-name="Ethereum" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-eth.svg" alt="eth"><div><span>Ethereum</span><span>ETH • Ethereum</span></div></div><div data-value="usdt" data-crypto="true" data-network="eth" data-name="Tether" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-usdt.svg" alt="usdt"><div><span>Tether</span><span>USDT • Ethereum</span></div></div><div data-value="usdc" data-crypto="true" data-network="eth" data-name="USD Coin" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-usdc.svg" alt="usdc"><div><span>USD Coin</span><span>USDC • Ethereum</span></div></div><div data-value="link" data-crypto="true" data-network="eth" data-name="Chainlink" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-link.svg" alt="link"><div><span>Chainlink</span><span>LINK • Ethereum</span></div></div><div data-value="shib" data-crypto="true" data-network="eth" data-name="Shiba Inu" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-shib.svg" alt="shib"><div><span>Shiba Inu</span><span>SHIB • Ethereum</span></div></div><div data-value="bat" data-crypto="true" data-network="eth" data-name="Basic Attention Token" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-bat.svg" alt="bat"><div><span>Basic Attention Token</span><span>BAT • Ethereum</span></div></div></div>                    </div>
-                </div>
-            </div>
-            <div class="bxc-title bxc-title-summary bxc-title-summary-start bxc-active">
-                Summary<span id="bxc-quote-update" class="bxc-flex"><i class="bxc-icon-clock"></i>Quote updates in 3s</span>
-            </div>
-            <div id="bxc-summary" class="bxc-summary bxc-active">
-                <div class="bxc-1">You get <b>0.0000327 BTC</b> for <b>0.00004577 BTC</b></div>
-                <div class="bxc-2"><span class="bxc-flex"><span>0.0000327<i> @ 1 BTC</i></span><span>0.0000327 BTC</span></span><span class="bxc-flex"><span>Network fee <i class="bxc-icon-help bxc-toolip-cnt"><span class="bxc-toolip">The blockchain fee</span></i></span><span>0.00001078 BTC</span></span><span class="bxc-flex"><span>Processing fee <i class="bxc-icon-help bxc-toolip-cnt"><span class="bxc-toolip">The fee charged by us</span></i></span><span>0.00000228 BTC</span></span></div>
-            </div>
-            <div id="bxc-btn-exchange-1" class="bxc-btn bxc-icon-after bxc-btn-main">
-                Continue            </div>
-            <div class="bxc-footer">By continuing you agree to our <a href="https://boxcoin.dev/cookie" target="_blank">cookie policy</a>.</div>        </div>
-                <div id="bxc-panel-address" class="bxc-panel">
-            <div class="bxc-title"></div>
-            <div id="bxc-get-address" class="bxc-input bxc-active">
-                <input type="text" autocomplete="one-time-code">
-                <img src="" alt="">
-            </div>
-            <div id="bxc-error-address" class="bxc-error"></div>
-            <div class="bxc-text"></div>
-            <div id="bxc-btn-exchange-2" class="bxc-btn bxc-icon-after bxc-btn-main bxc-disabled">
-                Continue            </div>
-            <div class="bxc-footer">By continuing you confirm that you own and have control of this wallet.</div>        </div>
-                <div id="bxc-panel-payment" class="bxc-panel">
-            <div class="bxc-title">
-                You pay with<i data-back="address" class="bxc-icon-arrow-left"></i>
-            </div>
-            <div class="bxc-paymet-method">
-                <div data-payment-method="stripe" class="bxc-flex bxc-active"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-cc.svg" alt="Credit or debit card"><span>Credit or debit card</span></div><div data-payment-method="paypal" class="bxc-flex"><img src="https://boxcoin.dev/demo/admin_exchange/media/icon-pp-2.svg" alt="PayPal"><span>PayPal</span></div>                <div data-payment-method="crypto" class="bxc-flex">
-                    <img src="" alt="">
-                    <div></div>
-                </div>
-            </div>
-            <div id="bxc-payment-address-title" class="bxc-title"></div>
-            <div id="bxc-payment-address" class="bxc-input bxc-active">
-                <input type="text" disabled="">
-                <img src="" alt="">
-            </div>
-            <div id="bxc-payment-address-fiat"></div>
-            <div class="bxc-title bxc-title-summary bxc-title-summary-payment">
-                Summary<span id="bxc-quote-update" class="bxc-flex"></span>
-            </div>
-            <div id="bxc-summary-payment" class="bxc-summary">
-                <div class="bxc-1"></div>
-                <div class="bxc-2"></div>
-            </div>
-            <div id="bxc-btn-exchange-3" class="bxc-btn bxc-icon-after bxc-btn-main bxc-disabled">
-                Pay            </div>
-            <div class="bxc-footer">By clicking Pay you agree to our <a href="https://boxcoin.dev/terms-of-service" target="_blank">Terms of Service</a> and <a href="https://boxcoin.dev/privacy" target="_blank">Privacy Policy</a>.</div>        </div>
-        <div id="bxc-panel-processing" class="bxc-panel">
-            <div class="bxc-loading"></div>
-            <div class="bxc-title">
-                We are confirming your payment...            </div>
-            <div class="bxc-footer">Problems? Contact us at support@boxcoin.dev and send your Order ID.</div>            <div id="bxc-cancel-verify-payment" class="bxc-link">
-                <div class="bxc-icon-close"></div>Cancel            </div>
         </div>
-        <div id="bxc-panel-finish" class="bxc-panel">
-            <div class="bxc-icon-check"></div>
-            <div id="bxc-finish-text" class="bxc-title"></div>
-            <a id="bxc-transaction-link" href="#" class="bxc-underline bxc-loading">
-                View transaction            </a>
-            <div class="bxc-footer">Problems? Contact us at support@boxcoin.dev and send your Order ID.</div>        </div>
-            </div>
+    </div>
 </div>
 
+<div class="modal fade-in animated bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog crypto-modal-width modal-sm modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+            <h2 class="modal-title f-18 OpenSans-400" id="exampleModalLongTitle">Select Crypto</h2>
+            <button type="button" class="close close-icon" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body modal-body-parent">
+        <div class="p-3">
+        <div class="crypto-search">
+            <input type="text" class="form-control" id="fromInput" placeholder="Search">
+            <span class="fa fa-search"></span>
+        </div>
+        </div>
+            <div class="modal-body-child thin-scrollbar">
+            <table class="table table-hover" id="from-currency-table">
+                <tbody id="from-currency-tr">
+
+                         <tr>
+                            <td class="text-left cursor-pointer from-currency" id="11">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="from-image-11" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/1671520294.png" alt="ETH">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="from-code-11">
+                                         ETH
+                                        </p>
+                                        <span class="coin-name">Ethereum</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+
+                         <tr>
+                            <td class="text-left cursor-pointer from-currency" id="8">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="from-image-8" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png" alt="LTC">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="from-code-8">
+                                         LTC
+                                        </p>
+                                        <span class="coin-name">Litecoin Testnet</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+
+                         <tr>
+                            <td class="text-left cursor-pointer from-currency" id="29">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="from-image-29" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/bitcoin_crypto.png" alt="BTC">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="from-code-29">
+                                         BTC
+                                        </p>
+                                        <span class="coin-name">Bitcoin</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade-in animated bd-example-modal-sm-to" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog crypto-modal-width modal-sm modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+            <h2 class="modal-title f-18 OpenSans-400" id="exampleModalLongTitle">Select Crypto</h2>
+            <button type="button" class="close close-icon" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body modal-body-parent">
+        <div class="p-3">
+        <div class="crypto-search">
+            <input type="text" class="form-control" id="toInput" placeholder="Search">
+            <span class="fa fa-search"></span>
+        </div>
+        </div>
+            <div class="modal-body-child thin-scrollbar">
+            <table class="table table-hover" id="to-currency-table">
+                <tbody id="to-currency-tr">
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="8">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-8" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png" alt="LTC">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-8">
+                                            LTC
+                                        </p>
+                                        <span class="coin-name">Litecoin Testnet</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="12">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-12" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/1671523566.png" alt="DOGE">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-12">
+                                            DOGE
+                                        </p>
+                                        <span class="coin-name">Dogecoin</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="13">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-13" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/avalanche.png" alt="AVAX">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-13">
+                                            AVAX
+                                        </p>
+                                        <span class="coin-name">Avalanche</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="14">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-14" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/bnb.png" alt="BNB">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-14">
+                                            BNB
+                                        </p>
+                                        <span class="coin-name">Binance Coin</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="15">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-15" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/cardano.png" alt="ADA">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-15">
+                                            ADA
+                                        </p>
+                                        <span class="coin-name">Cardano</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="16">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-16" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/luna.png" alt="LUNA">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-16">
+                                            LUNA
+                                        </p>
+                                        <span class="coin-name">Terra</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="17">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-17" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/dot.png" alt="DOT">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-17">
+                                            DOT
+                                        </p>
+                                        <span class="coin-name">Polkadot</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="18">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-18" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/solana.png" alt="SOL">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-18">
+                                            SOL
+                                        </p>
+                                        <span class="coin-name">Solana</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="19">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-19" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/tether.png" alt="USDT">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-19">
+                                            USDT
+                                        </p>
+                                        <span class="coin-name">Tether USD (Ethereum)</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="20">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-20" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/usdc.png" alt="USDC">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-20">
+                                            USDC
+                                        </p>
+                                        <span class="coin-name">USD Coin (Tron)</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="21">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-21" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/ripple.png" alt="XRP">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-21">
+                                            XRP
+                                        </p>
+                                        <span class="coin-name">Ripple</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="22">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-22" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/monero.png" alt="XMR">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-22">
+                                            XMR
+                                        </p>
+                                        <span class="coin-name">Monero</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="23">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-23" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/tron.png" alt="TRX">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-23">
+                                            TRX
+                                        </p>
+                                        <span class="coin-name">TRON</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="24">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-24" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/dash.png" alt="DASH">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-24">
+                                            DASH
+                                        </p>
+                                        <span class="coin-name">Dash</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="27">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-27" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/atom.png" alt="ATOM">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-27">
+                                            ATOM
+                                        </p>
+                                        <span class="coin-name">Cosmos</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                            <tr>
+                            <td class="text-left cursor-pointer to-currency" id="29">
+                                <div class="d-flex px-3 align-items-center">
+                                    <img id="to-image-29" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/bitcoin_crypto.png" alt="BTC">
+
+                                    <div class="px-3 coin-list">
+                                        <p class="coin-tag" id="to-code-29">
+                                            BTC
+                                        </p>
+                                        <span class="coin-name">Bitcoin</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- TBC exchange section End-->
+</div>
 @endsection
 
