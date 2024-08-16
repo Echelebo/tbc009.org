@@ -1,540 +1,759 @@
-@extends('layouts.fronty')
+@extends('layouts.user')
 
 @section('contents')
-<div class="navandbody-section p-main" id="crypto-front-initiate">
-        <!-- TBC exchange section -->
-        <div>
-            <div class="container-fluid px-240p pb-10 row-head">
-                <div class="row">
-                    <div class="col-lg-6  col-sm-12 col-sm-12 col-xs-12 mw-auto">
-                        <div class="pt-95">
-                            <p class="f-21 OpenSans-600 color-CD aos-init aos-animate" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                                THE SAFEST &amp; MOST RELIABLE</p>
-                            <p class="bold-text p-0">
-                                <span class="crypto-text OpenSans-700 color-E8">TBC</span><br>
-                                <span class="exchange-text OpenSans-700 color-FF">EXCHANGE</span>
-                            </p>
-                            <div class="OpenSans-400 font-20 text-width color-CD">
-                                Buy, sell, and exchange most valued cryptocurrency "The Billion Coin" easily, safely &amp; securely with low fees in just a few minutes.
-                            </div>
-                            <p class="OpenSans-400 font-16 col-md-11 mulish4 c-blue2"></p>
-                            <p class="font-22 OpenSans-600 c-blue2 mt-38 color-E8">Let's Get Started..</p>
-                            <div class="button-widths d-flex justify-content-between align-items-center mt-14 cursor-pointer btn-animate text-light">
+    <div class="w-full p-3">
 
-                                <div class="ml-27p svg-img-parent">
-                                    <div class="svg-img">
-                                        <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="54" height="54" rx="6" fill="none"></rect>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8181 39.1818C15.4164 38.7801 15.4164 38.1289 15.8181 37.7273L34.7272 18.8182C35.1288 18.4165 35.7801 18.4165 36.1817 18.8182C36.5834 19.2198 36.5834 19.8711 36.1817 20.2727L17.2726 39.1818C16.871 39.5835 16.2198 39.5835 15.8181 39.1818Z" fill="#403E5B"></path>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.2441 19.5454C24.2441 18.9774 24.7046 18.5169 25.2727 18.5169L35.4545 18.5169C36.0225 18.5169 36.483 18.9774 36.483 19.5454L36.483 29.7273C36.483 30.2953 36.0225 30.7558 35.4545 30.7558C34.8864 30.7558 34.426 30.2953 34.426 29.7273L34.426 20.574L25.2727 20.574C24.7046 20.574 24.2441 20.1135 24.2441 19.5454Z" fill="#403E5B"></path>
-                                        </svg>
+
+        <div class="w-full lg:flex lg:gap-3">
+            <div class="w-full-x lg:w-1/3 h-52  rounded-lg p-5 mb-3">
+                <div class="w-full grid grid-cols-1 gap-3 p-2">
+                    <a data-target="bots" role="button"
+                        class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                        My Portfolio </a>
+                    <a data-target="new-bot" role="button"
+                        class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                        Activate Portfolio</a>
+
+                    <a data-target="bot-history" role="button"
+                        class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                        Portfolio History</a>
+
+                    <a data-target="daily_summary" role="button"
+                        class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                        Daily Summary</a>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="w-full lg:w-2/3">
+                <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card" id="bots">
+                    <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">My Portfolio</span>
+                    </h3>
+
+                    <div class="w-full">
+
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-5">
+
+                            @forelse ($activations as $bot)
+                                <div
+                                    class="w-full bg-bot-1 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                    <div style="" class="rounded-lg">
+                                        <div class="relative">
+                                            <div
+                                                class="absolute flex justify-center items-center -top-1 -right-1 border border-slate-800  rounded-lg p-1 text-xs text-white hover:scale-110 transition-all hover:text-white @if ($bot->expires_in < time()) bg-red-500 @else bg-green-500 @endif">
+                                                <a role="button" class="flex space-x-1 items-center cursor-pointer"
+                                                    id="{{ 'bot_timer_' . $bot->id }}">
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="w-full flex justify-between items-center mb-2">
+                                                <p class="flex space-x-1 items-center"><img
+                                                        class="w-8 h-8 bg-white rounded-full"
+                                                        src="{{ asset('storage/bots/' . $bot->bot->logo) }}" alt="">
+                                                    <span
+                                                        class="font-mono font-semibold text-left">{{ $bot->bot->name }}</span>
+                                                    @if ($bot->status == 'active')
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-5 h-5 text-green-500" fill="currentColor"
+                                                            class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                                        </svg>
+                                                    @else
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-5 h-5 text-gray-500" fill="currentColor"
+                                                            class="bi bi-patch-exclamation-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                        </svg>
+                                                    @endif
+                                                </p>
+
+                                            </div>
+                                            <div class="w-full">
+                                                <div class="grid grid-cols-2 gap-2">
+
+                                                    <p class="text-xs text-mono grid grid-cols-1"><span
+                                                            class="text-orange-500 text-xs">Activation Date</span>
+                                                        <span
+                                                            class="local-time">{{ date('d-m-y H:i:s', strtotime($bot->created_at)) }}</span>
+                                                    </p>
+
+                                                    <p class="text-xs text-mono grid grid-cols-1"><span
+                                                            class="text-orange-500 text-xs">Portfolio</span>
+                                                        <span>{{ formatAmount($bot->capital) }}</span>
+                                                    </p>
+
+                                                    <p class="text-xs text-mono grid grid-cols-1"><span
+                                                            class="text-orange-500 text-xs">Portfolio Balance</span>
+                                                        <span>{{ formatAmount($bot->balance) }}</span>
+                                                    </p>
+
+                                                    <p class="text-xs text-mono grid grid-cols-1"><span
+                                                            class="text-orange-500 text-xs">PNL</span>
+                                                        @if ($bot->profit < 0)
+                                                            <span
+                                                                class="text-red-500 flex space-x-1"><span>{{ ($bot->profit / $bot->capital) * 100 }}%</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                    fill="currentColor" class="w-6 h-6">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M1.72 5.47a.75.75 0 011.06 0L9 11.69l3.756-3.756a.75.75 0 01.985-.066 12.698 12.698 0 014.575 6.832l.308 1.149 2.277-3.943a.75.75 0 111.299.75l-3.182 5.51a.75.75 0 01-1.025.275l-5.511-3.181a.75.75 0 01.75-1.3l3.943 2.277-.308-1.149a11.194 11.194 0 00-3.528-5.617l-3.809 3.81a.75.75 0 01-1.06 0L1.72 6.53a.75.75 0 010-1.061z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </span>
+                                                        @else
+                                                            <span
+                                                                class="text-green-500 flex space-x-1"><span>+{{ ($bot->profit / $bot->capital) * 100 }}%</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                    fill="currentColor" class="w-6 h-6">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </span>
+                                                        @endif
+                                                    </p>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
+
+                            @empty
+                                <div
+                                    class="w-full flex justify-center items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                        fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                    </svg>
+                                    <span>You have not activated any bot</span>
+                                </div>
+                            @endforelse
+
+
+
+
+
+
                         </div>
+
+                        <div class="w-full mt-5 flex items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer simple-pagination"
+                            data-paginator="bots">
+                            {{ $activations->links('paginations.simple') }}
+                        </div>
+
                     </div>
-                    <div class="col-lg-6">
-    <div class="row">
-        <div class="col-md-12 p-1-res">
-            <div class="pt-80">
-                                                    <nav class="nav-dimension">
-                        <div class="navmp nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link c-off-white padding-a OpenSans-700 crypto crypto_swap active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" data-type="crypto_swap">Crypto Swap </a>
 
-                        </div>
-                    </nav>
+                </div>
 
-                <form action="#" method="POST" accept-charset="UTF-8" id="crypto-send-form">
-                    <input type="hidden" name="_token" value="Zw0tjR1I5l9mXyBV9qCscb624B7hUCPy5NZjfjVm" autocomplete="off">                    <input type="hidden" name="from_type" id="from_type" value="crypto_swap">
+                <div class="w-full p-5 mb-5  rounded-lg rescron-card transition-all hidden" id="new-bot">
+                    <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">Portfolio Activation</span>
+                    </h3>
 
-                    <div class="tab-content tab-dimension mt-n3" id="nav-tabContent">
-                        <div class="box-shadow tabpan-rad tab-pane  show active bg-light bg-5B" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                            <!-- You Send Section -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="boxdiv yousend-top bg-light mx-28 mt-35 box-bg-one">
-                                        <div class="d-flex justify-content-between">
 
-                                            <!-- You Send Amount -->
-                                            <div class="mt-2 mt-n8-res w-100">
-                                                <span class="font-14 OpenSans-400 c-blue2 pl-20 color-E8">You Send</span>
-                                                <br>
-                                                <input type="text" class="form-control custom-height w-100 input-customization s-font-24 c-blue2 mulish4 pl-20 mt-n3 color-E8" autocomplete="off" name="send_amount" id="send_amount" value="0.05000000" onkeypress="return isNumberOrDecimalPointKey(this, event);" oninput="restrictNumberToPrefdecimalOnSendInput(this)">
+                    <div class="w-full mb-5  rounded-lg transition-all">
+
+                        <div class="">
+
+                            <div class="w-full grid grid-cols-1 lg:grid-cols-2  gap-3 mb-5 px-3 py-10">
+                                
+                                @forelse ($bots as $bot)
+                                    <div data-target="{{ $bot->code }}"
+                                        class="bg-bot-1 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <div style="" class="rounded-lg">
+                                            <div class="relative">
+                                                <div
+                                                    class="absolute flex justify-center items-center -top-1 -right-1 border border-slate-800  rounded-lg p-1 text-xs font-semibold hover:scale-110 transition-all ">
+                                                    <a role="button" data-bot_id="{{ $bot->id }}"
+                                                        data-bot_name="{{ $bot->name }}"
+                                                        class="flex space-x-1 items-center bot cursor-pointer">
+                                                        <img class="w-8 h-8 rounded-full bg-white"
+                                                            src="{{ asset('storage/bots/' . $bot->logo) }}"
+                                                            alt="">
+                                                        <span>Activate</span>
+                                                    </a>
+                                                </div>
                                             </div>
+                                            <div class="p-5">
 
-                                            <!-- Button trigger modal -->
-                                                <div id="selected-from-currency" class="selected d-flex gap-20" data-bs-toggle="modal" data-bs-target=".bd-example-modal-sm">
-                                                                                                            <button type="button" class="btn btn-primary md:ms-2">
-                                                            <img id="seleceted-from-image" class="img-fluid rounded-icon set-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/1671520294.png">
-                                                            <span class="set-coinname px-2" id="from-selected">ETH</span>
-                                                        </button>
-                                                                                                    </div>
 
-                                                <input type="hidden" name="from_currency" id="fromCurrencyId" value="11">
+                                                <div class="px-2 flex items-center justify-between">
 
+                                                    <div class="grid grid-cols-1 gap-3">
+                                                        <div class="font-mono font-semibold text-left">
+                                                            {{ $bot->name }}
+                                                        </div>
+
+                                                        <div class="text-left">
+                                                            <h2 class="uppercase text-xs  text-orange-500">Trading
+                                                                Portfolio
+                                                            </h2>
+                                                            <h2 class="text-16">@if ($bot->max >= 100000000) {{ formatAmount($bot->min) . ' - UNLIMITED' }}  @else {{ formatAmount($bot->min) . ' - ' . formatAmount($bot->max) }} @endif
+                                                            </h2>
+                                                        </div>
+                                                        <div class="text-left">
+                                                            <h2 class="uppercase text-xs  text-orange-500">Avg. Daily PNL
+                                                            </h2>
+                                                            <h2 class="text-16">{{ $bot->daily_min . '% - ' . $bot->daily_max . '%' }}</h2>
+                                                        </div>
+
+                                                        <div class="text-left">
+                                                            <h2 class="uppercase text-xs  text-orange-500">Duration
+                                                            </h2>
+                                                            <h2 class="text-16">{{ $bot->duration . $bot->duration_type }}</h2>
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <!-- Limit Fees Estimated Text -->
-                            <div class="row">
-                                <div class="col-md-10 col-10 parent-2">
-                                    <div class="ul-one ul-ml-51 dot display-hide">
-                                    </div>
-                                    <div class="d-flex align-items-center dot dot-message display-hide">
-                                        <div class="ul-two ul-ml-47 dot display-hide">
-                                        </div>
-
-                                        <p class="mb-unset OpenSans-400 font-13 c-blue2 pl-16 send_amount_error"></p>
-                                    </div>
-
-                                    <div class="ul-three ul-ml-51">
-                                    </div>
-                                    <div class="d-flex align-items-center h-9p">
-                                        <div class="ul-four ul-ml-47">
-                                        </div>
-                                        <p class="mb-unset OpenSans-400 font-13 c-blue2 pl-16">
-                                            Fees : <span class="exchange_fee">0.00125</span>
-                                        </p>
-                                    </div>
-                                    <div class="ul-five ul-ml-51">
-                                    </div>
-                                    <div class="d-flex align-items-center h-9p">
-                                        <div class="ul-six ul-ml-47">
-                                        </div>
-                                        <p class="mb-unset OpenSans-400 font-13 c-blue2 pl-16">
-                                            Estimated rate : <span class="rate">18.58000000</span>
-                                        </p>
-                                    </div>
-
-                                    <div class="ul-seven ul-ml-51">
 
                                     </div>
-                                </div>
-                                <div class="col-md-2 col-2 d-flex align-items-center">
-                                    <div class="buy-sell-btn display-flex justify-content-center align-items-center switch-box display-hide cur-pointer">
-                                        <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.75 0C12.3358 0 12 0.373096 12 0.833333C12 1.29357 12.3358 1.66667 12.75 1.66667H15.75C15.9489 1.66667 16.1397 1.75446 16.2803 1.91074C16.421 2.06702 16.5 2.27899 16.5 2.5V17.4164L13.4226 14.2511C13.0972 13.9163 12.5695 13.9163 12.2441 14.2511C11.9186 14.5858 11.9186 15.1285 12.2441 15.4632L16.4107 19.7489C16.6068 19.9506 16.8761 20.0308 17.1305 19.9895C17.1694 19.9964 17.2093 20 17.25 20C17.6095 20 17.9098 19.719 17.983 19.344L21.7559 15.4632C22.0814 15.1285 22.0814 14.5858 21.7559 14.2511C21.4305 13.9163 20.9028 13.9163 20.5774 14.2511L18 16.9021V2.5C18 1.83696 17.7629 1.20107 17.341 0.732233C16.919 0.263392 16.3467 0 15.75 0H12.75ZM4.62801 4.01042C4.396 3.97235 4.1488 4.03861 3.96967 4.20921L0.21967 7.78064C-0.0732233 8.05958 -0.0732233 8.51184 0.21967 8.79079C0.512563 9.06974 0.987437 9.06974 1.28033 8.79079L4 6.20063V20.625C4 21.2549 4.23705 21.859 4.65901 22.3044C5.08097 22.7498 5.65326 23 6.25 23H9.25C9.66421 23 10 22.6456 10 22.2083C10 21.7711 9.66421 21.4167 9.25 21.4167H6.25C6.05109 21.4167 5.86032 21.3333 5.71967 21.1848C5.57902 21.0363 5.5 20.835 5.5 20.625V6.67682L7.71967 8.79079C8.01256 9.06974 8.48744 9.06974 8.78033 8.79079C9.07322 8.51184 9.07322 8.05958 8.78033 7.78064L5.487 4.64413C5.42152 4.27741 5.11645 4 4.75 4C4.70846 4 4.66771 4.00356 4.62801 4.01042Z" fill="currentColor" fill-opacity="0.6"></path>
+                                @empty
+                                    <div
+                                        class="w-full flex justify-center items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                            fill="currentColor" class="bi bi-exclamation-triangle-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                         </svg>
+                                        <span>Bots coming soon ...</span>
                                     </div>
-                                </div>
+                                @endforelse
+
+
+
+
                             </div>
 
-                            <!-- You Get Section -->
-                            <div class="row pb-36">
-                                <div class="col-md-12">
-                                    <div class="boxdiv bg-light mx-28 box-bg-two">
-                                        <div class="d-flex justify-content-between">
 
-                                            <!-- You Get Amount -->
-                                            <div class="mt-2 mt-n8-res w-100">
-                                                <span class="font-14 poppins5 c-blue2 pl-20">You Get</span>
-                                                <br>
-                                                <input type="text" class="form-control custom-height w-100 input-customization s-font-24 c-blue2 mulish4 pl-20 mt-n3" autocomplete="off" name="get_amount" id="get_amount" value="0.1" onkeypress="return isNumberOrDecimalPointKey(this, event);" oninput="restrictNumberToPrefdecimalOnReceiveInput(this)">
+
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card hidden" id="bot-history">
+                    <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">Portfolio
+                            History</span>
+                    </h3>
+
+                    <div class="w-full">
+
+                        <div class="w-full  p-2 rounded-lg border border-slate-800 hover:border-slate-600">
+                            <div id="profitChart"></div>
+                        </div>
+
+                        <div class="w-full" id="bot-history-grid">
+                            <div class="grid grid-cols-1 gap-3 mt-5">
+
+                                @forelse ($histories as $history)
+                                    <div
+                                        class="w-full  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <div class="flex px-2 justify-between">
+                                            <p class="flex space-x-1 p-3"><img class="w-8 h-8 bg-white rounded-full"
+                                                    src="{{ asset('storage/bots/' . $history->botActivation->bot->logo) }}"
+                                                    alt="">
+                                                <span>{{ $history->botActivation->bot->name }}</span>
+
+                                            </p>
+                                            <p>
+                                                <span
+                                                    class="view-chart cursor-pointer flex items-center bg-purple-500 px-2 py-1 rounded-lg hover:scale-110 transition-all "
+                                                    data-pair="{{ $history->pair }}">View Chart</span>
+                                            </p>
+                                        </div>
+                                        <div class="w-full flex justify-between items-center p-2">
+
+
+                                            <div class="">
+                                                <div class="grid grid-cols-2 gap-1">
+                                                    <p class="text-xs">Exit Time (UTC)</p>
+                                                    <p class="text-purple-500 font-mono local-time">
+                                                        {{ date('d-m-y H:i:s', $history->timestamp) }}
+                                                    </p>
+
+                                                    <p class="text-xs">Trading Pair</p>
+                                                    <p class="text-purple-500 font-mono">{{ $history->pair }}</p>
+
+                                                    <p class="text-xs">Entry Price</p>
+                                                    <p class="text-purple-500 font-mono">{{ $history->entry_price }}</p>
+
+                                                    <p class="text-xs">Exit Price</p>
+                                                    <p class="text-purple-500 font-mono">{{ $history->exit_price }}</p>
+                                                </div>
+
                                             </div>
+                                            <div class="">
+                                                <p class="flex justify-end items-center space-x-1">
 
+                                                </p>
+                                                @if ($history->profit < 0)
+                                                    <p class="flex justify-end items-center text-red-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M1.72 5.47a.75.75 0 011.06 0L9 11.69l3.756-3.756a.75.75 0 01.985-.066 12.698 12.698 0 014.575 6.832l.308 1.149 2.277-3.943a.75.75 0 111.299.75l-3.182 5.51a.75.75 0 01-1.025.275l-5.511-3.181a.75.75 0 01.75-1.3l3.943 2.277-.308-1.149a11.194 11.194 0 00-3.528-5.617l-3.809 3.81a.75.75 0 01-1.06 0L1.72 6.53a.75.75 0 010-1.061z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </p>
+                                                    <p class="flex justify-end items-center text-red-500">
+                                                        -{{ formatAmount(str_replace('-', '', $history->profit)) }}
+                                                    </p>
+                                                    <p class="flex justify-end items-center text-red-500">
+                                                        {{ number_format((($history->exit_price - $history->entry_price) / $history->entry_price) * 100, 2) }}%
+                                                    </p>
+                                                @else
+                                                    <p class="flex justify-end items-center text-green-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </p>
+                                                    <p class="flex justify-end items-center text-green-500">
+                                                        +{{ formatAmount($history->profit) }}</p>
+                                                    <p class="flex justify-end items-center text-green-500">
+                                                        +{{ number_format((($history->exit_price - $history->entry_price) / $history->entry_price) * 100, 2) }}%
+                                                    </p>
+                                                @endif
 
-
-                                            <div id="selected-to-currency" class="selected d-flex gap-20" data-bs-toggle="modal" data-bs-target=".bd-example-modal-sm-to">
-                                                                                                <button type="button" class="btn btn-primary md:ms-2">
-                                                    <img id="seleceted-to-image" class="img-fluid rounded-icon set-imgTo" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png">
-                                                    <span id="to-selected" class="set-coinnameTo px-2">LTC </span>
-                                                </button>
-                                                                                            </div>
-
-                                            <input type="hidden" id="toCurrencyId" name="to_currency" value="8">
-
+                                            </div>
                                         </div>
 
+
                                     </div>
-                                </div>
+
+                                @empty
+                                    <div
+                                        class="w-full flex justify-center items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                            fill="currentColor" class="bi bi-exclamation-triangle-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                        </svg>
+                                        <span>Empty Record. No trading history found!</span>
+                                    </div>
+                                @endforelse
+
+
+
+
+
+
                             </div>
 
-                            <!-- Exchange Button -->
-                            <div class="row pb-36">
-                                <div class="col-md-12">
-                                    <div class="mx-28 exchangebutton-2 text-center d-grid">
-                                        <button type="submit" class="btn-lg btn-block btn cur-pointer btn-bg-color" id="crypto_buy_sell_button">
-                                            <div class="spinner spinner-border text-white spinner-border-sm mx-2 d-none">
-                                                <span class="visually-hidden"></span>
-                                            </div>
-                                            <span class="exc-font-22 OpenSans-600 c-white" id="rp_text">Swap</span>
-                                            <span id="rightAngleSvgIcon"><svg class="position-relative ms-1 rtl-wrap-one nscaleX-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11648 12.216C3.81274 11.9123 3.81274 11.4198 4.11648 11.1161L8.23317 6.99937L4.11648 2.88268C3.81274 2.57894 3.81274 2.08647 4.11648 1.78273C4.42022 1.47899 4.91268 1.47899 5.21642 1.78273L9.88309 6.4494C10.1868 6.75314 10.1868 7.2456 9.88309 7.54934L5.21642 12.216C4.91268 12.5198 4.42022 12.5198 4.11648 12.216Z" fill="currentColor"></path>
-                            </svg></span>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="w-full mt-5 flex items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer simple-pagination"
+                                data-paginator="bot-history-grid">
+                                {{ $histories->links('paginations.simple') }}
                             </div>
+
                         </div>
+
+
+
                     </div>
-                </form>
 
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade-in animated bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog crypto-modal-width modal-sm modal-dialog-scrollable modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header border-0">
-            <h2 class="modal-title f-18 OpenSans-400" id="exampleModalLongTitle">Select Crypto</h2>
-            <button type="button" class="close close-icon" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body modal-body-parent">
-        <div class="p-3">
-        <div class="crypto-search">
-            <input type="text" class="form-control" id="fromInput" placeholder="Search">
-            <span class="fa fa-search"></span>
-        </div>
-        </div>
-            <div class="modal-body-child thin-scrollbar">
-            <table class="table table-hover" id="from-currency-table">
-                <tbody id="from-currency-tr">
-
-                         <tr>
-                            <td class="text-left cursor-pointer from-currency" id="11">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="from-image-11" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/1671520294.png" alt="ETH">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="from-code-11">
-                                         ETH
-                                        </p>
-                                        <span class="coin-name">Ethereum</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-                        </tr>
+                </div>
 
 
-                         <tr>
-                            <td class="text-left cursor-pointer from-currency" id="8">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="from-image-8" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png" alt="LTC">
+                <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card hidden" id="daily_summary">
+                    <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">Portfolio
+                            Daily Summary</span>
+                    </h3>
 
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="from-code-8">
-                                         LTC
-                                        </p>
-                                        <span class="coin-name">Litecoin Testnet</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-                        </tr>
+                    <div class="w-full">
 
 
-                         <tr>
-                            <td class="text-left cursor-pointer from-currency" id="29">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="from-image-29" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/bitcoin_crypto.png" alt="BTC">
+                        <div class="w-full">
+                            <div class="grid grid-cols-1 gap-3 mt-5">
 
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="from-code-29">
-                                         BTC
-                                        </p>
-                                        <span class="coin-name">Bitcoin</span>
-                                    </div>
+                                @foreach ($daily_data as $date => $summary)
+                                    @if ($summary['profit'] != 0)
+                                        <div
+                                            class="h-10 w-full  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                            <div class="w-full grid grid-cols-3 gap-3">
+                                                <div>
+                                                    <span>{{ $date }}</span>
+                                                </div>
+                                                @if ($summary['profit'] < 0)
+                                                    <div class="text-red-500">
+                                                        -{{ formatAmount(str_replace('-', '', $summary['profit'])) }}
+                                                    </div>
+                                                    <div class="flex justify-end items-center text-red-500 space-x-2">
+                                                        <span>{{ number_format($summary['profit_percent'], 2) }}%</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M1.72 5.47a.75.75 0 011.06 0L9 11.69l3.756-3.756a.75.75 0 01.985-.066 12.698 12.698 0 014.575 6.832l.308 1.149 2.277-3.943a.75.75 0 111.299.75l-3.182 5.51a.75.75 0 01-1.025.275l-5.511-3.181a.75.75 0 01.75-1.3l3.943 2.277-.308-1.149a11.194 11.194 0 00-3.528-5.617l-3.809 3.81a.75.75 0 01-1.06 0L1.72 6.53a.75.75 0 010-1.061z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                @else
+                                                    <div class="text-green-500">
+                                                        <span>+{{ formatAmount($summary['profit']) }}</span>
+                                                    </div>
+                                                    <div class="flex justify-end items-center text-green-500 space-x-2">
+                                                        <span>+{{ number_format($summary['profit_percent'], 2) }}%</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                @endif
+                                            </div>
 
-                                </div>
+                                        </div>
+                                    @endif
 
-                            </td>
-                        </tr>
+                                  
+                                @endforeach
 
 
-                </tbody>
-            </table>
+
+
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
             </div>
 
         </div>
-      </div>
     </div>
-</div>
-
-<div class="modal fade-in animated bd-example-modal-sm-to" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog crypto-modal-width modal-sm modal-dialog-scrollable modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header border-0">
-            <h2 class="modal-title f-18 OpenSans-400" id="exampleModalLongTitle">Select Crypto</h2>
-            <button type="button" class="close close-icon" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body modal-body-parent">
-        <div class="p-3">
-        <div class="crypto-search">
-            <input type="text" class="form-control" id="toInput" placeholder="Search">
-            <span class="fa fa-search"></span>
-        </div>
-        </div>
-            <div class="modal-body-child thin-scrollbar">
-            <table class="table table-hover" id="to-currency-table">
-                <tbody id="to-currency-tr">
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="8">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-8" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/icons8-litecoin-test-48.png" alt="LTC">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-8">
-                                            LTC
-                                        </p>
-                                        <span class="coin-name">Litecoin Testnet</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="12">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-12" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/1671523566.png" alt="DOGE">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-12">
-                                            DOGE
-                                        </p>
-                                        <span class="coin-name">Dogecoin</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="13">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-13" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/avalanche.png" alt="AVAX">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-13">
-                                            AVAX
-                                        </p>
-                                        <span class="coin-name">Avalanche</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="14">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-14" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/bnb.png" alt="BNB">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-14">
-                                            BNB
-                                        </p>
-                                        <span class="coin-name">Binance Coin</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="15">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-15" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/cardano.png" alt="ADA">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-15">
-                                            ADA
-                                        </p>
-                                        <span class="coin-name">Cardano</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="16">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-16" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/luna.png" alt="LUNA">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-16">
-                                            LUNA
-                                        </p>
-                                        <span class="coin-name">Terra</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="17">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-17" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/dot.png" alt="DOT">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-17">
-                                            DOT
-                                        </p>
-                                        <span class="coin-name">Polkadot</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="18">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-18" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/solana.png" alt="SOL">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-18">
-                                            SOL
-                                        </p>
-                                        <span class="coin-name">Solana</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="19">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-19" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/tether.png" alt="USDT">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-19">
-                                            USDT
-                                        </p>
-                                        <span class="coin-name">Tether USD (Ethereum)</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="20">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-20" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/usdc.png" alt="USDC">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-20">
-                                            USDC
-                                        </p>
-                                        <span class="coin-name">USD Coin (Tron)</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="21">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-21" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/ripple.png" alt="XRP">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-21">
-                                            XRP
-                                        </p>
-                                        <span class="coin-name">Ripple</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="22">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-22" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/monero.png" alt="XMR">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-22">
-                                            XMR
-                                        </p>
-                                        <span class="coin-name">Monero</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="23">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-23" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/tron.png" alt="TRX">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-23">
-                                            TRX
-                                        </p>
-                                        <span class="coin-name">TRON</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="24">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-24" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/dash.png" alt="DASH">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-24">
-                                            DASH
-                                        </p>
-                                        <span class="coin-name">Dash</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="27">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-27" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/atom.png" alt="ATOM">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-27">
-                                            ATOM
-                                        </p>
-                                        <span class="coin-name">Cosmos</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                            <tr>
-                            <td class="text-left cursor-pointer to-currency" id="29">
-                                <div class="d-flex px-3 align-items-center">
-                                    <img id="to-image-29" class="img-fluid currency-img" src="/demo.paymoney.techvill.net/public/uploads/currency_logos/bitcoin_crypto.png" alt="BTC">
-
-                                    <div class="px-3 coin-list">
-                                        <p class="coin-tag" id="to-code-29">
-                                            BTC
-                                        </p>
-                                        <span class="coin-name">Bitcoin</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                </tbody>
-            </table>
-            </div>
-
-        </div>
-      </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-<!-- TBC exchange section End-->
-</div>
 @endsection
 
+@section('scripts')
+    @foreach ($activations as $item)
+        <script>
+            $(document).ready(function() {
+                var target = "{{ 'bot_timer_' . $item->id }}";
+                var expires_in = {{ $item->expires_in }};
+
+                // Get the current time in milliseconds
+                var currentTime = new Date().getTime();
+
+                // Calculate the remaining time in milliseconds
+                var remainingTime = expires_in * 1000 - currentTime;
+
+                // Calculate days, hours, minutes, and seconds
+                var days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                // Display the countdown
+                var countdownElement = document.getElementById(target);
+                countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+                // Update the countdown every second
+                var countdownInterval = setInterval(function() {
+                    if (remainingTime > 0) {
+                        remainingTime -= 1000;
+
+                        days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                        hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                        seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                        countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds +
+                            "s";
+                    } else {
+                        clearInterval(countdownInterval);
+                        countdownElement.innerHTML = "Expired";
+                    }
+                }, 1000);
+            });
+        </script>
+    @endforeach
+    <script>
+        let interval;
+
+
+        // select the bot bot
+        $(document).on('click', ".bot", function(e) {
+
+
+            var bot_id = $(this).data('bot_id');
+            var bot_name = $(this).data('bot_name');
+
+            Swal.fire({
+                html: `
+                    <div class="mt-5">
+                        <div>
+                            <div class="ts-gray-1 text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
+                                <form action="{{ route('user.bots.new') }}" method="post" id="botForm">
+                                    @csrf
+                                    <input type="hidden" name="bot_id" id="bot_id">
+                                    <p class="mb-3">You have chosen to activate <span class="text-orange-500" id="dispay_bot_name"></span>  Ai bot</p>
+                                    <p class="mb-3 text-red-500 text-xs" id="errorMessage"></p>
+                                    <div class="flex justify-end mb-5">
+                                        <div class="grid grid-cols-1 mb-2 mt-5 w-full">
+                                            <div class="relative">
+
+                                                <span class="theme1-input-icon material-icons">
+                                                    paid
+                                                </span>
+                                                <input type="number" step="any"
+                                                    placeholder="Capital ({{ site('currency') }})" id="capital"
+                                                    class="theme1-text-input" name="capital" value="0" required>
+                                                <label for="capital"
+                                                    class="placeholder-label text-gray-300  px-2">Capital
+                                                    ({{ site('currency') }})
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-10 mb-10 px-3 flex flex-start">
+                                        <button type="submit" id="activateButton"
+                                            class="bg-purple-500 px-2 py-1 rounded-lg hover:scale-110 transition-all"> Activate Now
+                                        </button>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                toast: false,
+                background: 'rgb(7, 3, 12, 0)',
+                showConfirmButton: false,
+                showCancelButton: false,
+                showCloseButton: true,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+
+
+
+            });
+
+            $('#dispay_bot_name').html(bot_name);
+            $("#bot_id").val(bot_id);
+
+
+
+
+        });
+
+        // handle deposit form
+        $(document).on('submit', '#botForm', function(e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var formData = new FormData(this);
+
+            var submitButton = $(this).find('button[type="submit"]');
+            submitButton.addClass('relative disabled');
+            submitButton.append('<span class="button-spinner"></span>');
+            submitButton.prop('disabled', true);
+            $.ajax({
+                url: form.attr('action'),
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    var link = window.location.href;
+                    var targetDiv = '#bots';
+                    $.ajax({
+                        url: link,
+                        method: 'GET',
+                        success: function(response) {
+                            $(targetDiv).html($(response).find(targetDiv).html());
+                            var scrollTo = $(targetDiv).offset().top - 100;
+                            $('.rescron-card').addClass('hidden');
+                            $(targetDiv).removeClass('hidden');
+                            $('html, body').animate({
+                                scrollTop: scrollTo
+                            }, 800);
+                        }
+                    });
+                    toastNotify('success', 'Bot activated successfully');
+
+
+                },
+                error: function(xhr, status, error) {
+                    var errors = xhr.responseJSON.errors;
+
+                    if (errors) {
+                        $.each(errors, function(field, messages) {
+                            var fieldErrors = '';
+                            $.each(messages, function(index, message) {
+                                fieldErrors += message + '<br>';
+                            });
+                            $('#errorMessage').html(fieldErrors);
+                        });
+                    } else {
+                        $('#errorMessage').html('error', 'An Error occured, try again later');
+                    }
+
+
+                },
+                complete: function() {
+                    submitButton.removeClass('disabled');
+                    submitButton.find('.button-spinner').remove();
+                    submitButton.prop('disabled', false);
+
+                }
+            });
+
+        });
+    </script>
+
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+        var profits = {!! json_encode($profits) !!};
+        var profitInt = profits.map(value => parseFloat((value * 1).toFixed(2)));
+
+        Highcharts.chart('profitChart', {
+            chart: {
+                type: 'spline',
+                backgroundColor: '#1f1a23', // Set background color here
+
+                plotBackgroundColor: '#1f1a23',
+                plotBorderWidth: 1,
+                plotBorderColor: 'rgb(168, 85, 247)',
+
+                borderWidth: 0,
+                borderColor: 'rgb(168, 85, 247)',
+                borderRadius: 10,
+                style: {
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '14px',
+                    color: '#fff'
+                }
+            },
+            accessibility: {
+                point: {
+                    descriptionFormatter: function(p) {
+                        return p.series.name + ', ' + p.category + ', ' + p.y + '{{ site('currency') }}.';
+                    }
+                }
+            },
+            title: {
+                text: '<span style="color: white">30 Days PNL</span>'
+            },
+            subtitle: {
+                text: 'PNL Chart history for the last 30 days'
+            },
+            xAxis: {
+                categories: {!! json_encode($days) !!},
+                crosshair: true
+            },
+            yAxis: {
+                // min: 0,
+                title: {
+                    text: '<span style="color: white">PNL ({{ site('currency') }})</span>'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size: 10px">{point.key} PNL</span><br/>',
+                valuePrefix: '{{ site('currency') }}'
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'PNL',
+                data: profitInt
+            }]
+        });
+    </script>
+
+    {{-- view trading history chart --}}
+    <script src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+        $(document).on('click', '.view-chart', function(e) {
+            var pair = $(this).data('pair'); // BTCUSDT
+
+            //fetch trading view chart for the pair
+            Swal.fire({
+                html: `
+                        <div class="mt-5 sm:overflow-x-scroll">
+                            <div id="chart-container"></div>
+                        </div>
+                        `,
+                toast: false,
+                background: 'rgb(7, 3, 12, 0)',
+                showConfirmButton: false,
+                showCloseButton: true,
+                position: 'top-left',
+                allowEscapeKey: false, // Prevent closing by escape key
+                allowOutsideClick: false, // Prevent closing by clicking backdrop
+                willClose: () => {
+                    //delete the previously generated qrcode
+                    // $('#single_wallet_qrcode').html('');
+                }
+            });
+
+            new TradingView.widget({
+                // Define the container element for the widget
+                container_id: 'chart-container', // Replace 'chart-container' with your actual container ID
+
+                // Specify the symbol (pair) you want to display
+                symbol: pair,
+
+                // Specify the interval for the chart (e.g., '1D' for 1 day)
+                interval: '1D',
+
+                // Choose the style of the chart (e.g., 'Line' or 'Candles')
+                style: 'Candles',
+
+                // Specify the timezone for the chart
+                timezone: 'Etc/UTC',
+                theme: 'Dark'
+
+            });
+
+        });
+    </script>
+@endsection
