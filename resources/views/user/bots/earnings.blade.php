@@ -1,227 +1,150 @@
 @extends('layouts.user')
 
 @section('contents')
-<div class="container-fluid">
-  <!-- start page title -->
-    <div class="row">
-      <div class="col-12">
-        <div class="page-title-box d-flex align-items-center justify-content-between">
-          <h4 class="mb-0">Deposit</h4>
-          <div class="page-title-right">
-            <ol class="breadcrumb m-0">
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a>
-              </li>
-              <li class="breadcrumb-item active">Deposit</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end page title -->
-      <div class="col-sm-12">
-          
-       
-       <!-- script -->
-       
-       <script language="javascript"><!-
-function openCalculator(id)
-{
-
-w = 225; h = 400;
-t = (screen.height-h-30)/2;
-l = (screen.width-w-30)/2;
-window.open('?a=calendar&type=' + id, 'calculator' + id, "top="+t+",left="+l+",width="+w+",height="+h+",resizable=1,scrollbars=0");
+    <div class="w-full p-3">
 
 
- 
-for (i = 0; i < document.spendform.h_id.length; i++)
-{
-if (document.spendform.h_id[i].value == id)
-{
-document.spendform.h_id[i].checked = true;
-}
-}
-
- 
-
-}
-
-function updateCompound() {
-var id = 0;
-var tt = document.spendform.h_id.type;
-if (tt && tt.toLowerCase() == 'hidden') {
-id = document.spendform.h_id.value;
-} else {
-for (i = 0; i < document.spendform.h_id.length; i++) {
-if (document.spendform.h_id[i].checked) {
-id = document.spendform.h_id[i].value;
-}
-}
-}
-
-var cpObj = document.getElementById('compound_percents');
-if (cpObj) {
-while (cpObj.options.length != 0) {
-cpObj.options[0] = null;
-}
-}
-
-if (cps[id] && cps[id].length > 0) {
-document.getElementById('coumpond_block').style.display = '';
-
-for (i in cps[id]) {
-cpObj.options[cpObj.options.length] = new Option(cps[id][i]);
-}
-} else {
-document.getElementById('coumpond_block').style.display = 'none';
-}
-}
-var cps = {};
--></script>
-       
-       <!-- edn of script -->
-       
-       
-       
-       
-       
-       <br>
-        <div class="card">
-          <h5 class="card-header bg-primary text-white">Deposit
-          </h5>
-          <div class="card-body">
-            <form action="{{ route('user.bots.new') }}" method="post" id="botForm" name="spendform">
-                @csrf
-              <div class="table-responsive">
-                  @foreach ($bots as $bot)
-                  
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td colspan="3">
-                          
-                          <input type="radio" id="bot_id" name="bot_id" value="{{$bot->id}}"  onclick="updateCompound()">
-                        <b>{{ $bot->name }}</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="inheader">Plan</td>
-                      <td class="inheader" width="200">Spent Amount ($)
-                      </td>
-                      <td class="inheader" width="100" nowrap="">
-                        <nobr>Daily Profit (%)
-                        </nobr>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="item">Plan 1</td>
-                      <td class="item" align="left">
-                        @if ($bot->max >= 100000000) ${{number_format($bot->min). ' and more'}} @else {{number_format($bot->min). ' - $' .number_format($bot->max)}} @endif</td>
-                      <td class="item" align="left">
-                        {{ $bot->daily_min . '%' }}</td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" align="right">
-                        <span class="badge badge-info"><a href="javascript:openCalculator({{$bot->id}})"
-                            class="text-white">Calculate
-                            your profit &gt;
-                            &gt;
-                          </a></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table><br><br>
+        <div class="w-full lg:flex lg:gap-3">
+            <div class="w-full lg:w-2/3-x">
                 
-                <script>cps[{{$bot->id}}] =[];
-                </script>
-                
-                
-                @endforeach
-               </div>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>Your account balance ($):
-                            </td>
-                            <td align="right">
-                              ${{ number_format(user()->balance) }}</td>
-                          </tr>
-                          <tr>
-                            <td>&nbsp;
 
-                            </td>
-                            <td align="right">
-                              <small>${{ number_format(user()->balance) }} of USDT TRC20<br></small>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Amount to Spend ($):</td>
-                            <td align="right">
-                              <input type="text" name="capital" id="capital" value="200.00" class="form-control" size="15"
-                                style="text-align:right;" required>
-                            </td>
-                          </tr>
-                          
-                          
-                          
-                          <tr id="coumpond_block" style="display:none">
-                                                            <td>Compounding(%):</td>
-                                                            <td align=right>
-                                                                <select name="compound" class=inpts
-                                                                    id="compound_percents"></select>
-                                                            </td>
-                                                        </tr>
-                                                        
-                                                        
-                          <tr>
-                            <td colspan="2">
-                              <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <td><input type="radio" name="type" value="0">
-                                    </td>
-                                    <td>Spend funds from the Account Balance USDT TRC20
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td><input type="radio" name="type" value="1">
-                                    </td>
-                                    <td>Spend funds from USDT TRC20
-                                    </td>
-                                  </tr>
-                                </tbody>
-                                <p class="mb-3 text-red-500 " id="errorMessage"></p>
-                              </table>
-                            </td>
-                            
-                          </tr>
-                          <tr>
-                            <td colspan="2">
-                              <input type="submit" value="Deposit" id="activateButton" class="btn bg-blue-500 btn-primary ml-auto">
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                
+
+                <div class="w-full p-5 mb-5 ts-gray-2-x rounded-lg transition-all rescron-card " id="bot-history">
+                    <h3 class="capitalize  font-extrabold "><span class="border-b-2">Trading
+                            History</span>
+                    </h3>
+
+                    <div class="w-full">
+
+                        <div class="w-full ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600">
+                            <div id="profitChart"></div>
+                        </div>
+
+                        <div class="w-full" id="bot-history-grid">
+                            <div class="grid grid-cols-1 gap-3 mt-5">
+
+                                @forelse ($histories as $history)
+                                    <div
+                                        class="w-full ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <div class="flex px-2 justify-between">
+                                            <p class="flex space-x-1 p-3"><img class="w-8 h-8 bg-white rounded-full"
+                                                    src="{{ asset('storage/bots/' . $history->botActivation->bot->logo) }}"
+                                                    alt="">
+                                                <span>{{ $history->botActivation->bot->name }}</span>
+
+                                            </p>
+                                            <p>
+                                                <span
+                                                    class="view-chart cursor-pointer flex items-center bg-blue-500 px-2 py-1 rounded-lg hover:scale-110 text-white transition-all "
+                                                    data-pair="{{ $history->pair }}">View Chart</span>
+                                            </p>
+                                        </div>
+                                        <div class="w-full flex justify-between items-center p-2">
+
+
+                                            <div class="">
+                                                <div class="grid grid-cols-2 gap-1">
+                                                    <p class="text-xs">Exit Time (UTC)</p>
+                                                    <p class="text-purple-500 font-mono local-time">
+                                                        {{ date('d-m-y H:i:s', $history->timestamp) }}
+                                                    </p>
+
+                                                    <p class="text-xs">Trading Pair</p>
+                                                    <p class="text-purple-500 font-mono">{{ $history->pair }}</p>
+
+                                                    <p class="text-xs">Entry Price</p>
+                                                    <p class="text-purple-500 font-mono">{{ $history->entry_price }}</p>
+
+                                                    <p class="text-xs">Exit Price</p>
+                                                    <p class="text-purple-500 font-mono">{{ $history->exit_price }}</p>
+                                                </div>
+
+                                            </div>
+                                            <div class="">
+                                                <p class="flex justify-end items-center space-x-1">
+
+                                                </p>
+                                                @if ($history->profit < 0)
+                                                    <p class="flex justify-end items-center text-red-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M1.72 5.47a.75.75 0 011.06 0L9 11.69l3.756-3.756a.75.75 0 01.985-.066 12.698 12.698 0 014.575 6.832l.308 1.149 2.277-3.943a.75.75 0 111.299.75l-3.182 5.51a.75.75 0 01-1.025.275l-5.511-3.181a.75.75 0 01.75-1.3l3.943 2.277-.308-1.149a11.194 11.194 0 00-3.528-5.617l-3.809 3.81a.75.75 0 01-1.06 0L1.72 6.53a.75.75 0 010-1.061z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </p>
+                                                    <p class="flex justify-end items-center text-red-500">
+                                                        -{{ formatAmount(str_replace('-', '', $history->profit)) }}
+                                                    </p>
+                                                    <p class="flex justify-end items-center text-red-500">
+                                                        {{ number_format((($history->exit_price - $history->entry_price) / $history->entry_price) * 100, 2) }}%
+                                                    </p>
+                                                @else
+                                                    <p class="flex justify-end items-center text-green-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </p>
+                                                    <p class="flex justify-end items-center text-green-500">
+                                                        +{{ formatAmount($history->profit) }}</p>
+                                                    <p class="flex justify-end items-center text-green-500">
+                                                        +{{ number_format((($history->exit_price - $history->entry_price) / $history->entry_price) * 100, 2) }}%
+                                                    </p>
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                @empty
+                                    <div
+                                        class="w-full flex justify-center items-center ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                            fill="currentColor" class="bi bi-exclamation-triangle-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                        </svg>
+                                        <span>Empty Record. No trading history found!</span>
+                                    </div>
+                                @endforelse
+
+
+
+
+
+
+                            </div>
+
+                            <div class="w-full mt-5 flex items-center ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer simple-pagination"
+                                data-paginator="bot-history-grid">
+                                {{ $histories->links('paginations.simple') }}
+                            </div>
+
+                        </div>
+
+
+
                     </div>
-                    
-                  </div>
-                </div>
-              </div>
-            </form>
-            
-            <script language=javascript>
-                                    for (i = 0; i < document.spendform.type.length; i++) {
-                                        if ((document.spendform.type[i].value.match(/^process_/))) {
-                                            document.spendform.type[i].checked = true;
-                                            break;
-                                        }
-                                    }
-                                    updateCompound();
-                                </script>
-          </div>
-        </div>
 
+                </div>
+
+
+                
+
+
+
+
+            </div>
+
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -282,7 +205,7 @@ var cps = {};
                 html: `
                     <div class="mt-5">
                         <div>
-                            <div class=" text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
+                            <div class="ts-gray-1-x text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
                                 <form action="{{ route('user.bots.new') }}" method="post" id="botForm">
                                     @csrf
                                     <input type="hidden" name="bot_id" id="bot_id">
@@ -299,7 +222,7 @@ var cps = {};
                                                     placeholder="Capital ({{ site('currency') }})" id="capital"
                                                     class="theme1-text-input" name="capital" value="0" required>
                                                 <label for="capital"
-                                                    class="placeholder-label text-gray-300  px-2">Capital
+                                                    class="placeholder-label text-white ts-gray-2-x px-2">Capital
                                                     ({{ site('currency') }})
                                                 </label>
 
@@ -309,7 +232,7 @@ var cps = {};
 
                                     <div class="mt-10 mb-10 px-3 flex flex-start">
                                         <button type="submit" id="activateButton"
-                                            class="bg-purple-500 px-2 py-1 rounded-lg hover:scale-110 transition-all"> Activate Now
+                                            class="bg-blue-500 px-2 py-1 rounded-lg hover:scale-110 transition-all"> Activate Now
                                         </button>
                                     </div>
 
@@ -320,7 +243,7 @@ var cps = {};
                     </div>
                 `,
                 toast: false,
-                background: 'rgb(7, 3, 12, 0)',
+                background: 'rgb(34, 37, 47, 0)',
                 showConfirmButton: false,
                 showCancelButton: false,
                 showCloseButton: true,
@@ -350,11 +273,7 @@ var cps = {};
             submitButton.addClass('relative disabled');
             submitButton.append('<span class="button-spinner"></span>');
             submitButton.prop('disabled', true);
-              if($('input[name=type]:checked').val() == 1) {
-                            botForm.submit();
-                    }else{
-                        
-                        $.ajax({
+            $.ajax({
                 url: form.attr('action'),
                 method: 'POST',
                 data: formData,
@@ -377,7 +296,7 @@ var cps = {};
                             }, 800);
                         }
                     });
-                    toastNotify('success', 'Plan activated successfully');
+                    toastNotify('success', 'Bot activated successfully');
 
 
                 },
@@ -405,9 +324,6 @@ var cps = {};
 
                 }
             });
-                        
-                    };
-            
 
         });
     </script>
@@ -423,14 +339,14 @@ var cps = {};
         Highcharts.chart('profitChart', {
             chart: {
                 type: 'spline',
-                backgroundColor: '#1f1a23', // Set background color here
+                backgroundColor: '#22252F', // Set background color here
 
-                plotBackgroundColor: '#1f1a23',
+                plotBackgroundColor: '#22252F',
                 plotBorderWidth: 1,
-                plotBorderColor: 'rgb(168, 85, 247)',
+                plotBorderColor: 'rgb(85, 147, 247)',
 
                 borderWidth: 0,
-                borderColor: 'rgb(168, 85, 247)',
+                borderColor: 'rgb(85, 147, 247)',
                 borderRadius: 10,
                 style: {
                     fontFamily: 'Arial, sans-serif',
@@ -472,7 +388,7 @@ var cps = {};
                 }
             },
             series: [{
-                name: 'PNL',
+                name: '<span style="color: white">PNL</span>',
                 data: profitInt
             }]
         });
@@ -492,7 +408,7 @@ var cps = {};
                         </div>
                         `,
                 toast: false,
-                background: 'rgb(7, 3, 12, 0)',
+                background: 'rgb(34, 37, 47, 0)',
                 showConfirmButton: false,
                 showCloseButton: true,
                 position: 'top-left',
