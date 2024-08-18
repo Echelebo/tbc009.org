@@ -3,20 +3,7 @@
 @section('contents')
     <div class="container-fluid">
         <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0">Deposit</h4>
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active">Deposit</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- end page title -->
         <div class="col-sm-12">
 
@@ -88,7 +75,7 @@
 
             <br>
             <div class="card">
-                <h5 class="card-header bg-primary text-white">Deposit
+                <h5 class="card-header bg-primary text-white">TBC Exchange
                 </h5>
                 <div class="card-body">
                     <form action="{{ route('user.bots.new') }}" method="post" id="botForm" name="spendform">
@@ -109,13 +96,15 @@
                                             <td class="inheader">Plan</td>
                                             <td class="inheader" width="200">Spent Amount ($)
                                             </td>
+                                            <td class="inheader" width="200">Duration (days)
+                                            </td>
                                             <td class="inheader" width="100" nowrap="">
                                                 <nobr>Daily Profit (%)
                                                 </nobr>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="item">Plan 1</td>
+                                            <td class="item">{{ $bot->name }}</td>
                                             <td class="item" align="left">
                                                 @if ($bot->max >= 100000000)
                                                     ${{ number_format($bot->min) . ' and more' }}
@@ -124,18 +113,12 @@
                                                 @endif
                                             </td>
                                             <td class="item" align="left">
+                                                {{ $bot->duration }} Days
+                                            </td>
+                                            <td class="item" align="left">
                                                 {{ $bot->daily_min . '%' }}</td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="3" align="right">
-                                                <span class="badge badge-info"><a
-                                                        href="javascript:openCalculator({{ $bot->id }})"
-                                                        class="text-white">Calculate
-                                                        your profit &gt;
-                                                        &gt;
-                                                    </a></span>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table><br><br>
 
@@ -151,14 +134,14 @@
                                         <td>Your account balance ($):
                                         </td>
                                         <td align="right">
-                                            ${{ number_format(user()->balance) }}</td>
+                                            ${{ number_format(user()->exch_balance) }}</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;
 
                                         </td>
                                         <td align="right">
-                                            <small>${{ number_format(user()->balance) }} of USDT TRC20<br></small>
+                                            <small>${{ number_format(user()->exch_balance) }} of USDT TRC20<br></small>
                                         </td>
                                     </tr>
                                     <tr>
