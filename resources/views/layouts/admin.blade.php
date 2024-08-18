@@ -210,7 +210,7 @@
 
 
 
-           <!-- <div class="w-3/4">
+            <div class="w-3/4">
                 <a href="{{ route('admin.withdrawals.index') }}"
                     class="w-full flex items-center space-x-2  px-3 py-1 rounded-full shadow hover:text-purple-700 hover:scale-110 transition-all @if (request()->routeIs('admin.withdrawals.index')) ts-gray-1 @endif">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
@@ -223,7 +223,21 @@
 
                     <span>Withdrawals</span>
                 </a>
-            </div>-->
+            </div>
+            <div class="w-3/4">
+                <a href="{{ route('admin.deposits.index') }}"
+                    class="w-full flex items-center space-x-2  px-3 py-1 rounded-full shadow hover:text-purple-700 hover:scale-110 transition-all @if (request()->routeIs('admin.deposits.index')) ts-gray-1 @endif">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+                        class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
+                        <path fill-rule="evenodd"
+                            d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
+                    </svg>
+
+                    <span>Deposits</span>
+                </a>
+            </div>
 
             <!--<div class="w-3/4">
                 <a href="{{ route('admin.transfers.index') }}"
@@ -366,7 +380,7 @@
                 </svg>
             </a>
             {{-- withdraw --}}
-           <!-- <a href="{{ route('admin.withdrawals.index') }}" class="ts-gray-1 rounded-full px-2 py-2">
+            <a href="{{ route('admin.withdrawals.index') }}" class="ts-gray-1 rounded-full px-2 py-2">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
                     class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
@@ -375,7 +389,17 @@
                     <path fill-rule="evenodd"
                         d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
                 </svg>
-            </a> -->
+            </a>
+            <a href="{{ route('admin.deposits.index') }}" class="ts-gray-1 rounded-full px-2 py-2">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+                    class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
+                    <path fill-rule="evenodd"
+                        d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
+                </svg>
+            </a>
 
             {{-- dashboard --}}
             <a href="{{ route('admin.dashboard') }}" class="ts-gray-1 rounded-full px-2 py-2">
@@ -389,7 +413,7 @@
             </a>
 
             {{-- p2p --}}
-           <!-- <a href="{{ route('admin.transfers.index') }}" class="ts-gray-1 rounded-full px-2 py-2">
+            <!-- <a href="{{ route('admin.transfers.index') }}" class="ts-gray-1 rounded-full px-2 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                     <path fill-rule="evenodd"
                         d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
