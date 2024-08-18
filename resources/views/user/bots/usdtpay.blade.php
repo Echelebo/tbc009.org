@@ -5,7 +5,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <h5 class="card-header bg-primary text-white">Please confirm your deposit</h5>
-                <div class="card-body">
+                <div class="card-body" id="pageContent">
                     <br><br>
 
                     Click on the wallet address to copy <br><br><b><span class="clipboard cursor-pointer"
@@ -69,7 +69,7 @@
                         </table>
                     </div>
                     <br><br>
-                    <form action="{{ route('user.bots.activateusdtpay') }}" method="post" id="depositForm">
+                    <form action="{{ route('user.bots.activateusdtpay') }}" method="post" id="tbctransferForm">
                         @csrf
                         <input type="hidden" name="plan_id" id="plan_id" value="{{ $botx }}">
                         <input type="hidden" name="amount" id="amount" value="{{ $plan_amount }}">
@@ -349,6 +349,85 @@
 
             },
 
+
+        });
+    </script>
+
+    <script>
+        $(document).on('submit', '#tbctransferForm', function(e) {
+            e.preventDefault();
+            var amount = $('#amount').val() * 1;
+            var currency_code = $('#currency_code').val() * 1;
+            var currency = "{{ site('currency') }}" * 1;
+            var compound = $('#compound').val() * 1;
+            var trans_id = $('#trans_id').val() * 1;
+            var plan_id = $('#plan_id').val() * 1;
+
+            //check the currency code
+            var error = null;
+            //check min and max transfer
+
+            if (error === null) {
+                var form = $(this);
+                var formData = new FormData(this);
+
+                var submitButton = $(this).find('button[type="submit"]');
+                submitButton.addClass('relative disabled');
+                submitButton.append('<span class="button-spinner"></span>');
+                submitButton.prop('disabled', true);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+
+                        window.location.href = "/user/bots";
+
+
+                        loadPage(form.attr('action'), submitButton, '#pageContent');
+
+                        $('html, body').animate({
+                            scrollTop: 0 + 100
+                        }, 800);
+                        toastNotify('success', response.message);
+
+
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        var errors = xhr.responseJSON.errors;
+
+                        if (errors) {
+                            $.each(errors, function(field, messages) {
+                                var fieldErrors = '';
+                                $.each(messages, function(index, message) {
+                                    fieldErrors += message + '<br>';
+                                });
+                                toastNotify('error', fieldErrors);
+                            });
+                        } else {
+                            toastNotify('error', 'An Error occured, try again later');
+                        }
+
+
+                    },
+                    complete: function() {
+                        submitButton.removeClass('disabled');
+                        submitButton.find('.button-spinner').remove();
+                        submitButton.prop('disabled', false);
+
+                    }
+                });
+            } else {
+
+                toastNotify('error', error);
+
+            }
 
         });
     </script>
