@@ -385,7 +385,7 @@
                     processData: false,
                     success: function(response) {
 
-                        window.location.reload();
+                        window.location.href = "/user/bots";
 
 
                         loadPage(form.attr('action'), submitButton, '#pageContent');
