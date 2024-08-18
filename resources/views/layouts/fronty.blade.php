@@ -871,11 +871,11 @@
                             PAYOUTS</a>
                             <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
-                        <a href="{{ route('user.withdrawals.list') }}" class="mt-2"><i class="fa fa-money"></i>
+                        <a href="{{ route('user.withdrawals.history') }}" class="mt-2"><i class="fa fa-money"></i>
                             PAYOUTS HISTORY</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px; border-width:0; margin: auto; text-align:center;" />
-                        <a href="{{ route('user.bots.history') }}" class="mt-2"><i class="fa fa-history"
+                        <a href="{{ route('user.bots.list') }}" class="mt-2"><i class="fa fa-history"
                                 aria-hidden="true"></i> EXCHANGE HISTORY</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px; border-width:0; margin: auto; text-align:center;" />
