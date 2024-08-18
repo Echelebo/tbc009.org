@@ -169,13 +169,13 @@
                                                     <tr>
                                                         <td><input type="radio" name="type" value="0">
                                                         </td>
-                                                        <td>Spend funds from the Account Balance USDT TRC20
+                                                        <td>Pay fee from the Account Balance
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="radio" name="type" value="1">
                                                         </td>
-                                                        <td>Spend funds from USDT TRC20
+                                                        <td>Pay fee from USDT TRC20
                                                         </td>
                                                     </tr>
                                                 </tbody>
