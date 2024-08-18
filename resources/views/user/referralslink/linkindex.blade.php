@@ -26,9 +26,9 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <img src="http://primetimeholdingsltd.comimages/125x125.gif">
-                            <textarea class="form-control" rows="5" spellcheck="false">&lt;a href="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}"&gt; &lt;img src="http://ligraceholdings.com/images/125x125.gif" alt="" width="125" height="125" /&gt; &lt;/a&gt;</textarea>
+                        <div class="col-md-12"
+                            data-copy="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}">
+                            {{ route('user.register', ['ref' => user()->username ?? 'notset']) }}
                         </div>
                     </div>
 
