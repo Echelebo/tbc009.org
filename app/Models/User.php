@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'username',
         'balance',
+        'exch_balance',
         'address',
         'usdt_wallet',
         'walletaddr',
