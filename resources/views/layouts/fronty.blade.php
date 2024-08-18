@@ -871,8 +871,8 @@
                             PAYOUTS</a>
                             <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
-                        <a href="{{ route('user.referralslink.linkindex') }}" class="mt-2"><i class="fa fa-money"></i>
-                            PAYOUTS HISTORY</a>
+                        <a href="{{ route('user.referrals.links') }}" class="mt-2"><i class="fa fa-money"></i>
+                            REFERRALS LINK</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px; border-width:0; margin: auto; text-align:center;" />
                         <a href="{{ route('user.bots.list') }}" class="mt-2"><i class="fa fa-history"

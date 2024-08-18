@@ -1,146 +1,135 @@
 @extends('layouts.fronty')
 
 @section('contents')
-    <div class="w-full p-3">
+    <div class="container-fluid">
+        <!-- start page title -->
 
+        <!-- end page title -->
+        <div class="col-sm-12">
+            <div class="card">
+                <h5 class="card-header bg-primary text-white">Exchange History
+                </h5>
+                <div class="card-body">
 
-        <div class="card lg:flex lg:gap-3">
+                    @forelse ($activations as $bot)
+                        <div
+                            class="w-full bg-bot-1 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                            <div class="rounded-lg">
+                                <div class="relative">
+                                    <div
+                                        class="absolute flex justify-center items-center -top-1 -right-1 border border-slate-800  rounded-lg p-1 text-xs text-white hover:scale-110 transition-all hover:text-white @if ($bot->expires_in < time()) bg-red-500 @else bg-green-500 @endif">
+                                        <a role="button" class="flex space-x-1 items-center cursor-pointer"
+                                            id="{{ 'bot_timer_' . $bot->id }}">
 
-            <div class=" card-header bg-primary text-white  lg:w-2/3-x">
-                <div class="card-body p-5 mb-5 ts-gray-2-x rounded-lg transition-all rescron-card" id="bots">
-                    <h3 class="capitalize  font-extrabold "><span class="border-b-2">My Deposit List</span>
-                    </h3>
-
-                    <div class="w-full">
-
-
-                        <div class="grid grid-cols-1-x lg:grid-cols-2-x gap-3 mt-5">
-
-                            @forelse ($activations as $bot)
-                                <div
-                                    class="w-full bg-bot-1 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
-                                    <div class="rounded-lg">
-                                        <div class="relative">
-                                            <div
-                                                class="absolute flex justify-center items-center -top-1 -right-1 border border-slate-800  rounded-lg p-1 text-xs text-white hover:scale-110 transition-all hover:text-white @if ($bot->expires_in < time()) bg-red-500 @else bg-green-500 @endif">
-                                                <a role="button" class="flex space-x-1 items-center cursor-pointer"
-                                                    id="{{ 'bot_timer_' . $bot->id }}">
-
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="p-2">
-                                            <div class="w-full flex justify-between items-center mb-2">
-                                                <p class="flex space-x-1 items-center"><img
-                                                        class="w-8 h-8 bg-white rounded-full"
-                                                        src="{{ asset('storage/bots/' . $bot->bot->logo) }}" alt="">
-                                                    <span
-                                                        class="font-mono font-semibold text-left">{{ $bot->bot->name }}</span>
-                                                    @if ($bot->status == 'active')
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="w-5 h-5 text-green-500" fill="currentColor"
-                                                            class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-                                                        </svg>
-                                                    @else
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
-                                                            fill="currentColor" class="bi bi-patch-exclamation-fill"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                                        </svg>
-                                                    @endif
-                                                </p>
-
-                                            </div>
-                                            <div class="w-full">
-                                                <div class="grid grid-cols-2 gap-2">
-
-                                                    <p class="text-xs text-mono grid grid-cols-1"><span
-                                                            class="text-orange-500 text-xs">Activation Date</span>
-                                                        <span
-                                                            class="local-time">{{ date('d-m-y H:i:s', strtotime($bot->created_at)) }}</span>
-                                                    </p>
-
-                                                    <p class="text-xs text-mono grid grid-cols-1"><span
-                                                            class="text-orange-500 text-xs">Portfolio</span>
-                                                        <span>{{ formatAmount($bot->capital) }}</span>
-                                                    </p>
-
-                                                    <p class="text-xs text-mono grid grid-cols-1"><span
-                                                            class="text-orange-500 text-xs">Portfolio Balance</span>
-                                                        <span>{{ formatAmount($bot->balance) }}</span>
-                                                    </p>
-
-                                                    <p class="text-xs text-mono grid grid-cols-1"><span
-                                                            class="text-orange-500 text-xs">PNL</span>
-                                                        @if ($bot->profit < 0)
-                                                            <span
-                                                                class="text-red-500 flex space-x-1"><span>{{ ($bot->profit / $bot->capital) * 100 }}%</span>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                    fill="currentColor" class="w-6 h-6">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M1.72 5.47a.75.75 0 011.06 0L9 11.69l3.756-3.756a.75.75 0 01.985-.066 12.698 12.698 0 014.575 6.832l.308 1.149 2.277-3.943a.75.75 0 111.299.75l-3.182 5.51a.75.75 0 01-1.025.275l-5.511-3.181a.75.75 0 01.75-1.3l3.943 2.277-.308-1.149a11.194 11.194 0 00-3.528-5.617l-3.809 3.81a.75.75 0 01-1.06 0L1.72 6.53a.75.75 0 010-1.061z"
-                                                                        clip-rule="evenodd" />
-                                                                </svg>
-                                                            </span>
-                                                        @else
-                                                            <span
-                                                                class="text-green-500 flex space-x-1"><span>+{{ ($bot->profit / $bot->capital) * 100 }}%</span>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                    fill="currentColor" class="w-6 h-6">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"
-                                                                        clip-rule="evenodd" />
-                                                                </svg>
-                                                            </span>
-                                                        @endif
-                                                    </p>
-
-
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
-
                                 </div>
+                                <div class="p-2">
+                                    <div class="w-full flex justify-between items-center mb-2">
+                                        <p class="flex space-x-1 items-center"><img class="w-8 h-8 bg-white rounded-full"
+                                                src="{{ asset('storage/bots/' . $bot->bot->logo) }}" alt="">
+                                            <span class="font-mono font-semibold text-left">{{ $bot->bot->name }}</span>
+                                            @if ($bot->status == 'active')
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500"
+                                                    fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                                </svg>
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
+                                                    fill="currentColor" class="bi bi-patch-exclamation-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                </svg>
+                                            @endif
+                                        </p>
 
-                            @empty
-                                <div
-                                    class="w-full flex justify-center items-center ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
-                                        fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                    </svg>
-                                    <span>You have not deposited in any plan</span>
+                                    </div>
+                                    <div class="w-full">
+                                        <div class="grid grid-cols-2 gap-2">
+
+                                            <p class="text-xs text-mono grid grid-cols-1"><span
+                                                    class="text-orange-500 text-xs">Activation Date</span>
+                                                <span
+                                                    class="local-time">{{ date('d-m-y H:i:s', strtotime($bot->created_at)) }}</span>
+                                            </p>
+
+                                            <p class="text-xs text-mono grid grid-cols-1"><span
+                                                    class="text-orange-500 text-xs">Portfolio</span>
+                                                <span>{{ formatAmount($bot->capital) }}</span>
+                                            </p>
+
+                                            <p class="text-xs text-mono grid grid-cols-1"><span
+                                                    class="text-orange-500 text-xs">Portfolio Balance</span>
+                                                <span>{{ formatAmount($bot->balance) }}</span>
+                                            </p>
+
+                                            <p class="text-xs text-mono grid grid-cols-1"><span
+                                                    class="text-orange-500 text-xs">PNL</span>
+                                                @if ($bot->profit < 0)
+                                                    <span
+                                                        class="text-red-500 flex space-x-1"><span>{{ ($bot->profit / $bot->capital) * 100 }}%</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M1.72 5.47a.75.75 0 011.06 0L9 11.69l3.756-3.756a.75.75 0 01.985-.066 12.698 12.698 0 014.575 6.832l.308 1.149 2.277-3.943a.75.75 0 111.299.75l-3.182 5.51a.75.75 0 01-1.025.275l-5.511-3.181a.75.75 0 01.75-1.3l3.943 2.277-.308-1.149a11.194 11.194 0 00-3.528-5.617l-3.809 3.81a.75.75 0 01-1.06 0L1.72 6.53a.75.75 0 010-1.061z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span
+                                                        class="text-green-500 flex space-x-1"><span>+{{ ($bot->profit / $bot->capital) * 100 }}%</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </span>
+                                                @endif
+                                            </p>
+
+
+                                        </div>
+
+                                    </div>
                                 </div>
-                            @endforelse
-
-
-
-
-
+                            </div>
 
                         </div>
 
-                        <div class="w-full mt-5 flex items-center ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer simple-pagination"
-                            data-paginator="bots">
-                            {{ $activations->links('paginations.simple') }}
+                    @empty
+                        <div
+                            class="w-full flex justify-center items-center ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500" fill="currentColor"
+                                class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                            </svg>
+                            <span>You have not deposited in any plan</span>
                         </div>
+                    @endforelse
 
-                    </div>
+
+
+
+
 
                 </div>
 
-
-
+                <div class="w-full mt-5 flex items-center ts-gray-3-x p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer simple-pagination"
+                    data-paginator="bots">
+                    {{ $activations->links('paginations.simple') }}
+                </div>
 
             </div>
 
         </div>
+
+
+
+
     </div>
 @endsection
 

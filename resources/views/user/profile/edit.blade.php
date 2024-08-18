@@ -25,7 +25,7 @@
                                     <tr>
                                         <td>Account Name:</td>
                                         <td><input type="text" class="form-control" name="username"
-                                                value="{{ user()->username }}" disabled></td>
+                                                value="{{ user()->username }}"></td>
                                     </tr>
                                     <tr>
                                         <td>Registration date:</td>
@@ -44,13 +44,13 @@
                                     </tr>
 
                                     <!-- <tr>
-                          <td>New Password:</td>
-                          <td><input type="password" name="password" value="" class="form-control"></td>
-                        </tr>
-                        <tr>
-                          <td>Retype Password:</td>
-                          <td><input type="password" name="password2" value="" class="form-control"></td>
-                        </tr>-->
+                              <td>New Password:</td>
+                              <td><input type="password" name="password" value="" class="form-control"></td>
+                            </tr>
+                            <tr>
+                              <td>Retype Password:</td>
+                              <td><input type="password" name="password2" value="" class="form-control"></td>
+                            </tr>-->
                                     <tr>
                                         <td>Your USDT TRC20 Account ID:</td>
                                         <td><input type="text" class="form-control" name="usdt_wallet" id="usdt_wallet"

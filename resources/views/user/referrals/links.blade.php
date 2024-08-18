@@ -1,10 +1,15 @@
-@extends('layouts.user')
+@extends('layouts.fronty')
 
 @section('contents')
-    <div class="w-full p-3">
-        <div class="w-full lg:flex lg:gap-3">
-            <div class="w-full-x lg:w-1/3 h-52  rounded-lg p-5 mb-3">
-                <div class="w-full grid grid-cols-1 gap-3 p-2">
+    <div class="container-fluid">
+        <!-- start page title -->
+
+        <!-- end page title -->
+        <div class="col-sm-12">
+            <div class="card" id="pageContent">
+                <h5 class="card-header bg-primary text-white">Your Referrals
+                </h5>
+                <div class="card-body">
                     <div class=" p-3 rounded-lg">
                         You have {{ user()->referredUsers->count() }} direct referrals
                     </div>
