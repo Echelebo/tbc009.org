@@ -12,7 +12,7 @@
                             data-copy="{{ $depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin' }}">USDTTRC20
                             Wallet: <font color="red">
                                 {{ $depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin' }}</font>
-                            </span></b><br><br><br>
+                        </span></b><br><br><br>
 
                     <div class="table-responsive">
                         <table class="table">
@@ -60,10 +60,7 @@
                                             {{ $compound }} </td>
                                     </tr>
                                 @endif
-                                <tr>
-                                    <th>Amount:</th>
-                                    <td>${{ $plan_amount }}</td>
-                                </tr>
+
                                 <tr>
                                     <th> Amount:</th>
                                     <td>${{ $plan_amount }}</td>
@@ -86,7 +83,8 @@
                                     </tr>
                                     <tr>
                                         <td>Transaction ID</td>
-                                        <td><input type="text" name="trans_id" value="" class="inpts" required>
+                                        <td><input type="text" name="trans_id" value="" class="form-control inputs"
+                                                required>
                                         </td>
                                     </tr>
                                 </tbody>
