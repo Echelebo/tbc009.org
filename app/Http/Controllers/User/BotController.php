@@ -19,7 +19,7 @@ class BotController extends Controller
         $page_title = 'My Portfolios';
 
         $bots = Bot::where('status', 1)->get();
-        $activations =  user()
+        $activations = user()
             ->botActivations()
             ->with('bot')
             ->orderBy('id', 'DESC')
@@ -69,7 +69,7 @@ class BotController extends Controller
             $graph_info[$formatted_date] = 0;
 
             $formatted_date_day = $currentDate->format('d-m-Y');
-            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' =>0 ];
+            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' => 0];
 
             $currentDate->addDay();
             array_push($days, $formatted_date);
@@ -83,22 +83,15 @@ class BotController extends Controller
 
             $formatted_date_day = date('d-m-Y', strtotime($data->date));
             $daily_data[$formatted_date_day] = ['profit' => $data->total_profit, 'profit_percent' => $data->total_profit_percent];
-            
-        }
 
-        
+        }
 
         uksort($daily_data, 'compareDatesDesc');
 
-        foreach($graph_info as $day => $profit) {
+        foreach ($graph_info as $day => $profit) {
             array_push($days, $day);
             array_push($profits, $profit);
         }
-    
-
-
-
-
 
         return view('user.bots.index', compact(
             'page_title',
@@ -110,13 +103,13 @@ class BotController extends Controller
             'daily_data'
         ));
     }
-    
+
     public function history()
     {
         $page_title = 'My Portfolios';
 
         $bots = Bot::where('status', 1)->get();
-        $activations =  user()
+        $activations = user()
             ->botActivations()
             ->with('bot')
             ->orderBy('id', 'DESC')
@@ -166,7 +159,7 @@ class BotController extends Controller
             $graph_info[$formatted_date] = 0;
 
             $formatted_date_day = $currentDate->format('d-m-Y');
-            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' =>0 ];
+            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' => 0];
 
             $currentDate->addDay();
             array_push($days, $formatted_date);
@@ -180,22 +173,15 @@ class BotController extends Controller
 
             $formatted_date_day = date('d-m-Y', strtotime($data->date));
             $daily_data[$formatted_date_day] = ['profit' => $data->total_profit, 'profit_percent' => $data->total_profit_percent];
-            
-        }
 
-        
+        }
 
         uksort($daily_data, 'compareDatesDesc');
 
-        foreach($graph_info as $day => $profit) {
+        foreach ($graph_info as $day => $profit) {
             array_push($days, $day);
             array_push($profits, $profit);
         }
-    
-
-
-
-
 
         return view('user.bots.history', compact(
             'page_title',
@@ -207,13 +193,13 @@ class BotController extends Controller
             'daily_data'
         ));
     }
-    
+
     public function list()
     {
         $page_title = 'My Portfolios';
 
         $bots = Bot::where('status', 1)->get();
-        $activations =  user()
+        $activations = user()
             ->botActivations()
             ->with('bot')
             ->orderBy('id', 'DESC')
@@ -263,7 +249,7 @@ class BotController extends Controller
             $graph_info[$formatted_date] = 0;
 
             $formatted_date_day = $currentDate->format('d-m-Y');
-            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' =>0 ];
+            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' => 0];
 
             $currentDate->addDay();
             array_push($days, $formatted_date);
@@ -277,22 +263,15 @@ class BotController extends Controller
 
             $formatted_date_day = date('d-m-Y', strtotime($data->date));
             $daily_data[$formatted_date_day] = ['profit' => $data->total_profit, 'profit_percent' => $data->total_profit_percent];
-            
-        }
 
-        
+        }
 
         uksort($daily_data, 'compareDatesDesc');
 
-        foreach($graph_info as $day => $profit) {
+        foreach ($graph_info as $day => $profit) {
             array_push($days, $day);
             array_push($profits, $profit);
         }
-    
-
-
-
-
 
         return view('user.bots.list', compact(
             'page_title',
@@ -304,13 +283,13 @@ class BotController extends Controller
             'daily_data'
         ));
     }
-    
+
     public function earnings()
     {
         $page_title = 'My Trading History';
 
         $bots = Bot::where('status', 1)->get();
-        $activations =  user()
+        $activations = user()
             ->botActivations()
             ->with('bot')
             ->orderBy('id', 'DESC')
@@ -360,7 +339,7 @@ class BotController extends Controller
             $graph_info[$formatted_date] = 0;
 
             $formatted_date_day = $currentDate->format('d-m-Y');
-            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' =>0 ];
+            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' => 0];
 
             $currentDate->addDay();
             array_push($days, $formatted_date);
@@ -374,22 +353,15 @@ class BotController extends Controller
 
             $formatted_date_day = date('d-m-Y', strtotime($data->date));
             $daily_data[$formatted_date_day] = ['profit' => $data->total_profit, 'profit_percent' => $data->total_profit_percent];
-            
-        }
 
-        
+        }
 
         uksort($daily_data, 'compareDatesDesc');
 
-        foreach($graph_info as $day => $profit) {
+        foreach ($graph_info as $day => $profit) {
             array_push($days, $day);
             array_push($profits, $profit);
         }
-    
-
-
-
-
 
         return view('user.bots.earnings', compact(
             'page_title',
@@ -401,14 +373,13 @@ class BotController extends Controller
             'daily_data'
         ));
     }
-    
-    
+
     public function usdtpay()
     {
-        $page_title = 'My Portfolios';
+        $page_title = 'My Exchanges';
 
         $bots = Bot::where('status', 1)->get();
-        $activations =  user()
+        $activations = user()
             ->botActivations()
             ->with('bot')
             ->orderBy('id', 'DESC')
@@ -458,7 +429,7 @@ class BotController extends Controller
             $graph_info[$formatted_date] = 0;
 
             $formatted_date_day = $currentDate->format('d-m-Y');
-            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' =>0 ];
+            $daily_data[$formatted_date_day] = ['profit' => 0, 'profit_percent' => 0];
 
             $currentDate->addDay();
             array_push($days, $formatted_date);
@@ -472,22 +443,15 @@ class BotController extends Controller
 
             $formatted_date_day = date('d-m-Y', strtotime($data->date));
             $daily_data[$formatted_date_day] = ['profit' => $data->total_profit, 'profit_percent' => $data->total_profit_percent];
-            
-        }
 
-        
+        }
 
         uksort($daily_data, 'compareDatesDesc');
 
-        foreach($graph_info as $day => $profit) {
+        foreach ($graph_info as $day => $profit) {
             array_push($days, $day);
             array_push($profits, $profit);
         }
-    
-
-
-
-
 
         return view('user.bots.usdtpay', compact(
             'page_title',
@@ -499,7 +463,7 @@ class BotController extends Controller
             'daily_data'
         ));
     }
-    
+
     public function activateusdtpay(Request $request)
     {
 
@@ -513,7 +477,6 @@ class BotController extends Controller
         $currency = $request->currency_code;
         $fee = site('deposit_fee') / 100 * $amount_before_fee;
         $amount = $fee + $amount_before_fee;
-        
 
         $coin = DepositCoin::where('code', $currency)->where('status', 1)->first();
         if (!$coin) {
@@ -521,11 +484,10 @@ class BotController extends Controller
         }
 
         $coin_id = $coin->id;
-        
+
         $plan_id = $request->plan_id;
         //initiate deposit
         $randomNumber = rand();
-        
 
         $deposit = new Deposit();
         $deposit->user_id = user()->id;
@@ -541,11 +503,9 @@ class BotController extends Controller
         $deposit->deposit_coin_id = $coin_id;
         $deposit->trans_id = $request->trans_id;
         $deposit->save();
-        
+
         sendDepositEmail($deposit);
 
-        
-        
         return response()->json(['message' => 'Plan Deposit Initiated Successfully']);
     }
 
@@ -557,127 +517,117 @@ class BotController extends Controller
             'capital' => 'required|numeric',
         ]);
 
-        
-        
         if ($request->type == 1) {
-            
+
             $capital = $request->capital;
 
-        //check if the user has sufficient balance
+            //check if the user has sufficient balance
 
-        //retrieve the bot
-        $bot = Bot::where('id', $request->bot_id)->first();
+            //retrieve the bot
+            $bot = Bot::where('id', $request->bot_id)->first();
 
-        if (!$bot) {
-            return response()->json(validationError('Error accessing plan'), 422);
-        }
-
-        //check for min and max capital
-        if ($capital < $bot->min || $capital > $bot->max) {
-            if ($bot->max >= 100000000) {
-                return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - UNLIMITED'), 422);
-            }else { 
-            return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - ' . site('currency') . $bot->max), 422);
+            if (!$bot) {
+                return response()->json(validationError('Error accessing plan'), 422);
             }
-        }
-        
-        $depositusdtwallet = DepositCoin::where('id', 224)->first();
 
-        //debit the user 
-        $user = User::where('id', user()->id)->first();
-            
-         $page_title = 'USDT Payment';   
-        $plan_name = $bot->name;
-        $plan_daily_profit = $bot->daily_min;
-        $plan_duration = $bot->duration;
-        $plan_amount = $request->capital;
-        $compound = $request->compound;
-        $botx = $bot->id;
+            //check for min and max capital
+            if ($capital < $bot->min || $capital > $bot->max) {
+                if ($bot->max >= 100000000) {
+                    return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - UNLIMITED'), 422);
+                } else {
+                    return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - ' . site('currency') . $bot->max), 422);
+                }
+            }
 
-            
+            $depositusdtwallet = DepositCoin::where('id', 224)->first();
+
+            //debit the user
+            $user = User::where('id', user()->id)->first();
+
+            $page_title = 'USDT Payment';
+            $plan_name = $bot->name;
+            $plan_daily_profit = $bot->daily_min;
+            $plan_duration = $bot->duration;
+            $plan_amount = $request->capital;
+            $compound = $request->compound;
+            $botx = $bot->id;
+
             return view('user.bots.usdtpay', compact(
-            'page_title',
-            'plan_name',
-            'plan_daily_profit',
-            'plan_duration',
-            'plan_amount',
-            'compound',
-            'depositusdtwallet',
-            'botx'
-        ));
-        
-            
-        }else{
-            
+                'page_title',
+                'plan_name',
+                'plan_daily_profit',
+                'plan_duration',
+                'plan_amount',
+                'compound',
+                'depositusdtwallet',
+                'botx'
+            ));
+
+        } else {
+
             $capital = $request->capital;
 
-        //check if the user has sufficient balance
-        if (user()->balance < $capital) {
-            return response()->json(validationError('Insufficient balance!'), 422);
-        }
-
-        $capital = floatval($capital);
-        if ($capital <= 0) {
-            return response()->json(validationError('Invalid balance!'), 422);
-        }
-
-        //retrieve the bot
-        $bot = Bot::where('id', $request->bot_id)->first();
-
-        if (!$bot) {
-            return response()->json(validationError('Error accessing plan'), 422);
-        }
-
-        //check for min and max capital
-        if ($capital < $bot->min || $capital > $bot->max) {
-            if ($bot->max >= 100000000) {
-                return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - UNLIMITED'), 422);
-            }else { 
-            return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - ' . site('currency') . $bot->max), 422);
+            //check if the user has sufficient balance
+            if (user()->balance < $capital) {
+                return response()->json(validationError('Insufficient balance!'), 422);
             }
-        }
 
-        //debit the user 
-        $user = User::where('id', user()->id)->first();
-            
+            $capital = floatval($capital);
+            if ($capital <= 0) {
+                return response()->json(validationError('Invalid balance!'), 422);
+            }
+
+            //retrieve the bot
+            $bot = Bot::where('id', $request->bot_id)->first();
+
+            if (!$bot) {
+                return response()->json(validationError('Error accessing plan'), 422);
+            }
+
+            //check for min and max capital
+            if ($capital < $bot->min || $capital > $bot->max) {
+                if ($bot->max >= 100000000) {
+                    return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - UNLIMITED'), 422);
+                } else {
+                    return response()->json(validationError('Plan range for amount is ' . site('currency') . $bot->min . ' - ' . site('currency') . $bot->max), 422);
+                }
+            }
+
+            //debit the user
+            $user = User::where('id', user()->id)->first();
+
             $debit = User::find($user->id);
-        $debit->balance = $user->balance - $capital;
-        $debit->save();
+            $debit->balance = $user->balance - $capital;
+            $debit->save();
 
-        //log transaction
-        recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
+            //log transaction
+            recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
 
+            // $trade_data = tradeData($bot);
+            $duration = strtotime("+ $bot->duration $bot->duration_type");
+            //calculate total return
+            $days = floor($duration / (60 * 60 * 24));
+            //log activation
+            $activation = new BotActivation();
+            $activation->user_id = $user->id;
+            $activation->balance = $capital;
+            $activation->bot_id = $bot->id;
+            $activation->capital = $capital;
+            $activation->profit = 0;
+            $activation->expires_in = $duration;
+            $activation->daily_timestamp = now()->addDays(-1)->timestamp;
+            $activation->daily_sequence = json_encode([]);
+            $activation->gen_timestamps = json_encode([]);
+            $activation->status = 'active';
+            $activation->save();
 
+            //notify by email
+            sendNewBotActivationMail($activation);
 
-        // $trade_data = tradeData($bot);
-        $duration = strtotime("+ $bot->duration $bot->duration_type");
-        //calculate total return 
-        $days = floor($duration / (60 * 60 * 24));
-        //log activation
-        $activation = new BotActivation();
-        $activation->user_id = $user->id;
-        $activation->balance = $capital;
-        $activation->bot_id = $bot->id;
-        $activation->capital = $capital;
-        $activation->profit = 0;
-        $activation->expires_in = $duration;
-        $activation->daily_timestamp = now()->addDays(-1)->timestamp;
-        $activation->daily_sequence = json_encode([]);
-        $activation->gen_timestamps = json_encode([]);
-        $activation->status = 'active';
-        $activation->save();
+            return response()->json(['message' => 'Plan Activated Successfully']);
 
-        //notify by email
-        sendNewBotActivationMail($activation);
-
-        return response()->json(['message' => 'Plan Activated Successfully']);
-            
         }
 
-        
     }
-    
-    
-    
-    
+
 }
