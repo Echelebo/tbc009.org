@@ -134,14 +134,14 @@
                                         <td>Your account balance ($):
                                         </td>
                                         <td align="right">
-                                            ${{ user()->exch_balance }}</td>
+                                            ${{ number_format(user()->exch_balance) }}</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;
 
                                         </td>
                                         <td align="right">
-                                            <small>${{ user()->exch_balance }} of USDT TRC20<br></small>
+                                            <small>${{ number_format(user()->exch_balance) }} of USDT TRC20<br></small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,13 +169,13 @@
                                                     <tr>
                                                         <td><input type="radio" name="type" value="0">
                                                         </td>
-                                                        <td>Pay fee from the Account Balance
+                                                        <td>Exchange fee from the Account Balance
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="radio" name="type" value="1">
                                                         </td>
-                                                        <td>Pay fee from USDT TRC20
+                                                        <td>Exchange fee from USDT TRC20
                                                         </td>
                                                     </tr>
                                                 </tbody>
