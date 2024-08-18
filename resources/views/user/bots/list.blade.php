@@ -4,10 +4,10 @@
     <div class="w-full p-3">
 
 
-        <div class="w-full lg:flex lg:gap-3">
+        <div class="card lg:flex lg:gap-3">
 
-            <div class="w-full lg:w-2/3-x">
-                <div class="w-full p-5 mb-5 ts-gray-2-x rounded-lg transition-all rescron-card" id="bots">
+            <div class=" card-header bg-primary text-white  lg:w-2/3-x">
+                <div class="card-body p-5 mb-5 ts-gray-2-x rounded-lg transition-all rescron-card" id="bots">
                     <h3 class="capitalize  font-extrabold "><span class="border-b-2">My Deposit List</span>
                     </h3>
 

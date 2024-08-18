@@ -3,7 +3,7 @@
 @section('contents')
     <div class="w-full p-3" id="pageContent">
         <div class="w-full lg:flex lg:gap-3" id="refresh">
-            
+
             <div class="w-full ">
                 <div class="w-full p-5 mb-5 rounded-lg transition-all rescron-card" id="withdrawals">
                     <h3 class="capitalize  font-extrabold "><span class="border-b-2">Withdrawal History</span>
@@ -22,8 +22,8 @@
                                         </span>
                                         <input type="text" placeholder="Txn Ref" id="search-withdrawal-input"
                                             class="theme1-text-input rounded-0" value="{{ request()->s }}">
-                                        <label for="search-withdrawal-input"
-                                            class="placeholder-label text-white px-2">Txn Ref
+                                        <label for="search-withdrawal-input" class="placeholder-label text-white px-2">Txn
+                                            Ref
                                         </label>
 
                                     </div>
@@ -57,8 +57,7 @@
                                                     <path
                                                         d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                 </svg>
-                                                <span
-                                                    class="text-white uppercase text-xs">{{ $withdrawal->status }}</span>
+                                                <span class="text-white uppercase text-xs">{{ $withdrawal->status }}</span>
                                             @elseif ($withdrawal->status == 'approved')
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500"
                                                     fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
@@ -109,7 +108,8 @@
 
                                         <div class="w-full flex items-center justify-between">
                                             <h2>Txn Ref: </h2>
-                                            <span class="font-bold clipboard cursor-pointer" data-copy="{{ $withdrawal->ref }}">{{ $withdrawal->ref }}</span>
+                                            <span class="font-bold clipboard cursor-pointer"
+                                                data-copy="{{ $withdrawal->ref }}">{{ $withdrawal->ref }}</span>
                                             </span>
                                         </div>
                                     </div>
@@ -229,11 +229,11 @@
                                                     data-copy=""></span>
                                             </h2>
                                         </div>
-    
-                                        
-    
+
+
+
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>
