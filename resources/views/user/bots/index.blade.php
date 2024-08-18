@@ -94,7 +94,7 @@
                                         </tr>
                                         <tr>
                                             <td class="inheader">Plan</td>
-                                            <td class="inheader" width="200">Spent Amount ($)
+                                            <td class="inheader" width="200">Exchange Amount ($)
                                             </td>
                                             <td class="inheader" width="200">Duration (days)
                                             </td>
@@ -109,7 +109,7 @@
                                                 @if ($bot->max >= 100000000)
                                                     ${{ number_format($bot->min) . ' and more' }}
                                                 @else
-                                                    {{ number_format($bot->min) . ' - $' . number_format($bot->max) }}
+                                                    ${{ number_format($bot->min) . ' - $' . number_format($bot->max) }}
                                                 @endif
                                             </td>
                                             <td class="item" align="left">
@@ -186,7 +186,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <input type="submit" value="Deposit" id="activateButton"
+                                            <input type="submit" value="Deposit" id="activateButton-x"
                                                 class="btn bg-blue-500 btn-primary ml-auto">
                                         </td>
                                     </tr>
@@ -534,53 +534,58 @@
                 submitButton.addClass('relative disabled');
                 submitButton.append('<span class="button-spinner"></span>');
                 submitButton.prop('disabled', true);
-                $.ajax({
-                    url: form.attr('action'),
-                    method: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
 
-                        window.location.reload();
+                if ($('input[name=type]:checked').val() == 1) {
+                    tbctransferForm.submit();
+                } else {
+                    $.ajax({
+                        url: form.attr('action'),
+                        method: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
 
-
-                        loadPage(form.attr('action'), submitButton, '#pageContent');
-
-                        $('html, body').animate({
-                            scrollTop: 0 + 100
-                        }, 800);
-                        toastNotify('success', response.message);
+                            window.location.reload();
 
 
+                            loadPage(form.attr('action'), submitButton, '#pageContent');
+
+                            $('html, body').animate({
+                                scrollTop: 0 + 100
+                            }, 800);
+                            toastNotify('success', response.message);
 
 
-                    },
-                    error: function(xhr, status, error) {
-                        var errors = xhr.responseJSON.errors;
 
-                        if (errors) {
-                            $.each(errors, function(field, messages) {
-                                var fieldErrors = '';
-                                $.each(messages, function(index, message) {
-                                    fieldErrors += message + '<br>';
+
+                        },
+                        error: function(xhr, status, error) {
+                            var errors = xhr.responseJSON.errors;
+
+                            if (errors) {
+                                $.each(errors, function(field, messages) {
+                                    var fieldErrors = '';
+                                    $.each(messages, function(index, message) {
+                                        fieldErrors += message + '<br>';
+                                    });
+                                    toastNotify('error', fieldErrors);
                                 });
-                                toastNotify('error', fieldErrors);
-                            });
-                        } else {
-                            toastNotify('error', 'An Error occured, try again later');
+                            } else {
+                                toastNotify('error', 'An Error occured, try again later');
+                            }
+
+
+                        },
+                        complete: function() {
+                            submitButton.removeClass('disabled');
+                            submitButton.find('.button-spinner').remove();
+                            submitButton.prop('disabled', false);
+
                         }
-
-
-                    },
-                    complete: function() {
-                        submitButton.removeClass('disabled');
-                        submitButton.find('.button-spinner').remove();
-                        submitButton.prop('disabled', false);
-
-                    }
-                });
+                    });
+                }
             } else {
 
                 toastNotify('error', error);

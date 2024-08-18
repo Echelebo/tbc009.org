@@ -71,10 +71,10 @@
                     <br><br>
                     <form action="{{ route('user.bots.activateusdtpay') }}" method="post" id="depositForm">
                         @csrf
-                        <input type="hidden" name="plan_id" value="{{ $botx }}">
+                        <input type="hidden" name="plan_id" id="plan_id" value="{{ $botx }}">
                         <input type="hidden" name="amount" id="amount" value="{{ $plan_amount }}">
                         <input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">
-                        <input type="hidden" name="compound" value="{{ $compound }}">
+                        <input type="hidden" name="compound" id="compound" value="{{ $compound }}">
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
@@ -83,8 +83,8 @@
                                     </tr>
                                     <tr>
                                         <td>Transaction ID</td>
-                                        <td><input type="text" name="trans_id" value="" class="form-control inputs"
-                                                required>
+                                        <td><input type="text" name="trans_id" id="trans_id" value=""
+                                                class="form-control inputs" required>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -310,6 +310,9 @@
             var min_deposit = "{{ site('min_deposit') }}" * 1;
             var max_deposit = "{{ site('max_deposit') }}" * 1;
             var currency = "{{ site('currency') }}";
+            var compound = $('#compound').val();
+            var trans_id = $('#trans_id').val();
+            var plan_id = $('#plan_id').val();
 
             //check the currency code
             var error = null;
