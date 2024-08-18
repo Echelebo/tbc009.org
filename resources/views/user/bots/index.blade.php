@@ -1,227 +1,232 @@
-@extends('layouts.user')
+@extends('layouts.fronty')
 
 @section('contents')
-<div class="container-fluid">
-  <!-- start page title -->
-    <div class="row">
-      <div class="col-12">
-        <div class="page-title-box d-flex align-items-center justify-content-between">
-          <h4 class="mb-0">Deposit</h4>
-          <div class="page-title-right">
-            <ol class="breadcrumb m-0">
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a>
-              </li>
-              <li class="breadcrumb-item active">Deposit</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end page title -->
-      <div class="col-sm-12">
-          
-       
-       <!-- script -->
-       
-       <script language="javascript"><!-
-function openCalculator(id)
-{
-
-w = 225; h = 400;
-t = (screen.height-h-30)/2;
-l = (screen.width-w-30)/2;
-window.open('?a=calendar&type=' + id, 'calculator' + id, "top="+t+",left="+l+",width="+w+",height="+h+",resizable=1,scrollbars=0");
-
-
- 
-for (i = 0; i < document.spendform.h_id.length; i++)
-{
-if (document.spendform.h_id[i].value == id)
-{
-document.spendform.h_id[i].checked = true;
-}
-}
-
- 
-
-}
-
-function updateCompound() {
-var id = 0;
-var tt = document.spendform.h_id.type;
-if (tt && tt.toLowerCase() == 'hidden') {
-id = document.spendform.h_id.value;
-} else {
-for (i = 0; i < document.spendform.h_id.length; i++) {
-if (document.spendform.h_id[i].checked) {
-id = document.spendform.h_id[i].value;
-}
-}
-}
-
-var cpObj = document.getElementById('compound_percents');
-if (cpObj) {
-while (cpObj.options.length != 0) {
-cpObj.options[0] = null;
-}
-}
-
-if (cps[id] && cps[id].length > 0) {
-document.getElementById('coumpond_block').style.display = '';
-
-for (i in cps[id]) {
-cpObj.options[cpObj.options.length] = new Option(cps[id][i]);
-}
-} else {
-document.getElementById('coumpond_block').style.display = 'none';
-}
-}
-var cps = {};
--></script>
-       
-       <!-- edn of script -->
-       
-       
-       
-       
-       
-       <br>
-        <div class="card">
-          <h5 class="card-header bg-primary text-white">Deposit
-          </h5>
-          <div class="card-body">
-            <form action="{{ route('user.bots.new') }}" method="post" id="botForm" name="spendform">
-                @csrf
-              <div class="table-responsive">
-                  @foreach ($bots as $bot)
-                  
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td colspan="3">
-                          
-                          <input type="radio" id="bot_id" name="bot_id" value="{{$bot->id}}"  onclick="updateCompound()">
-                        <b>{{ $bot->name }}</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="inheader">Plan</td>
-                      <td class="inheader" width="200">Spent Amount ($)
-                      </td>
-                      <td class="inheader" width="100" nowrap="">
-                        <nobr>Daily Profit (%)
-                        </nobr>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="item">Plan 1</td>
-                      <td class="item" align="left">
-                        @if ($bot->max >= 100000000) ${{number_format($bot->min). ' and more'}} @else {{number_format($bot->min). ' - $' .number_format($bot->max)}} @endif</td>
-                      <td class="item" align="left">
-                        {{ $bot->daily_min . '%' }}</td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" align="right">
-                        <span class="badge badge-info"><a href="javascript:openCalculator({{$bot->id}})"
-                            class="text-white">Calculate
-                            your profit &gt;
-                            &gt;
-                          </a></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table><br><br>
-                
-                <script>cps[{{$bot->id}}] =[];
-                </script>
-                
-                
-                @endforeach
-               </div>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>Your account balance ($):
-                            </td>
-                            <td align="right">
-                              ${{ number_format(user()->balance) }}</td>
-                          </tr>
-                          <tr>
-                            <td>&nbsp;
-
-                            </td>
-                            <td align="right">
-                              <small>${{ number_format(user()->balance) }} of USDT TRC20<br></small>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Amount to Spend ($):</td>
-                            <td align="right">
-                              <input type="text" name="capital" id="capital" value="200.00" class="form-control" size="15"
-                                style="text-align:right;" required>
-                            </td>
-                          </tr>
-                          
-                          
-                          
-                          <tr id="coumpond_block" style="display:none">
-                                                            <td>Compounding(%):</td>
-                                                            <td align=right>
-                                                                <select name="compound" class=inpts
-                                                                    id="compound_percents"></select>
-                                                            </td>
-                                                        </tr>
-                                                        
-                                                        
-                          <tr>
-                            <td colspan="2">
-                              <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <td><input type="radio" name="type" value="0">
-                                    </td>
-                                    <td>Spend funds from the Account Balance USDT TRC20
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td><input type="radio" name="type" value="1">
-                                    </td>
-                                    <td>Spend funds from USDT TRC20
-                                    </td>
-                                  </tr>
-                                </tbody>
-                                <p class="mb-3 text-red-500 " id="errorMessage"></p>
-                              </table>
-                            </td>
-                            
-                          </tr>
-                          <tr>
-                            <td colspan="2">
-                              <input type="submit" value="Deposit" id="activateButton" class="btn bg-blue-500 btn-primary ml-auto">
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Deposit</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Deposit</li>
+                        </ol>
                     </div>
-                    
-                  </div>
                 </div>
-              </div>
-            </form>
-            
-            <script language=javascript>
-                                    for (i = 0; i < document.spendform.type.length; i++) {
-                                        if ((document.spendform.type[i].value.match(/^process_/))) {
-                                            document.spendform.type[i].checked = true;
-                                            break;
-                                        }
-                                    }
-                                    updateCompound();
-                                </script>
-          </div>
+            </div>
         </div>
+        <!-- end page title -->
+        <div class="col-sm-12">
 
+
+            <!-- script -->
+
+            <script language="javascript">
+                < !-
+                function openCalculator(id) {
+
+                    w = 225;
+                    h = 400;
+                    t = (screen.height - h - 30) / 2;
+                    l = (screen.width - w - 30) / 2;
+                    window.open('?a=calendar&type=' + id, 'calculator' + id, "top=" + t + ",left=" + l + ",width=" + w +
+                        ",height=" + h + ",resizable=1,scrollbars=0");
+
+
+
+                    for (i = 0; i < document.spendform.h_id.length; i++) {
+                        if (document.spendform.h_id[i].value == id) {
+                            document.spendform.h_id[i].checked = true;
+                        }
+                    }
+
+
+
+                }
+
+                function updateCompound() {
+                    var id = 0;
+                    var tt = document.spendform.h_id.type;
+                    if (tt && tt.toLowerCase() == 'hidden') {
+                        id = document.spendform.h_id.value;
+                    } else {
+                        for (i = 0; i < document.spendform.h_id.length; i++) {
+                            if (document.spendform.h_id[i].checked) {
+                                id = document.spendform.h_id[i].value;
+                            }
+                        }
+                    }
+
+                    var cpObj = document.getElementById('compound_percents');
+                    if (cpObj) {
+                        while (cpObj.options.length != 0) {
+                            cpObj.options[0] = null;
+                        }
+                    }
+
+                    if (cps[id] && cps[id].length > 0) {
+                        document.getElementById('coumpond_block').style.display = '';
+
+                        for (i in cps[id]) {
+                            cpObj.options[cpObj.options.length] = new Option(cps[id][i]);
+                        }
+                    } else {
+                        document.getElementById('coumpond_block').style.display = 'none';
+                    }
+                }
+                var cps = {}; -
+                >
+            </script>
+
+            <!-- edn of script -->
+
+
+
+
+
+            <br>
+            <div class="card">
+                <h5 class="card-header bg-primary text-white">Deposit
+                </h5>
+                <div class="card-body">
+                    <form action="{{ route('user.bots.new') }}" method="post" id="botForm" name="spendform">
+                        @csrf
+                        <div class="table-responsive">
+                            @foreach ($bots as $bot)
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3">
+
+                                                <input type="radio" id="bot_id" name="bot_id"
+                                                    value="{{ $bot->id }}" onclick="updateCompound()">
+                                                <b>{{ $bot->name }}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="inheader">Plan</td>
+                                            <td class="inheader" width="200">Spent Amount ($)
+                                            </td>
+                                            <td class="inheader" width="100" nowrap="">
+                                                <nobr>Daily Profit (%)
+                                                </nobr>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Plan 1</td>
+                                            <td class="item" align="left">
+                                                @if ($bot->max >= 100000000)
+                                                    ${{ number_format($bot->min) . ' and more' }}
+                                                @else
+                                                    {{ number_format($bot->min) . ' - $' . number_format($bot->max) }}
+                                                @endif
+                                            </td>
+                                            <td class="item" align="left">
+                                                {{ $bot->daily_min . '%' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" align="right">
+                                                <span class="badge badge-info"><a
+                                                        href="javascript:openCalculator({{ $bot->id }})"
+                                                        class="text-white">Calculate
+                                                        your profit &gt;
+                                                        &gt;
+                                                    </a></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table><br><br>
+
+                                <script>
+                                    cps[{{ $bot->id }}] = [];
+                                </script>
+                            @endforeach
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Your account balance ($):
+                                        </td>
+                                        <td align="right">
+                                            ${{ number_format(user()->balance) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;
+
+                                        </td>
+                                        <td align="right">
+                                            <small>${{ number_format(user()->balance) }} of USDT TRC20<br></small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount to Spend ($):</td>
+                                        <td align="right">
+                                            <input type="text" name="capital" id="capital" value="200.00"
+                                                class="form-control" size="15" style="text-align:right;" required>
+                                        </td>
+                                    </tr>
+
+
+
+                                    <tr id="coumpond_block" style="display:none">
+                                        <td>Compounding(%):</td>
+                                        <td align=right>
+                                            <select name="compound" class=inpts id="compound_percents"></select>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="2">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="radio" name="type" value="0">
+                                                        </td>
+                                                        <td>Spend funds from the Account Balance USDT TRC20
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="radio" name="type" value="1">
+                                                        </td>
+                                                        <td>Spend funds from USDT TRC20
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <p class="mb-3 text-red-500 " id="errorMessage"></p>
+                                            </table>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="submit" value="Deposit" id="activateButton"
+                                                class="btn bg-blue-500 btn-primary ml-auto">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        </form>
+
+        <script language=javascript>
+            for (i = 0; i < document.spendform.type.length; i++) {
+                if ((document.spendform.type[i].value.match(/^process_/))) {
+                    document.spendform.type[i].checked = true;
+                    break;
+                }
+            }
+            updateCompound();
+        </script>
+    </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -350,64 +355,64 @@ var cps = {};
             submitButton.addClass('relative disabled');
             submitButton.append('<span class="button-spinner"></span>');
             submitButton.prop('disabled', true);
-              if($('input[name=type]:checked').val() == 1) {
-                            botForm.submit();
-                    }else{
-                        
+            if ($('input[name=type]:checked').val() == 1) {
+                botForm.submit();
+            } else {
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        var link = window.location.href;
+                        var targetDiv = '#bots';
                         $.ajax({
-                url: form.attr('action'),
-                method: 'POST',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    var link = window.location.href;
-                    var targetDiv = '#bots';
-                    $.ajax({
-                        url: link,
-                        method: 'GET',
-                        success: function(response) {
-                            $(targetDiv).html($(response).find(targetDiv).html());
-                            var scrollTo = $(targetDiv).offset().top - 100;
-                            $('.rescron-card').addClass('hidden');
-                            $(targetDiv).removeClass('hidden');
-                            $('html, body').animate({
-                                scrollTop: scrollTo
-                            }, 800);
-                        }
-                    });
-                    toastNotify('success', 'Plan activated successfully');
-
-
-                },
-                error: function(xhr, status, error) {
-                    var errors = xhr.responseJSON.errors;
-
-                    if (errors) {
-                        $.each(errors, function(field, messages) {
-                            var fieldErrors = '';
-                            $.each(messages, function(index, message) {
-                                fieldErrors += message + '<br>';
-                            });
-                            $('#errorMessage').html(fieldErrors);
+                            url: link,
+                            method: 'GET',
+                            success: function(response) {
+                                $(targetDiv).html($(response).find(targetDiv).html());
+                                var scrollTo = $(targetDiv).offset().top - 100;
+                                $('.rescron-card').addClass('hidden');
+                                $(targetDiv).removeClass('hidden');
+                                $('html, body').animate({
+                                    scrollTop: scrollTo
+                                }, 800);
+                            }
                         });
-                    } else {
-                        $('#errorMessage').html('error', 'An Error occured, try again later');
+                        toastNotify('success', 'Plan activated successfully');
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        var errors = xhr.responseJSON.errors;
+
+                        if (errors) {
+                            $.each(errors, function(field, messages) {
+                                var fieldErrors = '';
+                                $.each(messages, function(index, message) {
+                                    fieldErrors += message + '<br>';
+                                });
+                                $('#errorMessage').html(fieldErrors);
+                            });
+                        } else {
+                            $('#errorMessage').html('error', 'An Error occured, try again later');
+                        }
+
+
+                    },
+                    complete: function() {
+                        submitButton.removeClass('disabled');
+                        submitButton.find('.button-spinner').remove();
+                        submitButton.prop('disabled', false);
+
                     }
+                });
 
+            };
 
-                },
-                complete: function() {
-                    submitButton.removeClass('disabled');
-                    submitButton.find('.button-spinner').remove();
-                    submitButton.prop('disabled', false);
-
-                }
-            });
-                        
-                    };
-            
 
         });
     </script>
