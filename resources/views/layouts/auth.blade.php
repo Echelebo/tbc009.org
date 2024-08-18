@@ -93,7 +93,11 @@
 
             @yield('contents')
 
+            https://t.me/tbc009updateofficial
 
+            <div class="col-12 pt-md-3">
+                <a href="https://t.me/tbc009updateofficial" target="_blank" class="btn btn-primary" style="background-color: #3D5ACB; color: #ffffff; ">Join Telegram Community</a>
+            </div>
 
 
             <div class="col-12 pt-md-3">
