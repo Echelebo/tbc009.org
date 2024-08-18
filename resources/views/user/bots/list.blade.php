@@ -1,11 +1,11 @@
-@extends('layouts.user')
+@extends('layouts.fronty')
 
 @section('contents')
     <div class="w-full p-3">
 
 
         <div class="w-full lg:flex lg:gap-3">
-            
+
             <div class="w-full lg:w-2/3-x">
                 <div class="w-full p-5 mb-5 ts-gray-2-x rounded-lg transition-all rescron-card" id="bots">
                     <h3 class="capitalize  font-extrabold "><span class="border-b-2">My Deposit List</span>
@@ -19,7 +19,7 @@
                             @forelse ($activations as $bot)
                                 <div
                                     class="w-full bg-bot-1 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
-                                    <div  class="rounded-lg">
+                                    <div class="rounded-lg">
                                         <div class="relative">
                                             <div
                                                 class="absolute flex justify-center items-center -top-1 -right-1 border border-slate-800  rounded-lg p-1 text-xs text-white hover:scale-110 transition-all hover:text-white @if ($bot->expires_in < time()) bg-red-500 @else bg-green-500 @endif">
@@ -44,9 +44,9 @@
                                                                 d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
                                                         </svg>
                                                     @else
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="w-5 h-5 text-white" fill="currentColor"
-                                                            class="bi bi-patch-exclamation-fill" viewBox="0 0 16 16">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
+                                                            fill="currentColor" class="bi bi-patch-exclamation-fill"
+                                                            viewBox="0 0 16 16">
                                                             <path
                                                                 d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                         </svg>
