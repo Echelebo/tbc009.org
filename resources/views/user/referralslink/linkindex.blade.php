@@ -28,27 +28,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <img src="http://primetimeholdingsltd.comimages/125x125.gif">
-                            <textarea class="form-control" rows="5" spellcheck="false">&lt;a href="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}"&gt; &lt;img src="http://ligraceholdings.comimages/125x125.gif" alt="" width="125" height="125" /&gt; &lt;/a&gt;</textarea>
+                            <textarea class="form-control" rows="5" spellcheck="false">&lt;a href="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}"&gt; &lt;img src="http://ligraceholdings.com/images/125x125.gif" alt="" width="125" height="125" /&gt; &lt;/a&gt;</textarea>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="http://primetimeholdingsltd.comimages/468x60.gif">
-                            <textarea class="form-control" rows="5" spellcheck="false">&lt;a href="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}"&gt; &lt;img src="http://ligraceholdings.comimages/468x60.gif" alt="" width="468" height="60" /&gt; &lt;/a&gt;</textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="http://primetimeholdingsltd.comimages/728x90.gif">
-                            <textarea class="form-control" rows="5" spellcheck="false">&lt;a href="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}"&gt; &lt;img src="http://ligraceholdings.comimages/728x90.gif" alt="" width="728" height="90" /&gt; &lt;/a&gt;</textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="http://primetimeholdingsltd.comimages/1200x150.gif">
-                            <textarea class="form-control" rows="5" spellcheck="false">&lt;a href="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}"&gt; &lt;img src="http://ligraceholdings.comimages/1200x150.gif" alt="" width="1200" height="150" /&gt; &lt;/a&gt;</textarea>
-                        </div>
-                    </div>
+
                     <br><br><br>
                 </div>
             </div>
