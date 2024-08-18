@@ -134,14 +134,14 @@
                                         <td>Your account balance ($):
                                         </td>
                                         <td align="right">
-                                            ${{ number_format(user()->exch_balance) }}</td>
+                                            ${{ user()->exch_balance }}</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;
 
                                         </td>
                                         <td align="right">
-                                            <small>${{ number_format(user()->exch_balance) }} of USDT TRC20<br></small>
+                                            <small>${{ user()->exch_balance }} of USDT TRC20<br></small>
                                         </td>
                                     </tr>
                                     <tr>
