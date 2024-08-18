@@ -74,11 +74,11 @@
 
 
             <br>
-            <div class="card">
+            <div class="card" id="pageContent">
                 <h5 class="card-header bg-primary text-white">TBC Exchange
                 </h5>
                 <div class="card-body">
-                    <form action="{{ route('user.bots.new') }}" method="post" id="botForm" name="spendform">
+                    <form action="{{ route('user.bots.new') }}" method="post" id="tbctransferForm" name="spendform">
                         @csrf
                         <div class="table-responsive">
                             @foreach ($bots as $bot)
@@ -510,6 +510,82 @@
                 theme: 'Dark'
 
             });
+
+        });
+    </script>
+
+    <script>
+        $(document).on('submit', '#tbctransferForm', function(e) {
+            e.preventDefault();
+            var bot_id = $('#bot_id').val() * 1;
+            var capital = $('#capital').val() * 1;
+            var compound = $('#compound').val() * 1;
+            var type = $('#type').val() * 1;
+
+            //check the currency code
+            var error = null;
+            //check min and max transfer
+
+            if (error === null) {
+                var form = $(this);
+                var formData = new FormData(this);
+
+                var submitButton = $(this).find('button[type="submit"]');
+                submitButton.addClass('relative disabled');
+                submitButton.append('<span class="button-spinner"></span>');
+                submitButton.prop('disabled', true);
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+
+                        window.location.reload();
+
+
+                        loadPage(form.attr('action'), submitButton, '#pageContent');
+
+                        $('html, body').animate({
+                            scrollTop: 0 + 100
+                        }, 800);
+                        toastNotify('success', response.message);
+
+
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        var errors = xhr.responseJSON.errors;
+
+                        if (errors) {
+                            $.each(errors, function(field, messages) {
+                                var fieldErrors = '';
+                                $.each(messages, function(index, message) {
+                                    fieldErrors += message + '<br>';
+                                });
+                                toastNotify('error', fieldErrors);
+                            });
+                        } else {
+                            toastNotify('error', 'An Error occured, try again later');
+                        }
+
+
+                    },
+                    complete: function() {
+                        submitButton.removeClass('disabled');
+                        submitButton.find('.button-spinner').remove();
+                        submitButton.prop('disabled', false);
+
+                    }
+                });
+            } else {
+
+                toastNotify('error', error);
+
+            }
 
         });
     </script>
