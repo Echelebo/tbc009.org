@@ -1,79 +1,108 @@
 @extends('layouts.user')
 
 @section('contents')
-
-<div class="container-fluid">
-<div class="col-sm-12">
-    <div class="card">
+    <div class="container-fluid">
+        <div class="col-sm-12">
+            <div class="card">
                 <h5 class="card-header bg-primary text-white">Please confirm your deposit</h5>
                 <div class="card-body">
-<br><br>
+                    <br><br>
 
-Click on the wallet address to copy <br><br><b><span
-                                            class="clipboard cursor-pointer" data-copy="{{$depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin'}}">USDTTRC20 Wallet:  <font color="red">{{$depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin'}}</font></span></b><br><br><br>
+                    Click on the wallet address to copy <br><br><b><span class="clipboard cursor-pointer"
+                            data-copy="{{ $depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin' }}">USDTTRC20
+                            Wallet: <font color="red">
+                                {{ $depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin' }}</font>
+                            </span></b><br><br><br>
 
- <div class="table-responsive">
-<table class="table">
-<tbody><tr>
- <th>Plan:</th>
- <td>{{$plan_name}}</td>
-</tr>
-<tr>
- <th>Profit:</th>
- <td>{{$plan_daily_profit}}% Daily for {{$plan_duration}} days </td>
-</tr>
-<tr>
- <th>Principal Return:</th>
- <td>Yes</td>
-</tr>
-<tr>
- <th>Principal Withdraw:</th>
- <td>
-Not available </td>
-</tr>
-@if ($botx == 4)
-<tr>
- <th>Compound:</th>
- <td>
-{{$compound}} </td>
-</tr>
-@endif
-<tr>
- <th>Amount:</th>
- <td>${{$plan_amount}}</td>
-</tr>
-<tr>
- <th> Amount:</th>
- <td>${{$plan_amount}}</td>
-</tr>
-</tbody></table>
-</div>
-<br><br>
-<form action="{{ route('user.bots.activateusdtpay') }}" method="post" id="depositForm">
-    @csrf
-<input type="hidden" name="plan_id" value="{{$botx}}">
-<input type="hidden" name="amount" id="amount" value="{{$plan_amount}}">
-<input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">
-<input type="hidden" name="compound" value="{{$compound}}">
- <div class="table-responsive">
-<table class="table">
-<tbody><tr>
- <td colspan="2"><b>Required Information:</b></td>
-</tr>
-<tr>
- <td>Transaction ID</td>
- <td><input type="text" name="trans_id" value="" class="inpts" required></td>
-</tr>
-</tbody></table>
-</div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Plan:</th>
+                                    <td>{{ $plan_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Profit:</th>
+                                    <td>{{ $plan_daily_profit }}% Daily for {{ $plan_duration }} days </td>
+                                </tr>
+                                <tr>
+                                    <th>Principal Return:</th>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <th>Daily Return:</th>
+                                    <td>
+                                        <?php
+                                        $a = $plan_daily_profit / 100;
+                                        $b = $plan_duration;
+                                        $c = $plan_amount;
+                                        $d = $a * $c;
+                                        $e = $d * $b;
+                                        echo "$" . $d;
+                                        ?> </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Return:</th>
+                                    <td>
+                                        <?php
+                                        $a = $plan_daily_profit / 100;
+                                        $b = $plan_duration;
+                                        $c = $plan_amount;
+                                        $d = $a * $c;
+                                        $e = $d * $b;
+                                        echo "$" . $e;
+                                        ?> </td>
+                                </tr>
+                                @if ($botx == 4)
+                                    <tr>
+                                        <th>Compound:</th>
+                                        <td>
+                                            {{ $compound }} </td>
+                                    </tr>
+                                @endif
+                                <tr>
+                                    <th>Amount:</th>
+                                    <td>${{ $plan_amount }}</td>
+                                </tr>
+                                <tr>
+                                    <th> Amount:</th>
+                                    <td>${{ $plan_amount }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br><br>
+                    <form action="{{ route('user.bots.activateusdtpay') }}" method="post" id="depositForm">
+                        @csrf
+                        <input type="hidden" name="plan_id" value="{{ $botx }}">
+                        <input type="hidden" name="amount" id="amount" value="{{ $plan_amount }}">
+                        <input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">
+                        <input type="hidden" name="compound" value="{{ $compound }}">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2"><b>Required Information:</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transaction ID</td>
+                                        <td><input type="text" name="trans_id" value="" class="inpts" required>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-<br><input type="submit" value="Save" class="btn bg-blue-500 btn-primary ml-auto"> &nbsp;
-<input type="button" class="btn bg-red-500 btn-primary ml-auto" value="Cancel" onclick="document.location='/user/bots'">
-</form>
+                        <br><input type="submit" value="Save" class="btn bg-blue-500 btn-primary ml-auto"> &nbsp;
+                        <input type="button" class="btn bg-red-500 btn-primary ml-auto" value="Cancel"
+                            onclick="document.location='/user/bots'">
+                    </form>
 
 
-</div></div></div></div>
-
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -160,11 +189,11 @@ Not available </td>
                                                     data-copy=""></span>
                                             </h2>
                                         </div>
-    
-                                        
-    
+
+
+
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>
@@ -221,7 +250,7 @@ Not available </td>
                     if (interval) {
                         clearInterval(interval);
                     }
-                    
+
                     interval = setInterval(function() {
                         updateCountdown(targetId, targetDateString);
                     }, 1000);
@@ -308,17 +337,17 @@ Not available </td>
                 submitButton.append('<span class="button-spinner"></span>');
                 submitButton.prop('disabled', true);
 
-                        $('html, body').animate({
-                            scrollTop: 0 + 100
-                        }, 800);
-                        toastNotify('success', 'Deposit request initated successfully');
+                $('html, body').animate({
+                    scrollTop: 0 + 100
+                }, 800);
+                toastNotify('success', 'Deposit request initated successfully');
 
-                        // Check payment status
-                        
+                // Check payment status
 
 
-                    },
-                   
+
+            },
+
 
         });
     </script>
