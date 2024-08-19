@@ -1,9 +1,7 @@
 @extends('layouts.fronty')
 
 @section('contents')
-    <div class="container-fluid">
-
-        >
+    <div class="container-fluid" id="pageContent">
 
 
 
@@ -23,7 +21,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Account Balance:</td>
-                                            <td><b>{{ formatAmount(user()->balance) }}</b></td>
+                                            <td><b>{{ formatAmount(user()->exch_balance) }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>Pending Withdrawals: </td>
@@ -53,7 +51,7 @@
                                             <td><input type="radio" name="wallet_address" id="wallet_address"
                                                     value="{{ user()->usdt_wallet }}"></td>
                                             <td>USDT TRC20</td>
-                                            <td><b style="color:green">{{ formatAmount(user()->balance) }}</b></td>
+                                            <td><b style="color:green">{{ formatAmount(user()->exch_balance) }}</b></td>
                                             <td><b style="color:red">{{ formatAmount($pending_withdrawals) }}</b></td>
                                             @if (is_null(user()->usdt_wallet))
                                                 <td><a class="badge badge-danger"
@@ -306,7 +304,7 @@
 
 
             // handle withdrawal form
-            $(document).on('submit', '#withdrawalFormbt', function(e) {
+            $(document).on('submit', '#withdrawalForm', function(e) {
                 e.preventDefault();
                 var amount = $('#amount').val() * 1;
                 var currency_code = $('#currency_code').val();
