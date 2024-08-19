@@ -10,6 +10,12 @@
     <link rel="apple-touch-icon" href="{{ asset('assets/images/' . site('favicon')) }}">
     <link rel="icon" href="{{ asset('assets/images/' . site('favicon')) }}">
     <title>{{ $page_title }} | {{ site('name') }}</title>
+    <meta name="author" content="support@tbc009.org">
+    <meta name="description" content="{{ site('seo_description') }}">
+    <meta property="og:url" content="{{ request()->url }}">
+    <meta property="og:title" content="{{ $page_title }} | {{ site('name') }}">
+    <meta property="og:description" content="{{ site('seo_description') }}">
+    <meta property="og:image" content="{{ asset('assets/images/' . site('cover')) }}">
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="/prime/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
