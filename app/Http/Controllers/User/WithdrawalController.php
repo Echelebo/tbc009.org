@@ -10,8 +10,6 @@ use App\Models\User;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use OTPHP\TOTP;
 
 class WithdrawalController extends Controller
 {
@@ -42,7 +40,7 @@ class WithdrawalController extends Controller
         $coins = DepositCoin::where('can_withdraw', '1')->get();
         $auto_wallets = user()->autoWallets()->get();
 
-        $auto_wallets_array  = [];
+        $auto_wallets_array = [];
         foreach ($auto_wallets as $wallet) {
             $auto_wallets_array[$wallet->depositCoin->code] = $wallet->wallet_address;
             // array_push($auto_wallets_array, $wallet->depositCoin->code);
@@ -68,7 +66,7 @@ class WithdrawalController extends Controller
             'auto_wallets_array'
         ));
     }
-    
+
     //index of all withdrawals
     public function history(Request $request)
     {
@@ -89,12 +87,10 @@ class WithdrawalController extends Controller
                 ->paginate(site('pagination'));
         }
 
-
-
         $coins = DepositCoin::where('can_withdraw', '1')->get();
         $auto_wallets = user()->autoWallets()->get();
 
-        $auto_wallets_array  = [];
+        $auto_wallets_array = [];
         foreach ($auto_wallets as $wallet) {
             $auto_wallets_array[$wallet->depositCoin->code] = $wallet->wallet_address;
             // array_push($auto_wallets_array, $wallet->depositCoin->code);
@@ -120,9 +116,7 @@ class WithdrawalController extends Controller
         ));
     }
 
-
-
-    //new deposit 
+    //new deposit
     public function newWithdrawal(Request $request)
     {
 
@@ -135,7 +129,7 @@ class WithdrawalController extends Controller
         $amount_before_fee = $request->amount;
         $currency = $request->currency_code;
         $fee = site('withdrawal_fee') / 100 * $amount_before_fee;
-        $amount =  $amount_before_fee - $fee;
+        $amount = $amount_before_fee - $fee;
         if ($amount_before_fee < site('min_withdrawal') || $amount_before_fee > site('max_withdrawal')) {
             return response()->json(validationError('Min or max withdrawal amount not met'), 422);
         }
@@ -145,22 +139,18 @@ class WithdrawalController extends Controller
             return response()->json(validationError('Insufficient balance'), 422);
         }
 
-
         $coin = DepositCoin::where('code', $currency)->where('can_withdraw', 1)->first();
         if (!$coin) {
             return response()->json(validationError('The Payment method you have selected is not allowed'), 422);
         }
 
-        
-
-
         // check for regex
         $wallet_regex = $coin->wallet_regex; //^(0x)[0-9A-Fa-f]{40}$
-       // if (!preg_match('/' . $wallet_regex . '/', $request->wallet_address)) {
-       //     return response()->json(validationError('The wallet you submitted is not valid for your selected coin'), 422);
-      //  }
+        // if (!preg_match('/' . $wallet_regex . '/', $request->wallet_address)) {
+        //     return response()->json(validationError('The wallet you submitted is not valid for your selected coin'), 422);
+        //  }
 
-        $converted_amount = convertFiatToCrypto(site('currency'), $currency,  $amount);
+        $converted_amount = convertFiatToCrypto(site('currency'), $currency, $amount);
         $ref = uniqid('trx-');
         // for auto withdrawal
         if (site('auto_withdraw') == 1) {
@@ -215,23 +205,20 @@ class WithdrawalController extends Controller
                 return response()->json(validationError('Error! Wallet Address not whitelisted'), 422);
             }
 
-
             // dispatch job
             ProcessAutoWithdrawJob::dispatch($request->wallet_address, $currency_lower, $converted_amount, $ref)->delay(now()->addMinutes(1));
 
             $type = 'auto';
         } else {
             $type = 'manual';
-            
-        }
 
+        }
 
         $coin_id = $coin->id;
         //debit the user
         $debit = User::find(user()->id);
-        $debit->balance = user()->balance - $amount_before_fee;
+        $debit->balance = user()->exch_balance - $amount_before_fee;
         $debit->save();
-
 
         //log transaction
         recordNewTransaction($amount_before_fee, user()->id, 'debit', 'New Withdrawal Request');
@@ -290,7 +277,7 @@ class WithdrawalController extends Controller
                     $auth_ok = true;
                 } else {
                     $error_msg = 'HMAC signature does not match';
-                    
+
                 }
 
                 $auth_ok = true;
@@ -310,7 +297,6 @@ class WithdrawalController extends Controller
             $status = $resp->status;
             $ref = 'trx-' . $resp->batch_withdrawal_id;
 
-
             //get the withdrawal
             $withdrawal = Withdrawal::where('ref', $ref)->where('status', 'pending')->first();
             if (!$withdrawal) {
@@ -324,10 +310,10 @@ class WithdrawalController extends Controller
                 $update->status = 'approved';
                 $update->save();
                 sendWithdrawalEmail($withdrawal);
-                $message = "*New Withdrawal Notification* \n♻️Time: " . date('d-m-y H:i:s') .  " UTC \n♻️Currency: " . $resp->currency .  "\n♻️Amount: " . formatAmount($withdrawal->amount) .  "\n♻️Sent: " . $withdrawal->converted_amount .  $resp->currency . "\n♻️Address: " . $withdrawal->wallet_address .  "\n♻️Hash: " . $resp->hash .  "\n♻️Fee: " . formatAmount($withdrawal->fee) . "\n💃💃💃💃💃💃💃💃💃💃 \n🍷🍷🍷🍷🍷🍷🍷🍷🍷";
-                        if (function_exists('sendMessageTelegram')) {
-                            sendMessageTelegram($message);
-                        }
+                $message = "*New Withdrawal Notification* \n♻️Time: " . date('d-m-y H:i:s') . " UTC \n♻️Currency: " . $resp->currency . "\n♻️Amount: " . formatAmount($withdrawal->amount) . "\n♻️Sent: " . $withdrawal->converted_amount . $resp->currency . "\n♻️Address: " . $withdrawal->wallet_address . "\n♻️Hash: " . $resp->hash . "\n♻️Fee: " . formatAmount($withdrawal->fee) . "\n💃💃💃💃💃💃💃💃💃💃 \n🍷🍷🍷🍷🍷🍷🍷🍷🍷";
+                if (function_exists('sendMessageTelegram')) {
+                    sendMessageTelegram($message);
+                }
             } elseif ($status == 'failed' || $status == 'rejected') {
                 $update = Withdrawal::find($withdrawal->id);
                 $update->status = 'rejected';
@@ -338,13 +324,10 @@ class WithdrawalController extends Controller
                 $new_bal = $user->balance + $withdrawal->amount;
                 $user->balance = $new_bal;
                 $user->save();
-                
+
                 recordNewTransaction($withdrawal->amount, $user->id, 'credit', 'Withdrawal reversal');
                 sendWithdrawalEmail($withdrawal);
             }
-
-            
-
 
             return true;
         } else {

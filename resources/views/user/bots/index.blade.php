@@ -99,7 +99,7 @@
                                             <td class="inheader" width="200">Duration (days)
                                             </td>
                                             <td class="inheader" width="100" nowrap="">
-                                                <nobr>Daily Profit (%)
+                                                <nobr>Daily Return (%)
                                                 </nobr>
                                             </td>
                                         </tr>

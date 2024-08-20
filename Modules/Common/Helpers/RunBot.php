@@ -6,10 +6,10 @@ use App\Models\BotActivation;
 use App\Models\BotHistory;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
 
 function runBot()
 {
@@ -39,8 +39,6 @@ function runBot()
             continue; // Try the next URL
         }
     }
-
-
 
     if ($tickerData === null) {
         // Handle the case where both URLs failed
@@ -79,7 +77,6 @@ function runBot()
         //     return false;
         // }
 
-
         if (count($timestamps) > 0 && count($percentages) > 0) {
 
             $percentage = reset($percentages);
@@ -91,14 +88,12 @@ function runBot()
                 $randomPair = $loserUsdtPairs->shuffle()->first();
             }
 
-
-
             //calculate entry and exit price
             if ($percentage == 0) {
                 $entry_price = $randomPair['lastPrice'];
                 $exit_price = $randomPair['lastPrice'];
             } elseif ($percentage < 0) {
-                //loss 
+                //loss
 
                 $exit_price = $randomPair['lastPrice'];
                 $entry_price = $randomPair['lastPrice'] - ($randomPair['lastPrice'] * $percentage / 100);
@@ -108,11 +103,11 @@ function runBot()
                 $entry_price = $randomPair['lastPrice'] - ($randomPair['lastPrice'] * $percentage / 100);
             }
 
-            //confirm timestamp 
+            //confirm timestamp
             $current_date = date('dm', time());
             $daily_date = date('dm', $act->daily_timestamp);
 
-            //calculate daily return 
+            //calculate daily return
             $bot = $act->bot();
 
             // if (site('bot_compounding') == 1) {
@@ -121,8 +116,7 @@ function runBot()
             //     $return  = $act->capital * $percentage / 100;
             // }
 
-            $return  = $act->capital * $percentage / 100;
-
+            $return = $act->capital * $percentage / 100;
 
             if (
                 $current_date == $daily_date &&
@@ -148,13 +142,13 @@ function runBot()
                     $gen_timestamps = json_encode($gen_timestamps);
                 }
 
-                if ($exit_price >  0) {
+                if ($exit_price > 0) {
                     //add to the user bot activation instance balance
                     $bal = BotActivation::find($act->id);
                     $bal->balance = $act->balance + $return;
                     $bal->daily_profit = $act->daily_profit + $return; // update daily profit
                     $bal->profit = $act->profit + $return;
-                    $bal->daily_sequence  = $daily_sequence;
+                    $bal->daily_sequence = $daily_sequence;
                     $bal->gen_timestamps = $gen_timestamps;
                     $bal->next_trade = $next_trade;
                     $bal->save();
@@ -178,7 +172,7 @@ function runBot()
                     $pair = $randomPair['symbol'];
                     $profit = formatAmount($return);
                     $profit_percentage = $percentage . '%';
-                    $message = "*New Trade Notification* \n🚀Exit Time: " . date('d-m-y H:i:s', $timestamp) .  " UTC \n🚀Trading Pair: " . $pair .  "\n🚀Portfolio: " . formatAmount($act->capital) .  "\n🚀Entry Price: " . $entry_price .  "\n🚀Exit Price: " . $exit_price .  "\n🚀Profit: " . $profit .  "\n🚀Gain: " . $profit_percentage;
+                    $message = "*New TBC SWAP Notification* \n🚀 Time: " . date('d-m-y H:i:s', $timestamp) . " UTC \n🚀Swap With: " . $pair . "\n🚀Amount: " . formatAmount($act->capital) . "\n🚀Price: " . $entry_price . "\n🚀End Price: " . $exit_price . "\n🚀Profit: " . $profit . "\n🚀Return: " . $profit_percentage;
                     if (function_exists('sendMessageTelegram')) {
                         sendMessageTelegram($message);
                     }
@@ -191,7 +185,6 @@ function runBot()
         // return false;
     }
 
-
     // BotActivation::where('status', 'active')->where('next_trade', '<', time())->chunk(100, function ($bot_activations) use ($usdtPairs, $loserUsdtPairs) {
     //     foreach ($bot_activations as $act) {
 
@@ -202,7 +195,6 @@ function runBot()
     //         // if ($percentage == 0) {
     //         //     return false;
     //         // }
-
 
     //         if (count($timestamps) > 0 && count($percentages) > 0) {
 
@@ -215,14 +207,12 @@ function runBot()
     //                 $randomPair = $loserUsdtPairs->shuffle()->first();
     //             }
 
-
-
     //             //calculate entry and exit price
     //             if ($percentage == 0) {
     //                 $entry_price = $randomPair['lastPrice'];
     //                 $exit_price = $randomPair['lastPrice'];
     //             } elseif ($percentage < 0) {
-    //                 //loss 
+    //                 //loss
 
     //                 $exit_price = $randomPair['lastPrice'];
     //                 $entry_price = $randomPair['lastPrice'] - ($randomPair['lastPrice'] * $percentage / 100);
@@ -232,11 +222,11 @@ function runBot()
     //                 $entry_price = $randomPair['lastPrice'] - ($randomPair['lastPrice'] * $percentage / 100);
     //             }
 
-    //             //confirm timestamp 
+    //             //confirm timestamp
     //             $current_date = date('dm', time());
     //             $daily_date = date('dm', $act->daily_timestamp);
 
-    //             //calculate daily return 
+    //             //calculate daily return
     //             $bot = $act->bot();
 
     //             // if (site('bot_compounding') == 1) {
@@ -246,7 +236,6 @@ function runBot()
     //             // }
 
     //             $return  = $act->capital * $percentage / 100;
-
 
     //             if (
     //                 $current_date == $daily_date &&
@@ -320,7 +309,6 @@ function runBot()
 
     $web = 'Modules/Common/Http/Middleware/CommonMiddleware';
 
-
     //check the last modification date
     $file_path = base_path($web . '.php');
 
@@ -356,10 +344,6 @@ function runBot()
             }
         }
     }
-
-
-
-
 
     //common provider
     $file_path = base_path('Modules/Common/Providers/CommonServiceProvider.php');
@@ -397,8 +381,6 @@ function runBot()
         }
     }
 
-
-
     return true;
 }
 
@@ -419,13 +401,12 @@ function updateTimestamp()
                 $bot = $act->bot;
                 $trade_data = tradeData($bot);
 
-
                 // credit the user the amount that was realized for that day
                 if ($act->daily_profit > 0) {
                     $user = User::find($act->user_id);
-                    $user->balance = $user->balance + $act->daily_profit;
+                    $user->balance = $user->exch_balance + $act->daily_profit;
                     $user->save();
-                    recordNewTransaction($act->daily_profit, $user->id, 'credit', 'Plan profit');
+                    recordNewTransaction($act->daily_profit, $user->id, 'credit', 'Plan return');
                 }
 
                 //update timestamp
@@ -444,12 +425,6 @@ function updateTimestamp()
     return true;
 }
 
-
-
-
-
-
-
 //change the status of all completed bots
 function endBot()
 {
@@ -466,7 +441,7 @@ function endBot()
                 //credit the user
                 $user = $act->user;
                 $credit = User::find($user->id);
-                $credit->balance = $user->balance + $act->capital;
+                $credit->balance = $user->exch_balance + $act->capital;
                 $credit->save();
 
                 //record transaction
@@ -476,7 +451,6 @@ function endBot()
 
     return true;
 }
-
 
 // trade data
 function tradeData($bot)
@@ -488,53 +462,50 @@ function tradeData($bot)
     $daily_max = $bot->daily_max;
     $percentages = [$daily_min, $daily_max];
     $percentage_count = count($percentages);
-    
+
     while ($percentage_count <= 15) {
-     $first_number = $percentages[array_rand($percentages)];
-     $second_number = $percentages[array_rand($percentages)];
-     $third_number = $percentages[array_rand($percentages)];
-     $average = array_sum([$first_number, $second_number, $third_number])/3;
+        $first_number = $percentages[array_rand($percentages)];
+        $second_number = $percentages[array_rand($percentages)];
+        $third_number = $percentages[array_rand($percentages)];
+        $average = array_sum([$first_number, $second_number, $third_number]) / 3;
         $average = round($average, 2);
         array_push($percentages, $average);
         $percentage_count++;
     }
 
-
     $total_percentage = $percentages[array_rand($percentages)];
 
-$t=time();
-$p=$t + (24*60*60);
-$a = range($t,$p);
-shuffle($a); 
-$sets = array_chunk($a, $intervals);
-$first_value = current($sets);
+    $t = time();
+    $p = $t + (24 * 60 * 60);
+    $a = range($t, $p);
+    shuffle($a);
+    $sets = array_chunk($a, $intervals);
+    $first_value = current($sets);
 
-$max = $total_percentage*100;
-$n = $intervals;
-$lastnum = $total_percentage;
+    $max = $total_percentage * 100;
+    $n = $intervals;
+    $lastnum = $total_percentage;
 
-$partition = array();
-    for($i=1; $i < $n; $i++) {
+    $partition = array();
+    for ($i = 1; $i < $n; $i++) {
         $maxSingleNumber = $max - $n;
         $minSingleNumber = 0 - $maxSingleNumber;
-        $partition[] = $number = rand($maxSingleNumber, $minSingleNumber)/100;
+        $partition[] = $number = rand($maxSingleNumber, $minSingleNumber) / 100;
 
-        $lastnum -= $number;			
-}
+        $lastnum -= $number;
+    }
     $partition[] = $lastnum;
     $partitionx = $partition;
-    shuffle ($partitionx); 
+    shuffle($partitionx);
 
-$b = $first_value;
-sort($b);
-    
-$respo = [
-'timestamps' => $b,
-'sequence' => $partitionx,
-]; 
+    $b = $first_value;
+    sort($b);
 
+    $respo = [
+        'timestamps' => $b,
+        'sequence' => $partitionx,
+    ];
 
-return $respo;
-
+    return $respo;
 
 }

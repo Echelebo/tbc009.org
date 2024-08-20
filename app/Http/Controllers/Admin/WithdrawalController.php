@@ -18,16 +18,14 @@ class WithdrawalController extends Controller
         $summary = [
             'approved' => $withdrawal_query->where('status', 'approved')->sum('amount'),
             'rejected' => $withdrawal_query->where('status', 'rejected')->sum('amount'),
-            'pending' => $withdrawal_query->where('status', 'pending')->sum('amount')
+            'pending' => $withdrawal_query->where('status', 'pending')->sum('amount'),
         ];
 
         if ($request->s) {
-            $withdrawals =  Withdrawal::with(['user', 'depositCoin'])->where('ref', 'LIKE', '%' . $request->s . '%')->orderBy('id', 'DESC')->paginate(site('pagination'));
+            $withdrawals = Withdrawal::with(['user', 'depositCoin'])->where('ref', 'LIKE', '%' . $request->s . '%')->orderBy('id', 'DESC')->paginate(site('pagination'));
         } else {
-            $withdrawals =  Withdrawal::with(['user', 'depositCoin'])->orderBy('id', 'DESC')->paginate(site('pagination'));
+            $withdrawals = Withdrawal::with(['user', 'depositCoin'])->orderBy('id', 'DESC')->paginate(site('pagination'));
         }
-
-
 
         $page_title = 'All Withdrawals';
 
@@ -47,12 +45,10 @@ class WithdrawalController extends Controller
         }
 
         if ($request->w) {
-            $auto_wallets =  AutoWallet::with(['user', 'depositCoin'])->where('wallet_address', 'LIKE', '%' . $request->w . '%')->orderBy('id', 'DESC')->paginate(site('pagination'));
+            $auto_wallets = AutoWallet::with(['user', 'depositCoin'])->where('wallet_address', 'LIKE', '%' . $request->w . '%')->orderBy('id', 'DESC')->paginate(site('pagination'));
         } else {
-            $auto_wallets =  AutoWallet::with(['user', 'depositCoin'])->orderBy('id', 'DESC')->paginate(site('pagination'));
+            $auto_wallets = AutoWallet::with(['user', 'depositCoin'])->orderBy('id', 'DESC')->paginate(site('pagination'));
         }
-
-
 
         return view('admin.withdrawals.index', compact(
             'page_title',
@@ -73,7 +69,6 @@ class WithdrawalController extends Controller
             abort(404);
         }
 
-
         $withdrawalData = [
             'amount' => $withdrawal->amount,
             'fee' => $withdrawal->fee,
@@ -83,18 +78,17 @@ class WithdrawalController extends Controller
             'network' => $withdrawal->depositCoin->network ?? $withdrawal->depositCoin->code,
             'payment_wallet' => $withdrawal->wallet_address,
             'status' => $withdrawal->status,
-            'id' => $withdrawal->id
+            'id' => $withdrawal->id,
         ];
 
         return response()->json(['withdrawal' => $withdrawalData]);
     }
 
-
     // process kyc record
     public function process(Request $request)
     {
         $request->validate([
-            'action' => 'required'
+            'action' => 'required',
         ]);
 
         $action = $request->action;
@@ -120,8 +114,8 @@ class WithdrawalController extends Controller
             $withdrawal->save();
 
             //credit the user back
-            $new_balance = $user->balance + $withdrawal->amount;
-            $user->balance = $new_balance;
+            $new_balance = $user->exch_balance + $withdrawal->amount;
+            $user->exch_balance = $new_balance;
             $user->save();
             recordNewTransaction($withdrawal->amount, $user->id, 'credit', 'Withdrawal refunded');
             sendWithdrawalEmail($withdrawal);
@@ -131,7 +125,6 @@ class WithdrawalController extends Controller
 
         return response()->json(validationError('Unknown action'), 422);
     }
-
 
     //delete auto wallets
     public function deleteWallet(Request $request)
