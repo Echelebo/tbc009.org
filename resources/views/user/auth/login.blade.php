@@ -8,9 +8,14 @@
                     <div class="px-xl-4">
                         <div class="bg-white rounded-ultra shadow-lg px-8 py-5 p-md-5">
 
-                            <!--<div class="mb-4 text-center">
-                                                <img src="/prime/assets/svg/upload/login-03.svg" alt="Login" data-width="64px" data-height="64px" style="width: 64px; height: 64px;">
-                                            </div>-->
+                            <div class="mb-4 text-center" style="color: red;">
+                                <p><strong>IMPORTANT!!! </strong><br />Please... Please first create a new account here, a
+                                    new TBC wallet will be generated for you. After login then request for recovery of TBC
+                                    balance to be able to get your TBC balance back.
+                                </p>
+                                <p>To create new account, click on Create your Account or goto https://tbc009.org/register
+                                </p>
+                            </div>
 
                             <div class="pb-1"></div>
 
@@ -68,17 +73,23 @@
 
                                 <div class="w-100 text-center mt-4">
                                     <label class="px-3">
-                                        <a href="{{ route('user.forgot-password.index') }}" class="font-semibold lg:px-10 text-reset-x hover:text-blue-700" >Forgot password?</a>
+                                        <a href="{{ route('user.forgot-password.index') }}"
+                                            class="font-semibold lg:px-10 text-reset-x hover:text-blue-700">Forgot
+                                            password?</a>
                                     </label>
                                 </div>
 
                                 <div class="w-100 text-center mt-4">
-                                    <p style="font-size: 14px;">The SCAMDEMIC has validated the need for a solution such as TBC. Putting our trust in a financial system linked directly to the FORCE of GOVERNMENT is clearly working against humanity.</p><br />
-                                    <p style="font-size: 14px;"><a href="https://kringle.cash" target="_blank"><b>Read more</b></a></p>
+                                    <p style="font-size: 14px;">The SCAMDEMIC has validated the need for a solution such as
+                                        TBC. Putting our trust in a financial system linked directly to the FORCE of
+                                        GOVERNMENT is clearly working against humanity.</p><br />
+                                    <p style="font-size: 14px;"><a href="https://kringle.cash" target="_blank"><b>Read
+                                                more</b></a></p>
                                 </div>
 
                                 <div class="mt-12 px-2 font-semibold lg:px-10 text-center">
-                                    <a href="{{ route('user.register') }}" class="hover:text-blue-700">Create your Account <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="{{ route('user.register') }}" class="hover:text-blue-700">Create your Account
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </form>
 
