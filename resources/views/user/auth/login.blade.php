@@ -13,7 +13,8 @@
                                     new TBC wallet will be generated for you. After login then request for recovery of TBC
                                     balance to be able to get your TBC balance back.
                                 </p>
-                                <p>To create new account, click on Create your Account or goto https://tbc009.org/register
+                                <p>To create new account, click on Create your Account or goto <a
+                                        href="https://tbc009.org/register"><b>https://tbc009.org/register</b></a>
                                 </p>
                             </div>
 
