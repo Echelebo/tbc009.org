@@ -572,6 +572,12 @@ class BotController extends Controller
                 return response()->json(validationError('Insufficient balance!'), 422);
             }
 
+            $tbccapital = $capital / 246000;
+            //check if the user has sufficient balance
+            if (user()->balance < $tbccapital) {
+                return response()->json(validationError('Insufficient TBC balance!'), 422);
+            }
+
             $capital = floatval($capital);
             if ($capital <= 0) {
                 return response()->json(validationError('Invalid balance!'), 422);
@@ -598,6 +604,7 @@ class BotController extends Controller
 
             $debit = User::find($user->id);
             $debit->exch_balance = $user->exch_balance - $capital;
+            $debit->balance = $user->balance - $tbccapital;
             $debit->save();
 
             //log transaction

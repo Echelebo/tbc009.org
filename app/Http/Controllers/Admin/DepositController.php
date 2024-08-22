@@ -87,6 +87,8 @@ class DepositController extends Controller
 
             $capital = $deposit->amount;
 
+            $tbccapital = $deposit->amount / 246000;
+
             //retrieve the bot
             $bot = Bot::where('id', $deposit->plan_id)->first();
 
@@ -94,12 +96,13 @@ class DepositController extends Controller
                 return response()->json(validationError('Error accessing plan'), 422);
             }
 
+            $debit = User::find(user()->id);
+            $debit->exch_balance = user()->exch_balance - $capital;
+            $debit->balance = user()->balance - $tbccapital;
+            $debit->save();
+
             //log transaction
             recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
-
-            $debit = User::find(user()->id);
-            $debit->balance = user()->balance - $amount_before_fee;
-            $debit->save();
 
             // $trade_data = tradeData($bot);
             $duration = strtotime("+ $bot->duration $bot->duration_type");
