@@ -147,8 +147,8 @@
                                     <tr>
                                         <td>Amount to Spend ($):</td>
                                         <td align="right">
-                                            <input type="text" name="capital" id="capital" value="200.00"
-                                                class="form-control" size="15" style="text-align:right;" required>
+                                            <input type="text" name="capital" id="capital" class="form-control"
+                                                size="15" style="text-align:right;" required>
                                         </td>
                                     </tr>
 
