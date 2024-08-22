@@ -167,7 +167,7 @@
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="radio" name="type" value="0">
+                                                        <td><input type="radio" name="type" value="0" required>
                                                         </td>
                                                         <td>Exchange fee from the Account Balance
                                                         </td>
