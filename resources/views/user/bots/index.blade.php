@@ -88,7 +88,7 @@
                                             <td colspan="3">
 
                                                 <input type="radio" id="bot_id" name="bot_id"
-                                                    value="{{ $bot->id }}" onclick="updateCompound()">
+                                                    value="{{ $bot->id }}" onclick="updateCompound()" required>
                                                 <b>{{ $bot->name }}</b>
                                             </td>
                                         </tr>
