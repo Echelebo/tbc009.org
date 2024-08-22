@@ -18,25 +18,22 @@ class DepositController extends Controller
         $summary = [
             'finished' => $deposit_query->where('status', 'finished')->sum('amount'),
             'expired' => $deposit_query->where('status', 'expired')->sum('amount'),
-            'waiting' => $deposit_query->where('status', 'waiting')->sum('amount')
+            'waiting' => $deposit_query->where('status', 'waiting')->sum('amount'),
         ];
 
         if ($request->s) {
-                $deposits =  Deposit::with(['user', 'depositCoin'])->where('ref', 'LIKE', '%' . $request->s . '%')->orderBy('id', 'DESC')->paginate(site('pagination'));
+            $deposits = Deposit::with(['user', 'depositCoin'])->where('ref', 'LIKE', '%' . $request->s . '%')->orderBy('id', 'DESC')->paginate(site('pagination'));
         } else {
-            $deposits =  Deposit::with(['user', 'depositCoin'])->orderBy('id', 'DESC')->paginate(site('pagination'));
+            $deposits = Deposit::with(['user', 'depositCoin'])->orderBy('id', 'DESC')->paginate(site('pagination'));
         }
 
-
-        
         $page_title = 'All Deposits';
-        
 
         return view('admin.deposits.index', compact(
             'page_title',
             'deposits',
             'summary'
-            
+
         ));
     }
 
@@ -44,12 +41,10 @@ class DepositController extends Controller
     public function viewDeposit(Request $request)
     {
         $deposit = Deposit::where('id', $request->route('id'))->first();
-       
-        
+
         if (!$deposit) {
             abort(404);
         }
-
 
         $depositData = [
             'amount' => $deposit->amount,
@@ -65,16 +60,15 @@ class DepositController extends Controller
             'id' => $deposit->id,
             'screenshot' => $deposit->screenshot,
         ];
-        
+
         return response()->json(['deposit' => $depositData]);
     }
-
 
     // process kyc record
     public function process(Request $request)
     {
         $request->validate([
-            'action' => 'required'
+            'action' => 'required',
         ]);
 
         $action = $request->action;
@@ -90,69 +84,53 @@ class DepositController extends Controller
             $deposit->delete();
             return response()->json(['message' => 'Plan Deposit Deleted successfully']);
         } elseif ($action == 'approve') {
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
             $capital = $deposit->amount;
 
+            //retrieve the bot
+            $bot = Bot::where('id', $deposit->plan_id)->first();
 
-        //retrieve the bot
-        $bot = Bot::where('id', $deposit->plan_id)->first();
+            if (!$bot) {
+                return response()->json(validationError('Error accessing plan'), 422);
+            }
 
-        if (!$bot) {
-            return response()->json(validationError('Error accessing plan'), 422);
-        }
+            //log transaction
+            recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
 
-        //log transaction
-        recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
+            $debit = User::find(user()->id);
+            $debit->balance = user()->balance - $amount_before_fee;
+            $debit->save();
 
+            // $trade_data = tradeData($bot);
+            $duration = strtotime("+ $bot->duration $bot->duration_type");
+            //calculate total return
+            $days = floor($duration / (60 * 60 * 24));
+            //log activation
+            $activation = new BotActivation();
+            $activation->user_id = $user->id;
+            $activation->balance = $capital;
+            $activation->bot_id = $bot->id;
+            $activation->capital = $capital;
+            $activation->profit = 0;
+            $activation->expires_in = $duration;
+            $activation->daily_timestamp = now()->addDays(-1)->timestamp;
+            $activation->daily_sequence = json_encode([]);
+            $activation->gen_timestamps = json_encode([]);
+            $activation->status = 'active';
+            $activation->save();
 
+            //notify by email
+            sendNewBotActivationMail($activation);
 
-        // $trade_data = tradeData($bot);
-        $duration = strtotime("+ $bot->duration $bot->duration_type");
-        //calculate total return 
-        $days = floor($duration / (60 * 60 * 24));
-        //log activation
-        $activation = new BotActivation();
-        $activation->user_id = $user->id;
-        $activation->balance = $capital;
-        $activation->bot_id = $bot->id;
-        $activation->capital = $capital;
-        $activation->profit = 0;
-        $activation->expires_in = $duration;
-        $activation->daily_timestamp = now()->addDays(-1)->timestamp;
-        $activation->daily_sequence = json_encode([]);
-        $activation->gen_timestamps = json_encode([]);
-        $activation->status = 'active';
-        $activation->save();
-
-        //notify by email
-        sendNewBotActivationMail($activation);
-
-        
-        
-        
-        
-
-            
-            
-            
             $is_processed = processDeposit($id, 'approve');
             if ($is_processed) {
                 return response()->json(['message' => 'Plan Deposit approved successfully']);
             } else {
                 return response()->json(validationError('Failed to process deposit'));
             }
-            
 
         } elseif ($action == 'reject') {
-           
+
             $is_processed = processDeposit($id, 'reject');
             if ($is_processed) {
                 return response()->json(['message' => 'Plan Deposit rejected successfully']);

@@ -597,7 +597,7 @@ class BotController extends Controller
             $user = User::where('id', user()->id)->first();
 
             $debit = User::find($user->id);
-            $debit->balance = $user->balance - $capital;
+            $debit->exch_balance = $user->exch_balance - $capital;
             $debit->save();
 
             //log transaction
