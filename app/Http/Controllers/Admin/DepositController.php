@@ -96,9 +96,9 @@ class DepositController extends Controller
                 return response()->json(validationError('Error accessing plan'), 422);
             }
 
-            $debit = User::find(user()->id);
-            $debit->exch_balance = user()->exch_balance - $capital;
-            $debit->balance = user()->balance - $tbccapital;
+            $debit = $user;
+            $debit->exch_balance = $user->exch_balance - $capital;
+            $debit->balance = $user->balance - $tbccapital;
             $debit->save();
 
             //log transaction
