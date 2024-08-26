@@ -97,7 +97,6 @@ class DepositController extends Controller
             }
 
             $debit = $user;
-            $debit->exch_balance = $user->exch_balance - $capital;
             $debit->balance = $user->balance - $tbccapital;
             $debit->save();
 
