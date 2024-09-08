@@ -1,11 +1,12 @@
 <x-mail::message>
-# Deposit Initiated
+    # Deposit Initiated
 
-Hi {{ $deposit->user->username }},
+    Hi {{ $deposit->user->name }},
 
-Your plan deposit request of {{ formatAmount($deposit->amount) }} has been received. You will be notified via when your plan deposit is processed.
+    Your plan deposit request of {{ formatAmount($deposit->amount) }} has been received. You will be notified via email
+    when your plan deposit is processed.
 
 
-Thanks,<br>
-{{ site('name') }}
+    Thanks,<br>
+    {{ site('name') }}
 </x-mail::message>

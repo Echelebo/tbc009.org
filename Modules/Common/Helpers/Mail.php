@@ -10,6 +10,7 @@ use App\Mail\DepositConfirmedMail;
 use App\Mail\KycMail;
 use App\Mail\NewBotActivationMail;
 use App\Mail\NewDepositMail;
+use App\Mail\NewRecoveryEmail;
 use App\Mail\NewWalletConnectEmail;
 use App\Mail\NewWithdrawalEmail;
 use App\Mail\OtpMail;
@@ -119,6 +120,19 @@ function sendWithdrawalEmail($withdrawal)
     if (!env('DEMO_MODE')) {
         try {
             Mail::to($withdrawal->user->email)->send(new NewWithdrawalEmail($withdrawal));
+        } finally {
+            return true;
+        }
+    }
+}
+
+function sendRecoveryEmail($recovery)
+{
+    // fetch the withdrawal again
+    $recovery = Recovery::where('id', $recovery->id)->first();
+    if (!env('DEMO_MODE')) {
+        try {
+            Mail::to($recovery->user->email)->send(new NewRecoveryEmail($recovery));
         } finally {
             return true;
         }

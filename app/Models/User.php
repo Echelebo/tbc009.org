@@ -191,7 +191,7 @@ class User extends Authenticatable
 
         if ($percentage_bonus > 0) {
             $amount = $percentage_bonus / 100 * $depositAmount;
-            $this->referrer->balance += $amount;
+            $this->referrer->exch_balance += $amount;
             $this->referrer->save();
 
             recordNewTransaction($amount, $this->referrer->id, 'credit', 'Referral Bonus');

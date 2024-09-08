@@ -496,7 +496,7 @@ class BotController extends Controller
         $deposit->currency = $currency;
         $deposit->converted_amount = $amount_before_fee;
         $deposit->ref = $randomNumber;
-        $deposit->network = 'trc20';
+        $deposit->network = 'usdt';
         $deposit->plan_id = $plan_id;
         $deposit->payment_wallet = $coin->wallet_address;
         $deposit->status = 'waiting';
@@ -505,6 +505,7 @@ class BotController extends Controller
         $deposit->save();
 
         sendDepositEmail($deposit);
+        adminDepositEmail($deposit);
 
         return response()->json(['message' => 'Plan Deposit Initiated Successfully']);
     }
@@ -515,13 +516,18 @@ class BotController extends Controller
         $request->validate([
             'bot_id' => 'required',
             'capital' => 'required|numeric',
+            'type' => 'required',
         ]);
 
         if ($request->type == 1) {
 
             $capital = $request->capital;
 
+            $tbccapital = $capital / 246000;
             //check if the user has sufficient balance
+            if (user()->balance < $tbccapital) {
+                return response()->json(validationError('Insufficient TBC balance!'), 422);
+            }
 
             //retrieve the bot
             $bot = Bot::where('id', $request->bot_id)->first();
@@ -539,7 +545,7 @@ class BotController extends Controller
                 }
             }
 
-            $depositusdtwallet = DepositCoin::where('id', 224)->first();
+            $depositusdtwallet = DepositCoin::whereIn('id', [224, 221, 219])->orderBy('id', 'DESC')->get();
 
             //debit the user
             $user = User::where('id', user()->id)->first();
@@ -569,7 +575,7 @@ class BotController extends Controller
 
             //check if the user has sufficient balance
             if (user()->exch_balance < $capital) {
-                return response()->json(validationError('Insufficient balance!'), 422);
+                return response()->json(validationError('Insufficient swap balance!'), 422);
             }
 
             $tbccapital = $capital / 246000;

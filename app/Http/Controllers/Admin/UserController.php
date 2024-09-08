@@ -17,7 +17,6 @@ class UserController extends Controller
 
         $user_query = User::get();
 
-        
         if (request()->s) {
             $users = User::where('name', 'LIKE', '%' . request()->s . '%')
                 ->orWhere('email', 'LIKE', '%' . request()->s . '%')
@@ -27,18 +26,12 @@ class UserController extends Controller
             $users = User::paginate(site('pagination'));
         }
 
-
-
-
-
-
         return view('admin.users.index', compact(
             'page_title',
             'users',
             'user_query'
         ));
     }
-
 
     // return a single user
     public function viewUser(Request $request)
@@ -54,7 +47,6 @@ class UserController extends Controller
             return redirect(route('admin.users.index'));
         }
 
-
         $page_title = $user->name ?? 'View User';
 
         return view('admin.users.view', compact(
@@ -62,7 +54,6 @@ class UserController extends Controller
             'user'
         ));
     }
-
 
     // change user status
     public function status(Request $request)
@@ -82,7 +73,6 @@ class UserController extends Controller
             return response()->json(['message' => 'User has been suspended successfully']);
         }
     }
-
 
     //Edit user
     public function edit(Request $request)
@@ -107,7 +97,6 @@ class UserController extends Controller
             }
         }
 
-        
         if (user($request->route('id'))->email !== $request->email) {
             $validationRules['email'] = 'required|email|unique:users';
         }
@@ -144,7 +133,7 @@ class UserController extends Controller
         $request->validate([
             'amount' => 'required|numeric',
             'type' => 'required',
-            'description' => 'required'
+            'description' => 'required',
         ]);
 
         $amount = $request->amount;
@@ -152,19 +141,19 @@ class UserController extends Controller
         $description = $request->description;
         //credit if credit
         if ($type == 'credit') {
-            
-            $new_balance = $user->balance + $amount;
+
+            $new_balance = $user->exch_balance + $amount;
             $credit = User::find($user->id);
-            $credit->balance = $new_balance;
+            $credit->exch_balance = $new_balance;
             $credit->save();
             // log transaction
             recordNewTransaction($amount, $user->id, $type, $description);
             return response()->json(['message' => $user->username . ' has been credited']);
         } elseif ($type == 'debit') {
             // debit the user
-            $new_balance = $user->balance - $amount;
+            $new_balance = $user->exch_balance - $amount;
             $debit = User::find($user->id);
-            $debit->balance = $new_balance;
+            $debit->exch_balance = $new_balance;
             $debit->save();
             // log transaction
             recordNewTransaction($amount, $user->id, $type, $description);
@@ -172,7 +161,6 @@ class UserController extends Controller
         } else {
             return response()->json(validationError('Action not recognized'), 422);
         }
-
 
     }
 
@@ -185,14 +173,14 @@ class UserController extends Controller
     public function changePassword(Request $request)
     {
         $request->validate([
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
         ]);
 
         $user = User::find($request->route('id'));
         $user->password = Hash::make($request->password);
         $user->save();
         $name = $user->username ?? 'User';
-        return response()->json(['message' =>  $name . "'s password has been changed"]);
+        return response()->json(['message' => $name . "'s password has been changed"]);
     }
 
     // login as user
@@ -213,17 +201,12 @@ class UserController extends Controller
             // Delete the user
             $user->delete();
 
-    
             // Clear any associated cached data
             Cache::forget('user:' . $user_id);
-    
-            
+
             return response()->json(['message' => 'User deleted successfully']);
         } else {
             return response()->json(validationError('Failed to delete user'), 422);
         }
     }
 }
-
-
-

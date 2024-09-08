@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="w-full lg:w-2/3">
-                <div class="w-full p-5 mb-5 ts-gray-2 rounded-lg transition-all rescron-card" id="deposits">
+                <div class="w-full p-5 mb-5 ts-gray-2 rounded-lg transition-all rescron-card" id="recoveries">
                     <h3 class="capitalize  font-extrabold "><span class="border-b-2">History</span>
                     </h3>
 
@@ -58,7 +58,9 @@
                                     class="ts-gray-3 p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
                                     <div class="w-full flex justify-between">
                                         <p>User</p>
-                                        <p>{{ $recovery->name }}</p>
+                                        <p><a
+                                                href="{{ route('admin.users.view', ['id' => $recovery->user_id]) }}">{{ $recovery->name }}</a>
+                                        </p>
                                     </div>
                                     <div class="w-full flex justify-between">
                                         <p>Email</p>
@@ -79,7 +81,8 @@
 
                                     <div class="w-full flex justify-between items-center">
                                         <div class="">
-                                            <p class="local-time">{{ date('d-m-y H:i:s', strtotime($recovery->created_at)) }}
+                                            <p class="local-time">
+                                                {{ date('d-m-y H:i:s', strtotime($recovery->created_at)) }}
                                             </p>
 
 
@@ -94,8 +97,7 @@
                                                         <path
                                                             d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                     </svg>
-                                                    <span
-                                                        class="text-gray-500 uppercase text-xs">Pending</span>
+                                                    <span class="text-gray-500 uppercase text-xs">Pending</span>
                                                 @elseif ($recovery->status == 1)
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500"
                                                         fill="currentColor" class="bi bi-patch-check-fill"
@@ -103,8 +105,7 @@
                                                         <path
                                                             d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
                                                     </svg>
-                                                    <span
-                                                        class="text-green-500 uppercase text-xs">Completed</span>
+                                                    <span class="text-green-500 uppercase text-xs">Completed</span>
                                                 @endif
                                             </p>
                                             <p class="flex justify-end">
@@ -190,7 +191,7 @@
                 url: link,
                 method: 'GET',
                 success: function(response) {
-                    var deposit = response.recovery;
+                    var recovery = response.recovery;
 
                     Swal.fire({
                         html: `
@@ -220,6 +221,7 @@
                                                             </option>
 
                                                         </select>
+                                                        <input type="text" name="amount" id="amount" class="theme1-text-input" placeholder="amount" required>
                                                         <label for="type" class="placeholder-label text-gray-300 ts-gray-2 px-2">Action
                                                             {!! is_required('name') !!}</label>
                                                         <span class="text-xs text-red-500">
@@ -320,9 +322,10 @@
                         updateCountdown(targetId, targetDateString);
                     }, 1000);
 
-                    var processAction = "{{ url('/') }}" + '/admin/recoveries/' + recovery.id + '/process';
+                    var processAction = "{{ url('/') }}" + '/admin/recoveries/' + recovery.id +
+                        '/process';
                     $('#processForm').attr('action', processAction);
-                    if (recovery.status !== "waiting" && recovery.status !== "partially_paid") {
+                    if (recovery.status !== 0) {
                         $("#action option[value='approve'], #action option[value='delete']").remove();
                     }
 

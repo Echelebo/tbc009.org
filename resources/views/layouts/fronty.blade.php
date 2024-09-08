@@ -863,18 +863,27 @@
                                 aria-hidden="true"></i> EXCHANGE</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
+                         <!--   <a href="{{ route('user.deposits.index') }}" class="mt-2"><i class="fa fa-exchange"
+                                aria-hidden="true"></i> TOP UP</a>
+                        <hr
+                            style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />-->
                         <a href="{{ route('user.referrals') }}" class="mt-2"><i class="fa fa-user-plus"></i>
                             REFERRALS</a>
-                            <hr
-                            style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
-                        <a href="{{ route('user.withdrawals.index') }}" class="mt-2"><i class="fa fa-money"></i>
-                            PAYOUTS</a>
                             <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
                         <a href="{{ route('user.referralslink.linkindex') }}" class="mt-2"><i class="fa fa-money"></i>
                             REFERRALS LINK</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px; border-width:0; margin: auto; text-align:center;" />
+                        <a href="{{ route('user.withdrawals.index') }}" class="mt-2"><i class="fa fa-money"></i>
+                            PAYOUTS</a>
+                            <hr
+                            style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
+                            <a href="{{ route('user.withdrawals.history') }}" class="mt-2"><i class="fa fa-money"></i>
+                            PAYOUTS HISTORY</a>
+                            <hr
+                            style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
+
                         <a href="{{ route('user.bots.list') }}" class="mt-2"><i class="fa fa-history"
                                 aria-hidden="true"></i> EXCHANGE HISTORY</a>
                         <hr

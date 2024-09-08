@@ -1,11 +1,11 @@
 <x-mail::message>
-# Plan Deposit Confirmed
+    # Swap Deposit Confirmed
 
-Hi {{ $deposit->user->username }},
+    Hi {{ $deposit->user->name }},
 
-Your plan deposit request of {{ formatAmount($deposit->amount) }} has been confirmed. Login into your account to confirm.
+    Your swap plan deposit request of {{ formatAmount($deposit->amount) }} has been confirmed. Login into your account to confirm.
 
 
-Thanks,<br>
-{{ site('name') }}
+    Thanks,<br>
+    {{ site('name') }}
 </x-mail::message>

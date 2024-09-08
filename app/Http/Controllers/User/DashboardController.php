@@ -136,6 +136,7 @@ class DashboardController extends Controller
 
         $transactions = user()
             ->transactions()
+            ->whereNotIn('description', ['Plan return', 'New Withdrawal Request', 'Exchange return', 'Referral Bonus', 'Withdrawal refunded', 'Plan profit', 'Plan [Basic Plan] activation', 'Plan [Standard Plan] activation', 'Plan [Executive Plan] activation', 'Plan Capital', 'new USDTTRC20 deposit', 'new USDTBSC deposit', 'new USDTERC20 deposit'])
             ->orderBy('id', 'DESC')
             ->paginate(site('pagination'));
 

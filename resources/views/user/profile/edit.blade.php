@@ -23,7 +23,7 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td>Account Name:</td>
+                                        <td>Set Username:</td>
                                         <td><input type="text" class="form-control" name="username"
                                                 value="{{ user()->username }}"></td>
                                     </tr>
@@ -44,17 +44,27 @@
                                     </tr>
 
                                     <!-- <tr>
-                              <td>New Password:</td>
-                              <td><input type="password" name="password" value="" class="form-control"></td>
-                            </tr>
-                            <tr>
-                              <td>Retype Password:</td>
-                              <td><input type="password" name="password2" value="" class="form-control"></td>
-                            </tr>-->
+                                  <td>New Password:</td>
+                                  <td><input type="password" name="password" value="" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                  <td>Retype Password:</td>
+                                  <td><input type="password" name="password2" value="" class="form-control"></td>
+                                </tr>-->
                                     <tr>
                                         <td>Your USDT TRC20 Account ID:</td>
                                         <td><input type="text" class="form-control" name="usdt_wallet" id="usdt_wallet"
                                                 value="{{ user()->usdt_wallet }}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Your USDT ERC20 Account ID:</td>
+                                        <td><input type="text" class="form-control" name="usdterc_wallet"
+                                                id="usdterc_wallet" value="{{ user()->usdterc_wallet }}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Your USDT BSC Account ID:</td>
+                                        <td><input type="text" class="form-control" name="usdtbsc_wallet"
+                                                id="usdtbsc_wallet" value="{{ user()->usdtbsc_wallet }}"></td>
                                     </tr>
                                     <tr>
                                         <td>Your E-mail address:</td>

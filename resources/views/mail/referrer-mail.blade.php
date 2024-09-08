@@ -1,10 +1,10 @@
 <x-mail::message>
-# New Referral Notification
+    # New Referral Notification
 
-Hi {{ $ref->name }}
+    Hi {{ $ref->name }}
 
-{{ $user->usermame ?? 'A new user' }} has signed up to  {{ site('name') }} using your referral link. 
+    {{ $user->name ?? 'A new user' }} has signed up to {{ site('name') }} using your referral link.
 
-Thanks,<br>
-{{ site('name') }}
+    Thanks,<br>
+    {{ site('name') }}
 </x-mail::message>

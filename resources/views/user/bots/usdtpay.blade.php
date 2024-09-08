@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.fronty')
 
 @section('contents')
     <div class="container-fluid">
@@ -7,12 +7,19 @@
                 <h5 class="card-header bg-primary text-white">Please confirm your deposit</h5>
                 <div class="card-body" id="pageContent">
                     <br><br>
+                    <p style="color: #03A84E;"><b>PAY SWAPPING FEE USING ANY OF THESE METHODS</b></p>
+                    <br><br>
 
-                    Click on the wallet address to copy <br><br><b><span class="clipboard cursor-pointer"
-                            data-copy="{{ $depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin' }}">USDTTRC20
-                            Wallet: <font color="red">
-                                {{ $depositusdtwallet->wallet_address ?? 'Wallet Address not set contact admin' }}</font>
-                        </span></b><br><br><br>
+                    Click on the wallet address to copy... <br><br><b>
+                        @foreach ($depositusdtwallet as $depositusdtwallets)
+                            <p class="clipboard cursor-pointer mt-4"
+                                data-copy="{{ $depositusdtwallets->wallet_address ?? 'Wallet Address not set contact admin' }}">
+                                {{ $depositusdtwallets->code }} Wallet: <font color="red">
+                                    {{ $depositusdtwallets->wallet_address ?? 'Wallet Address not set contact admin' }}
+                                </font>
+                            </p>
+                        @endforeach
+                    </b><br><br><br>
 
                     <div class="table-responsive">
                         <table class="table">
@@ -333,7 +340,7 @@
                 var form = $(this);
                 var formData = new FormData(this);
 
-                var submitButton = $(this).find('button[type="submit"]');
+                var submitButton = $(this).find('input[type="submit"]');
                 submitButton.addClass('relative disabled');
                 submitButton.append('<span class="button-spinner"></span>');
                 submitButton.prop('disabled', true);
@@ -371,7 +378,7 @@
                 var form = $(this);
                 var formData = new FormData(this);
 
-                var submitButton = $(this).find('button[type="submit"]');
+                var submitButton = $(this).find('input[type="submit"]');
                 submitButton.addClass('relative disabled');
                 submitButton.append('<span class="button-spinner"></span>');
                 submitButton.prop('disabled', true);

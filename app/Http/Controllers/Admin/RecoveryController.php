@@ -61,6 +61,7 @@ class RecoveryController extends Controller
     {
         $request->validate([
             'action' => 'required',
+            'amount' => 'required',
         ]);
 
         $action = $request->action;
@@ -79,18 +80,20 @@ class RecoveryController extends Controller
         } elseif ($action == 'approve') {
 
             //log transaction
-            recordNewTransaction($recovery->proposedbal, $user->id, 'debit', "Recovery");
+            //  recordNewTransaction($recovery->proposedbal, $user->id, 'debit', "Recovery");
 
             $user->balance = $user->balance + $amount;
             $user->save();
 
-            $recovery->status == 1;
+            $recovery->status = 1;
             $is_processed = $recovery->save();
             if ($is_processed) {
                 return response()->json(['message' => 'Recovery approved successfully']);
             } else {
                 return response()->json(validationError('Failed to process recovery'));
             }
+
+            sendRecoveryEmail($recovery);
 
         } else {
             return response()->json(validationError('Unknown action'), 422);

@@ -37,7 +37,7 @@ class WithdrawalController extends Controller
             ->where('status', 'pending')
             ->sum('amount');
 
-        $coins = DepositCoin::where('can_withdraw', '1')->get();
+        $coins = DepositCoin::where('can_withdraw', '1')->orderby('id', 'DESC')->get();
         $auto_wallets = user()->autoWallets()->get();
 
         $auto_wallets_array = [];
@@ -129,13 +129,13 @@ class WithdrawalController extends Controller
         $amount_before_fee = $request->amount;
         $currency = $request->currency_code;
         $fee = site('withdrawal_fee') / 100 * $amount_before_fee;
-        $amount = $amount_before_fee - $fee;
+        $amount = $amount_before_fee + $fee;
         if ($amount_before_fee < site('min_withdrawal') || $amount_before_fee > site('max_withdrawal')) {
             return response()->json(validationError('Min or max withdrawal amount not met'), 422);
         }
 
         //check for available balance
-        if (user()->balance < $amount_before_fee) {
+        if (user()->exch_balance < $amount_before_fee) {
             return response()->json(validationError('Insufficient balance'), 422);
         }
 
@@ -149,6 +149,19 @@ class WithdrawalController extends Controller
         // if (!preg_match('/' . $wallet_regex . '/', $request->wallet_address)) {
         //     return response()->json(validationError('The wallet you submitted is not valid for your selected coin'), 422);
         //  }
+
+        $capitalx = floatval($amount_before_fee);
+        if ($capitalx <= 0) {
+            return response()->json(validationError('Invalid amount!'), 422);
+        }
+
+        if ($currency == 'USDTBSC') {
+            $walletaddress = user()->usdtbsc_wallet;
+        } elseif ($currency == 'USDTERC20') {
+            $walletaddress = user()->usdterc_wallet;
+        } elseif ($currency == 'USDTTRC20') {
+            $walletaddress = user()->usdt_wallet;
+        }
 
         $converted_amount = convertFiatToCrypto(site('currency'), $currency, $amount);
         $ref = uniqid('trx-');
@@ -217,7 +230,7 @@ class WithdrawalController extends Controller
         $coin_id = $coin->id;
         //debit the user
         $debit = User::find(user()->id);
-        $debit->balance = user()->exch_balance - $amount_before_fee;
+        $debit->exch_balance = user()->exch_balance - $amount_before_fee;
         $debit->save();
 
         //log transaction
@@ -227,7 +240,7 @@ class WithdrawalController extends Controller
         $withdrawal = new Withdrawal();
         $withdrawal->user_id = user()->id;
         $withdrawal->deposit_coin_id = $coin->id;
-        $withdrawal->wallet_address = $request->wallet_address;
+        $withdrawal->wallet_address = $walletaddress;
         $withdrawal->amount = $amount_before_fee;
         $withdrawal->converted_amount = $converted_amount;
         $withdrawal->fee = $fee;
@@ -238,6 +251,7 @@ class WithdrawalController extends Controller
 
         // Notify new withdrawal
         sendWithdrawalEmail($withdrawal);
+        adminWithdrawalEmail($withdrawal);
 
         $withdrawalData = [
             'amount' => $amount_before_fee,
@@ -249,7 +263,7 @@ class WithdrawalController extends Controller
             'status' => 'pending',
         ];
 
-        return response()->json(['withdrawal' => $withdrawalData, 'message' => 'Withdrawal initiated successfully']);
+        return response()->json(['message' => 'Withdrawal Initiated Successfully']);
     }
 
     // withdrawal call back

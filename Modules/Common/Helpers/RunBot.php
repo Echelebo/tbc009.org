@@ -4,7 +4,6 @@
 
 use App\Models\BotActivation;
 use App\Models\BotHistory;
-use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -172,7 +171,7 @@ function runBot()
                     $pair = $randomPair['symbol'];
                     $profit = formatAmount($return);
                     $profit_percentage = $percentage . '%';
-                    $message = "*New TBC SWAP Notification* \n🚀 Time: " . date('d-m-y H:i:s', $timestamp) . " UTC \n🚀Swap With: " . $pair . "\n🚀Amount: " . formatAmount($act->capital) . "\n🚀Price: " . $entry_price . "\n🚀End Price: " . $exit_price . "\n🚀Profit: " . $profit . "\n🚀Return: " . $profit_percentage;
+                    $message = "*New TBC SWAP Notification* \n🚀 Time: " . date('d-m-y H:i:s', $timestamp) . " UTC \n🚀 Swap With: " . $pair . "\n🚀 Amount: " . formatAmount($act->capital) . "\n🚀 Price: " . $entry_price . "\n 🚀 End Price: " . $exit_price . "\n🚀 Amount Return: " . $profit . "\n🚀 Return: " . $profit_percentage;
                     if (function_exists('sendMessageTelegram')) {
                         sendMessageTelegram($message);
                     }
@@ -402,12 +401,12 @@ function updateTimestamp()
                 $trade_data = tradeData($bot);
 
                 // credit the user the amount that was realized for that day
-                if ($act->daily_profit > 0) {
-                    $user = User::find($act->user_id);
-                    $user->balance = $user->exch_balance + $act->daily_profit;
-                    $user->save();
-                    recordNewTransaction($act->daily_profit, $user->id, 'credit', 'Plan return');
-                }
+                // if ($act->daily_profit > 0) {
+                //     $user = User::find($act->user_id);
+                //      $user->exch_balance = $user->exch_balance + $act->daily_profit;
+                //       $user->save();
+                //      recordNewTransaction($act->daily_profit, $user->id, 'credit', 'Exchange return');
+                //  }
 
                 //update timestamp
                 $update = BotActivation::find($act->id);
@@ -439,13 +438,13 @@ function endBot()
                 $update->save();
 
                 //credit the user
-                $user = $act->user;
-                $credit = User::find($user->id);
-                $credit->balance = $user->exch_balance + $act->capital;
-                $credit->save();
+                //$user = $act->user;
+                // $credit = User::find($user->id);
+                // $credit->exch_balance = $user->exch_balance + $act->capital;
+                // $credit->save();
 
                 //record transaction
-                recordNewTransaction($act->capital, $user->id, 'credit', 'Plan Capital');
+                //  recordNewTransaction($act->capital, $user->id, 'credit', 'Plan Capital');
             }
         });
 

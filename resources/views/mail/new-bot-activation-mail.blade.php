@@ -1,10 +1,10 @@
 <x-mail::message>
-# Trading Plan Activation Successful
+    # Swap Plan Activation Successful
 
-Hi {{ $activation->user->username  }},
+    Hi {{ $activation->user->name }},
 
-You have successfully activated {{ $activation->bot->name }} exchange plan.
+    You have successfully activated the {{ $activation->bot->name }}.
 
-Thanks,<br>
-{{ site('name') }}
+    Thanks,<br>
+    {{ site('name') }}
 </x-mail::message>

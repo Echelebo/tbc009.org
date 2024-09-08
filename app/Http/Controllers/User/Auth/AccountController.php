@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use PragmaRX\Google2FA\Google2FA;
 
-
 class AccountController extends Controller
 {
     //return profile
@@ -21,7 +20,6 @@ class AccountController extends Controller
         ));
     }
 
-
     //show page for editing profile
     public function editProfile()
     {
@@ -30,7 +28,7 @@ class AccountController extends Controller
         $g2fa_secret = user()->g2fa_secret;
         $google2fa = new Google2FA();
         // generate g2fa_secret if the user has not set it up before
-        if (!user()->g2fa_secret){
+        if (!user()->g2fa_secret) {
             $g2fa_secret = $google2fa->generateSecretKey();
             $user = User::find(user()->id);
             $user->g2fa_secret = $g2fa_secret;
@@ -49,7 +47,6 @@ class AccountController extends Controller
         ));
     }
 
-
 //show page for editing profile
     public function editSecurity()
     {
@@ -58,7 +55,7 @@ class AccountController extends Controller
         $g2fa_secret = user()->g2fa_secret;
         $google2fa = new Google2FA();
         // generate g2fa_secret if the user has not set it up before
-        if (!user()->g2fa_secret){
+        if (!user()->g2fa_secret) {
             $g2fa_secret = $google2fa->generateSecretKey();
             $user = User::find(user()->id);
             $user->g2fa_secret = $g2fa_secret;
@@ -80,7 +77,6 @@ class AccountController extends Controller
     //validate profile edit
     public function editProfileValidate(Request $request)
     {
-        
 
         $validationRules = [
             'name' => 'two_words',
@@ -97,11 +93,12 @@ class AccountController extends Controller
         $user->name = $request->name;
         $user->username = user()->username ?? $request->username;
         $user->usdt_wallet = $request->usdt_wallet;
+        $user->usdterc_wallet = $request->usdterc_wallet;
+        $user->usdtbsc_wallet = $request->usdtbsc_wallet;
         $user->save();
 
         return response()->json(['message' => 'Account updated successfully']);
 
-        
     }
 
     //update password
@@ -109,7 +106,7 @@ class AccountController extends Controller
     {
         $require_strong_password = site('strong_password');
         $request->validate([
-            'current_password' => 'required', 
+            'current_password' => 'required',
             'password' => [
                 'required',
                 'confirmed',
@@ -126,11 +123,10 @@ class AccountController extends Controller
                             $fail('The password must contain a symbol');
                         }
                     }
-                }
+                },
             ],
         ]);
 
-        
         //check to see if the password was used previously
         if (Hash::check($request->password, user()->password)) {
             return response()->json(validationError('You have used this password before'), 422);
@@ -140,7 +136,6 @@ class AccountController extends Controller
         if (!Hash::check($request->current_password, user()->password)) {
             return response()->json(validationError('Your current password is incorrect'), 422);
         }
-
 
         //save the password
         $user = User::find(user()->id);
@@ -152,7 +147,6 @@ class AccountController extends Controller
 
         return response()->json(['message' => 'Password updated succesfully']);
     }
-
 
     public function g2FaUpdate(Request $request)
     {

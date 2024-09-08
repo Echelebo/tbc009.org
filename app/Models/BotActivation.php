@@ -15,13 +15,11 @@ class BotActivation extends Model
         return $this->belongsTo(User::class);
     }
 
-
     //bot relationship
     public function bot()
     {
         return $this->belongsTo(Bot::class);
     }
-
 
     //get bot history
     public function botHistory()
@@ -40,8 +38,9 @@ class BotActivation extends Model
         'gen_timestamps',
         'daily_sequence',
         'daily_timestamp',
+        'start_time',
         'status',
         'daily_profit',
-        'next_trade'
+        'next_trade',
     ];
 }

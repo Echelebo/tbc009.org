@@ -356,6 +356,11 @@ class SettingController extends Controller
                 'wallet_address' => $request->wallet_sol,
             ]);
 
+        DepositCoin::where('id', 219)
+            ->update([
+                'wallet_address' => $request->wallet_usdtbsc,
+            ]);
+
         DepositCoin::where('id', 221)
             ->update([
                 'wallet_address' => $request->wallet_usdterc20,
@@ -396,6 +401,7 @@ class SettingController extends Controller
         updateEnvValue('WALLET_LUNA', $request->wallet_luna);
         updateEnvValue('WALLET_SHIB', $request->wallet_shib);
         updateEnvValue('WALLET_SOL', $request->wallet_sol);
+        updateEnvValue('WALLET_USDTBSC', $request->wallet_usdtbsc);
         updateEnvValue('WALLET_USDTTRC20', $request->wallet_usdttrc20);
         updateEnvValue('WALLET_USDTERC20', $request->wallet_usdterc20);
         updateEnvValue('WALLET_XLM', $request->wallet_xlm);

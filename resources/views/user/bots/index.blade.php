@@ -134,21 +134,22 @@
                                         <td>Your account balance ($):
                                         </td>
                                         <td align="right">
-                                            ${{ number_format(user()->exch_balance) }}</td>
+                                            ${{ number_format(user()->exch_balance, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;
 
                                         </td>
                                         <td align="right">
-                                            <small>${{ number_format(user()->exch_balance) }} of USDT TRC20<br></small>
+                                            <small>${{ number_format(user()->exch_balance, 2) }} of USDT TRC20<br></small>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Amount to Spend ($):</td>
+                                        <td>Amount to Swap ($):</td>
                                         <td align="right">
                                             <input type="text" name="capital" id="capital" class="form-control"
-                                                size="15" style="text-align:right;" required>
+                                                size="15" style="text-align:right;" placeholder="Amount To Swap ($)"
+                                                required>
                                         </td>
                                     </tr>
 
@@ -175,7 +176,7 @@
                                                     <tr>
                                                         <td><input type="radio" name="type" value="1">
                                                         </td>
-                                                        <td>Exchange fee from USDT TRC20
+                                                        <td>Exchange fee from USDT
                                                         </td>
                                                     </tr>
                                                 </tbody>
