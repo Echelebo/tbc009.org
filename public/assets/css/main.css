@@ -775,7 +775,7 @@ video {
     display: flex;
     width: 100%;
     align-items: center;
-    border-left: 5px solid rgb(168, 85, 247);
+    border-left: 5px solid rgb(61, 90, 203);
 
 }
 
@@ -2023,7 +2023,7 @@ video {
 
 .bg-\[\#5457b6\] {
     --tw-bg-opacity: 1;
-    background-color: rgb(84 87 182 / var(--tw-bg-opacity));
+    background-color: rgb(61 90 203 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#333581\] {
@@ -2067,7 +2067,7 @@ video {
 
 .bg-\[\#4e3aaa\] {
     --tw-bg-opacity: 1;
-    background-color: rgb(78 58 170 / var(--tw-bg-opacity));
+    background-color: rgb(61 93 203 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#df972bf8\] {
