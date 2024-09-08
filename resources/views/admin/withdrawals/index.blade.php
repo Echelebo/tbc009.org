@@ -11,8 +11,8 @@
                         Withdrawals</a>
 
                     <!--<a data-target="auto_wallets" role="button"
-                        class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
-                        Auto Wallets</a>-->
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                            Auto Wallets</a>-->
                 </div>
             </div>
             <div class="w-full lg:w-2/3">
@@ -82,7 +82,9 @@
                                     class="ts-gray-3 p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
                                     <div class="w-full flex justify-between">
                                         <p>User</p>
-                                        <p>{{ $withdrawal->user->name }}</p>
+                                        <p><a
+                                                href="{{ route('admin.users.view', ['id' => $withdrawal->user->id]) }}">{{ $withdrawal->user->name }}</a>
+                                        </p>
                                     </div>
                                     <div class="w-full flex justify-between">
                                         <p class="text-xs">Txn ID</p>
@@ -145,13 +147,14 @@
                                             </p>
                                             <div class="w-full flex items-center justify-between">
                                                 <h2>Txn Ref: </h2>
-                                                <span class="clipboard cursor-pointer" data-copy="{{ $withdrawal->ref }}">{{ $withdrawal->ref }}</span>
+                                                <span class="clipboard cursor-pointer"
+                                                    data-copy="{{ $withdrawal->ref }}">{{ $withdrawal->ref }}</span>
                                                 </span>
                                             </div>
 
                                             <div class="w-full flex items-center justify-between">
                                                 <h2>Type: </h2>
-                                                <span >{{ $withdrawal->type }}</span>
+                                                <span>{{ $withdrawal->type }}</span>
                                                 </span>
                                             </div>
 
@@ -302,21 +305,22 @@
                                             @endif
                                         </p>
                                     </div>
-                                    <form action="{{ route('admin.withdrawals.delete-wallet', ['id' => $withdrawal->id ]) }}" method="post" class="gen-form w-full flex justify-end" data-action="reload">
+                                    <form
+                                        action="{{ route('admin.withdrawals.delete-wallet', ['id' => $withdrawal->id]) }}"
+                                        method="post" class="gen-form w-full flex justify-end" data-action="reload">
                                         @csrf
-                                        <button
-                                            type="submit"
+                                        <button type="submit"
                                             class=" flex space-x-1 items-center text-gray-300  hover:scale-110 transition-all hover:text-white bg-red-500 px-2 py-1 rounded-full text-xs">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                class="w-3 h-3" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-3 h-3"
+                                                viewBox="0 0 16 16">
                                                 <path
                                                     d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                             </svg>
                                             <span>Delete</span>
                                         </button>
-                                        
+
                                     </form>
-                                
+
 
 
 
@@ -424,7 +428,7 @@
                                                             </option>
                                                             <option value="delete" >Delete
                                                             </option>
-                                                            
+
                                                         </select>
                                                         <label for="type" class="placeholder-label text-gray-300 ts-gray-2 px-2">Action
                                                             {!! is_required('name') !!}</label>
@@ -446,7 +450,7 @@
                                             <h2 class="font-bold"> <span id="single_display_withdrawal_status"></span>
                                             </h2>
                                         </div>
-                                        
+
                                         <div class="w-full flex items-center justify-between">
                                             <h2>Amount </h2>
                                             <h2 class="font-bold">{{ site('currency') }}<span id="single_display_withdrawal_amount"></span>
@@ -482,11 +486,11 @@
                                                     data-copy=""></span>
                                             </h2>
                                         </div>
-    
-                                        
-    
+
+
+
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>

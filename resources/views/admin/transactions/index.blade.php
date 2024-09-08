@@ -51,7 +51,8 @@
                                                 <path
                                                     d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                             </svg>
-                                            <span>{{ $transaction->user->username }}</span>
+                                            <span><a
+                                                    href="{{ route('admin.users.view', ['id' => $transaction->user->id]) }}">{{ $transaction->user->name }}</a></span>
                                         </span>
                                         <p class="local-time">{{ date('d-m-y H:i:s', strtotime($transaction->created_at)) }}
                                         </p>
@@ -152,10 +153,10 @@
                         <div class="ts-gray-1 text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
                             <form action="" method="post" id="deleteTransactionForm" class="gen-form" data-action="reload">
                                 @csrf
-                                
+
                                 <p class="mb-3">Do you really want to delete this transaction?</p>
 
-                                
+
 
                                 <div class="mt-10 mb-10 px-3 flex justify-center">
                                     <button type="submit" id="activateButton"

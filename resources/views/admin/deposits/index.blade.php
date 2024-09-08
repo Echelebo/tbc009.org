@@ -61,7 +61,9 @@
                                     class="ts-gray-3 p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
                                     <div class="w-full flex justify-between">
                                         <p>User</p>
-                                        <p>{{ $deposit->user->name }}</p>
+                                        <p><a
+                                                href="{{ route('admin.users.view', ['id' => $deposit->user->id]) }}">{{ $deposit->user->name }}</a>
+                                        </p>
                                     </div>
                                     <div class="w-full flex justify-between">
                                         <p class="text-xs">Txn ID</p>
@@ -78,7 +80,7 @@
                                                 <span>{{ $deposit->depositCoin->name }}</span>
                                             </p>
                                         </div>
-                                        
+
                                         <div class="">
                                             <p class="flex justify-end items-center space-x-1">
                                                 @if ($deposit->status == 'waiting')
@@ -133,9 +135,9 @@
                                                     </svg>
                                                     <span>View</span>
                                                 </button>
-                                               
+
                                                 <!--<a class="flex space-x-1 items-center text-white  hover:scale-110 transition-all hover:text-white bg-purple-500 px-1 rounded-full text-xs" href="{{ asset('assets/images/deposits/' . $deposit->screenshot) }}" target="_blank"> View Screenshot
-                                           </a>-->
+                                               </a>-->
                                             </p>
                                         </div>
                                     </div>
@@ -213,7 +215,7 @@
                             <div>
                                 <div class="ts-gray-1 p-2 w-full rounded-lg border border-slate-800 hover:border-slate-600">
                                     <div class="w-full flex justify-between items-center mb-2">
-                                    
+
                                         <div id="single_wallet_qrcode" class="clipboard" data-copy=""></div>
                                         <div class="ts-gray-3 rounded-lg p-1">
                                             <form action="" class="mt-5 gen-form" data-action="reload" id="processForm">
@@ -234,7 +236,7 @@
                                                             </option>
                                                             <option value="delete" >Delete
                                                             </option>
-                                                            
+
                                                         </select>
                                                         <label for="type" class="placeholder-label text-gray-300 ts-gray-2 px-2">Action
                                                             {!! is_required('name') !!}</label>
@@ -296,11 +298,11 @@
                                                     data-copy=""></span>
                                             </h2>
                                         </div>
-    
-                                        
-    
+
+
+
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>
@@ -335,9 +337,9 @@
 
                         }
                     }
-                    
-                
-                    
+
+
+
 
                     // create qrcode
                     var qrCodeElement = document.getElementById('single_wallet_qrcode');
@@ -365,12 +367,13 @@
                         updateCountdown(targetId, targetDateString);
                     }, 1000);
 
-                    var processAction = "{{ url('/') }}" + '/admin/deposits/' + deposit.id + '/process';
+                    var processAction = "{{ url('/') }}" + '/admin/deposits/' + deposit.id +
+                        '/process';
                     $('#processForm').attr('action', processAction);
                     if (deposit.status !== "waiting" && deposit.status !== "partially_paid") {
                         $("#action option[value='approve'], #action option[value='reject']").remove();
                     }
-                    
+
 
 
                 },

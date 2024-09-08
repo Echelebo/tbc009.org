@@ -89,7 +89,8 @@
 
                                                     <p class="text-xs text-mono grid grid-cols-1"><span
                                                             class="text-orange-500 text-xs">Username</span>
-                                                        <span>{{ $bot->user->username }}</span>
+                                                        <span><a
+                                                                href="{{ route('admin.users.view', ['id' => $bot->user->id]) }}">{{ $bot->user->name }}</a></span>
                                                     </p>
 
                                                     <p class="text-xs text-mono grid grid-cols-1"><span
@@ -176,12 +177,12 @@
                 </div>
 
                 <div class="w-full p-5 mb-5 ts-gray-2 rounded-lg rescron-card transition-all" id="bot-list">
-                    <h3 class="capitalize  font-extrabold flex justify-between items-center"><span class="border-b-2">Plans</span>
+                    <h3 class="capitalize  font-extrabold flex justify-between items-center"><span
+                            class="border-b-2">Plans</span>
 
                         <a role="button" data-target="add-new-bot"
                             class="rescron-card-trigger flex items-center space-x-1 border border-slate-800  rounded-lg p-1 text-xs text-gray-300 font-semibold hover:scale-110 transition-all hover:text-white ts-gray-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4"
-                                viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
                                     d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                             </svg>
@@ -753,8 +754,8 @@
                                                 </span>
                                                 <input type="number" step="any"
                                                     placeholder="Min Portfolio ({{ site('currency') }})"
-                                                    id="{{ 'portfolio_min_' . $bot->id }}" class="theme1-text-input" name="min"
-                                                    value="{{ $bot->min }}" required>
+                                                    id="{{ 'portfolio_min_' . $bot->id }}" class="theme1-text-input"
+                                                    name="min" value="{{ $bot->min }}" required>
                                                 <label for="{{ 'portfolio_min_' . $bot->id }}"
                                                     class="placeholder-label text-gray-300 ts-gray-2 px-2">Min Portfolio
                                                     ({{ site('currency') }})
@@ -769,8 +770,8 @@
                                                 </span>
                                                 <input type="number" step="any"
                                                     placeholder="Max Portfolio ({{ site('currency') }})"
-                                                    id="{{ 'portfolio_max_' . $bot->id }}" class="theme1-text-input" name="max"
-                                                    value="{{ $bot->max }}" required>
+                                                    id="{{ 'portfolio_max_' . $bot->id }}" class="theme1-text-input"
+                                                    name="max" value="{{ $bot->max }}" required>
                                                 <label for="{{ 'portfolio_max_' . $bot->id }}"
                                                     class="placeholder-label text-gray-300 ts-gray-2 px-2">Max Portfolio
                                                     ({{ site('currency') }})
@@ -788,8 +789,8 @@
                                                     schedule
                                                 </span>
                                                 <input type="number" step="any" placeholder="Duration"
-                                                    id="{{ 'duration_' . $bot->id }}" class="theme1-text-input" name="duration"
-                                                    value="{{ $bot->duration }}" required>
+                                                    id="{{ 'duration_' . $bot->id }}" class="theme1-text-input"
+                                                    name="duration" value="{{ $bot->duration }}" required>
                                                 <label for="{{ 'duration_' . $bot->id }}"
                                                     class="placeholder-label text-gray-300 ts-gray-2 px-2">Duration
                                                 </label>
@@ -819,7 +820,8 @@
                                                 <span class="theme1-input-icon material-icons">
                                                     toggle_on
                                                 </span>
-                                                <select class="theme1-text-input" name="status" id="{{ 'status_' . $bot->id }}" required>
+                                                <select class="theme1-text-input" name="status"
+                                                    id="{{ 'status_' . $bot->id }}" required>
                                                     <option value="1"
                                                         @if ($bot->status == '1') selected @endif>Active</option>
                                                     <option value="0"
@@ -839,7 +841,7 @@
                                         <label
                                             class="font-medium py-1 flex flex-grow justify-center items-center space-x-2 border rounded-sm border-slate-800 hover:border-slate-600 cursor-pointer"
                                             for="{{ 'logo_' . $bot->id }}">
-                                            <span id="{{ 'logo_' . $bot->id .'-preview' }}"
+                                            <span id="{{ 'logo_' . $bot->id . '-preview' }}"
                                                 class="uploadIcon w-32 h-32 rounded-full  flex justify-center items-center"
                                                 style="background-image: url({{ asset('storage/bots/' . $bot->logo) }}); background-size: contain; background-repeat: no-repeat;">
                                                 <span
@@ -855,7 +857,8 @@
                                             </span>
                                         </label>
                                         <input class="hidden" type="file" accept="image/*" name="logo"
-                                            id="{{ 'logo_' . $bot->id }}" data-preview="{{ 'logo_' . $bot->id .'-preview' }}">
+                                            id="{{ 'logo_' . $bot->id }}"
+                                            data-preview="{{ 'logo_' . $bot->id . '-preview' }}">
 
 
                                     </div>
@@ -1063,10 +1066,10 @@
                             <div class="ts-gray-1 text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
                                 <form action="" method="post" id="deletebotForm" class="gen-form" data-action="reload">
                                     @csrf
-                                    
+
                                     <p class="mb-3">Do you really want to delete this plan?</p>
 
-                                    
+
 
                                     <div class="mt-10 mb-10 px-3 flex justify-center">
                                         <button type="submit" id="activateButton"
@@ -1108,7 +1111,7 @@
                             <div class="ts-gray-1 text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
                                 <form action="" method="post" id="editBotActivationForm" class="gen-form" data-action="reload">
                                     @csrf
-                                    
+
                                     <p class="mb-3">Manage plan Activation</p>
 
                                     <div class="flex justify-end mb-5">
@@ -1172,10 +1175,10 @@
                             <div class="ts-gray-1 text-white px-2 py-5 w-full rounded-lg border border-slate-800 hover:border-slate-600">
                                 <form action="" method="post" id="deleteHistoryForm" class="gen-form" data-action="reload">
                                     @csrf
-                                    
+
                                     <p class="mb-3">Are you sure you want to delete this trading history?</p>
 
-                                    
+
 
                                     <div class="mt-10 mb-10 px-3 flex justify-center">
                                         <button type="submit" id="activateButton"

@@ -92,7 +92,7 @@
                                         </svg>
                                     </div>
 
-                                    <span>{{ formatAmount($user_query->sum('balance')) }}</span>
+                                    <span>{{ formatAmount($user_query->sum('exch_balance')) }}</span>
                                 </div>
                             </div>
 

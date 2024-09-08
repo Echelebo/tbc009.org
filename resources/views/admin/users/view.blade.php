@@ -14,7 +14,7 @@
                         <div class="w-full flex items-center justify-between">
                             <div>
                                 <div class="mb-1">
-                                    <p class=" font-bold text-gray-500">Account Balance</p>
+                                    <p class=" font-bold text-gray-500">TBC Balance</p>
                                 </div>
 
                                 <div class="flex items-center justify-between font-mono">
@@ -26,7 +26,7 @@
                                         </svg>
                                     </div>
 
-                                    <span>{{ formatAmount($user->balance) }}</span>
+                                    <span>{{ number_format($user->balance, 7) }} TBC</span>
                                 </div>
                             </div>
 
@@ -140,7 +140,7 @@
                         <div class="w-full flex items-center justify-between">
                             <div>
                                 <div class="mb-1">
-                                    <p class=" font-bold text-gray-500">Plan Profits</p>
+                                    <p class=" font-bold text-gray-500">Swap Balance</p>
                                 </div>
 
                                 <div class="flex items-center justify-between font-mono">
@@ -152,7 +152,7 @@
                                         </svg>
                                     </div>
 
-                                    <span>{{ formatAmount($user->bot_history_sum_profit) }}</span>
+                                    <span>{{ formatAmount($user->exch_balance) }}</span>
                                 </div>
                             </div>
 
