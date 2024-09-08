@@ -10,7 +10,15 @@
                 <h5 class="card-header bg-primary text-white">Your Referrals
                 </h5>
                 <div class="card-body">
-
+                    <div class="row">
+                        <p>First <a href="{{ route('user.profile.edit') }}">setup username</a> before using referral link</p>
+                        <br />
+                        <p>Click on referral link to copy</p>
+                        <div class="col-md-12"
+                            data-copy="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}">
+                            {{ route('user.register', ['ref' => user()->username ?? 'notset']) }}
+                        </div>
+                    </div>
                     <br>
                     <br>
                     <table width="300" cellspacing="1" cellpadding="1">
