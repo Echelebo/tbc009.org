@@ -1,8 +1,17 @@
 @extends('layouts.user')
 
 @section('contents')
-    <div class="w-full p-3" id="pageContent">
-        <div class="w-full lg:flex lg:gap-3">
+    <div class="container-fluid" id="pageContent">
+
+
+
+
+        <div class="col-sm-12">
+
+            <!--<input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">-->
+
+
+
             <div class="w-full-x lg:w-1/3 h-52  rounded-lg p-5 mb-3">
                 <div class="w-full grid grid-cols-1 gap-3 p-2">
                     <a data-target="transfers" role="button"
@@ -18,12 +27,10 @@
 
                 </div>
             </div>
-            <div class="w-full lg:w-2/3">
-                <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card" id="transfers">
-                    <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">transfer History</span>
-                    </h3>
-
-                    <div class="w-full">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h5 class="card-header bg-primary text-white">Transfer History</h5>
+                    <div class="card-body">
 
 
                         <div class="grid grid-cols-1 gap-3 mt-5">
@@ -35,9 +42,10 @@
                                             search
                                         </span>
                                         <input type="text" placeholder="Txn Ref" id="search-transfer-input"
-                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100 rounded-0" value="{{ request()->s }}">
-                                        <label for="search-transfer-input"
-                                            class="placeholder-label text-gray-300  px-2">Txn Ref
+                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100 rounded-0"
+                                            value="{{ request()->s }}">
+                                        <label for="search-transfer-input" class="placeholder-label text-gray-300  px-2">Txn
+                                            Ref
                                         </label>
 
                                     </div>
@@ -73,10 +81,10 @@
                                                     <p class="flex justify-end">to {{ $transfer->receiver_name }}</p>
                                                 </div>
                                             @else
-                                            <div class="">
-                                                <p class="text-green-500 flex justify-end uppercase">Received</p>
-                                                <p class="flex justify-end">from {{ $transfer->receiver_name }}</p>
-                                            </div>
+                                                <div class="">
+                                                    <p class="text-green-500 flex justify-end uppercase">Received</p>
+                                                    <p class="flex justify-end">from {{ $transfer->receiver_name }}</p>
+                                                </div>
                                             @endif
                                         </div>
 
@@ -121,26 +129,30 @@
 
                                 <div class="grid grid-cols-2 gap-2 text-mono text-sm break-all">
                                     <h2 style="font-size: 14px;">Status </h2>
-                                    <h2 class="font-bold" style="font-size: 14px;"> <span id="display_transfer_status"></span>
+                                    <h2 class="font-bold" style="font-size: 14px;"> <span
+                                            id="display_transfer_status"></span>
                                     </h2>
 
                                     <h2 style="font-size: 14px;">Valid Until </h2>
-                                    <h2 class="font-bold" style="font-size: 14px;"> <span id="display_transfer_valid_until"></span>
+                                    <h2 class="font-bold" style="font-size: 14px;"> <span
+                                            id="display_transfer_valid_until"></span>
                                     </h2>
 
                                     <h2 style="font-size: 14px;">Amount </h2>
-                                    <h2 class="font-bold" style="font-size: 14px;">{{ site('currency') }}<span id="display_transfer_amount"></span>
+                                    <h2 class="font-bold" style="font-size: 14px;">{{ site('currency') }}<span
+                                            id="display_transfer_amount"></span>
                                     </h2>
 
                                     <h2 style="font-size: 14px;">Fee </h2>
-                                    <h2 class="font-bold" style="font-size: 14px;">{{ site('currency') }}<span id="display_transfer_fee"></span>
+                                    <h2 class="font-bold" style="font-size: 14px;">{{ site('currency') }}<span
+                                            id="display_transfer_fee"></span>
                                     </h2>
 
 
                                     <h2 style="font-size: 14px;">Pay Amount</h2>
-                                    <h2 class="font-bold" style="font-size: 14px;"><span id="display_transfer_converted_amount"
-                                            class="clipboard cursor-pointer" data-copy=""> </span> <span
-                                            id="display_transfer_currency"></span>
+                                    <h2 class="font-bold" style="font-size: 14px;"><span
+                                            id="display_transfer_converted_amount" class="clipboard cursor-pointer"
+                                            data-copy=""> </span> <span id="display_transfer_currency"></span>
                                     </h2>
 
                                     <h2 style="font-size: 14px;">Network </h2>
@@ -149,13 +161,14 @@
                                     </h2>
 
                                     <h2 style="font-size: 14px;">Wallet Address </h2>
-                                    <h2 class="font-bold" style="font-size: 14px;"><span id="display_transfer_payment_wallet"
-                                            class="clipboard cursor-pointer" data-copy=""></span>
+                                    <h2 class="font-bold" style="font-size: 14px;"><span
+                                            id="display_transfer_payment_wallet" class="clipboard cursor-pointer"
+                                            data-copy=""></span>
                                     </h2>
 
                                     <h2 style="font-size: 14px;">Txn Ref </h2>
-                                    <h2 class="font-bold" style="font-size: 14px;"><span id="display_transfer_ref" class="clipboard cursor-pointer"
-                                            data-copy=""></span>
+                                    <h2 class="font-bold" style="font-size: 14px;"><span id="display_transfer_ref"
+                                            class="clipboard cursor-pointer" data-copy=""></span>
                                     </h2>
 
                                     {{-- 'status' => $transfer->status, --}}
@@ -170,8 +183,8 @@
 
 
                             <div class="flex  space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500" fill="currentColor"
-                                    class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                    fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                     <path
                                         d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
@@ -214,9 +227,9 @@
                                             person
                                         </span>
                                         <input type="text" placeholder="Username" id="username"
-                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100" name="username" required>
-                                        <label for="username"
-                                            class="placeholder-label text-gray-300  px-2">Username
+                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
+                                            name="username" required>
+                                        <label for="username" class="placeholder-label text-gray-300  px-2">Username
                                         </label>
 
                                     </div>
@@ -227,7 +240,8 @@
                                             person
                                         </span>
                                         <input type="text" placeholder="Full Name" id="fullname"
-                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100" name="fullname" required readonly>
+                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
+                                            name="fullname" required readonly>
                                         <label for="fullname" class="placeholder-label text-gray-300  px-2">Full
                                             Name
                                         </label>
@@ -241,9 +255,9 @@
                                         </span>
                                         <input type="number" step="any"
                                             placeholder="Amount ({{ site('currency') }})" id="amount"
-                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100" name="amount" value="0" required>
-                                        <label for="amount"
-                                            class="placeholder-label text-gray-300  px-2">Amount
+                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
+                                            name="amount" value="0" required>
+                                        <label for="amount" class="placeholder-label text-gray-300  px-2">Amount
                                             ({{ site('currency') }})
                                         </label>
 

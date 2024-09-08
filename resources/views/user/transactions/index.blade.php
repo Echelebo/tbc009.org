@@ -1,8 +1,8 @@
-@extends('layouts.user')
+@extends('layouts.fronty')
 
 @section('contents')
-    <div class="w-full p-3" id="pageContent">
-        <div class="w-full lg:flex lg:gap-3">
+    <div class="container-fluid" id="pageContent">
+        <div class="col-sm-12">
             <div class="w-full-x lg:w-1/3 h-32  rounded-lg p-5 mb-3">
                 <div class="w-full grid grid-cols-1 gap-3 p-2">
                     <div class="w-full ">
@@ -11,12 +11,19 @@
 
                 </div>
             </div>
-            <div class="w-full lg:w-2/3">
-                <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card" id="transactions">
-                    <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">Transaction History</span>
-                    </h3>
 
-                    <div class="w-full">
+
+
+
+
+
+
+            <!--<input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">-->
+
+            <div class="col-sm-12">
+                <div class="card">
+                    <h5 class="card-header bg-primary text-white">Transactions History</h5>
+                    <div class="card-body">
 
 
                         <div class="grid grid-cols-1 gap-3 mt-5">
@@ -28,7 +35,8 @@
                                             search
                                         </span>
                                         <input type="text" placeholder="Txn Ref" id="search-transaction-input"
-                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100 rounded-0" value="{{ request()->s }}">
+                                            class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100 rounded-0"
+                                            value="{{ request()->s }}">
                                         <label for="search-transaction-input"
                                             class="placeholder-label text-gray-300  px-2">Txn Ref
                                         </label>
@@ -45,10 +53,11 @@
                                 <div
                                     class="w-full flex justify-between items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
                                     <div class="">
-                                        <p class="local-time">{{ date('d-m-y H:i:s', strtotime($transaction->created_at)) }}</p>
+                                        <p class="local-time">{{ date('d-m-y H:i:s', strtotime($transaction->created_at)) }}
+                                        </p>
                                         <p class="clipboard cursor-pointer break-all" data-copy="{{ $transaction->ref }}">
 
-                                            REF: {{ $transaction->ref}}
+                                            REF: {{ $transaction->ref }}
                                         </p>
                                         <p class="font-bold text-mono">{{ formatAmount($transaction->amount) }}</p>
 
@@ -58,10 +67,12 @@
                                             @if ($transaction->type == 'debit')
                                                 <span class="text-red-500 uppercase text-xs">{{ $transaction->type }}</span>
                                             @else
-                                                <span class="text-green-500 uppercase text-xs">{{ $transaction->type }}</span>
+                                                <span
+                                                    class="text-green-500 uppercase text-xs">{{ $transaction->type }}</span>
                                             @endif
                                         </p>
-                                        <p class="flex justify-end cursor-pointer text-xs break-all" data-copy="{{ $transaction->description }}">
+                                        <p class="flex justify-end cursor-pointer text-xs break-all"
+                                            data-copy="{{ $transaction->description }}">
 
                                             {{ $transaction->description }}
                                         </p>
@@ -116,7 +127,5 @@
             var link = base_link + '?s=' + encodedRef;
             $('#search-transaction-button').attr('href', link);
         });
-
-
     </script>
 @endsection
