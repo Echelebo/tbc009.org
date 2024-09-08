@@ -450,7 +450,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(11) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 1%;
     left: 89%;
     animation-duration: 67s;
@@ -460,7 +460,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(12) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 66%;
     left: 51%;
     animation-duration: 58s;
@@ -510,7 +510,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(17) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 53%;
     left: 57%;
     animation-duration: 75s;
@@ -520,7 +520,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(18) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 20%;
     left: 17%;
     animation-duration: 92s;
@@ -530,7 +530,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(19) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 17%;
     left: 71%;
     animation-duration: 7s;
@@ -540,7 +540,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(20) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 24%;
     left: 40%;
     animation-duration: 133s;
@@ -560,7 +560,7 @@ textarea:-webkit-autofill:active {
 }
 
 .background span:nth-child(22) {
-    color: #583C87;
+    color: #3D5ACB;
     top: 28%;
     left: 42%;
     animation-duration: 38s;
@@ -979,13 +979,13 @@ textarea:-webkit-autofill:active {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(168 85 247);
+    background: rgb(61 93 203);
     border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(168 85 247);
+    background: rgb(61 93 203);
 }
 
 /* scrollbar */
