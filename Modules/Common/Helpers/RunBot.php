@@ -1,6 +1,6 @@
 <?php
 
-//give profit for running bot
+//give profit for running bot testing now now
 
 use App\Models\BotActivation;
 use App\Models\BotHistory;
