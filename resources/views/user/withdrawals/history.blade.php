@@ -1,15 +1,20 @@
-@extends('layouts.user')
+@extends('layouts.fronty')
 
 @section('contents')
-    <div class="w-full p-3" id="pageContent">
-        <div class="w-full lg:flex lg:gap-3" id="refresh">
+    <div class="container-fluid" id="pageContent">
 
-            <div class="w-full ">
-                <div class="w-full p-5 mb-5 rounded-lg transition-all rescron-card" id="withdrawals">
-                    <h3 class="capitalize  font-extrabold "><span class="border-b-2">Withdrawal History</span>
-                    </h3>
 
-                    <div class="w-full">
+
+
+        <div class="col-sm-12">
+
+            <!--<input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">-->
+
+            <div class="col-sm-12">
+                <div class="card">
+                    <h5 class="card-header bg-primary text-white">Withdrawal History</h5>
+                    <div class="card-body">
+
 
 
                         <div class="grid grid-cols-1 gap-3 mt-5">
@@ -38,10 +43,12 @@
                                 <div
                                     class="w-full flex justify-between items-center p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
                                     <div class="">
-                                        <p class="local-time">{{ date('d-m-y H:i:s', strtotime($withdrawal->created_at)) }}
+                                        <p class="local-time">
+                                            {{ date('d-m-y H:i:s', strtotime($withdrawal->created_at)) }}
                                         </p>
                                         <p class="font-bold text-mono">
-                                            {{ formatAmount($withdrawal->amount - $withdrawal->fee) }}</p>
+                                            {{ formatAmount($withdrawal->amount - $withdrawal->fee) }}
+                                        </p>
                                         <p class="flex space-x-1"><img class="w-5 h-5"
                                                 src="{{ 'https://nowpayments.io' . $withdrawal->depositCoin->logo_url }}"
                                                 alt="">

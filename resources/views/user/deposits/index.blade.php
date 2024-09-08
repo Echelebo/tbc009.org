@@ -8,12 +8,13 @@
                 <div class="card-body" id="pageContent">
                     <br><br>
                     <div class="w-full grid grid-cols-1 gap-3 p-2">
-                        <a data-target="new-deposit" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110-x hover:#007BFF transition-all cursor-pointer rescron-card-trigger-x">
-                            Top Up</a>
                         <a data-target="deposits" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110-x hover:#007BFF transition-all cursor-pointer rescron-card-trigger-x">
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110-x hover:#007BFF transition-all cursor-pointer rescron-card-trigger">
                             Top Up History</a>
+                        <a data-target="new-deposit" role="button"
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110-x hover:#007BFF transition-all cursor-pointer rescron-card-trigger">
+                            Top Up</a>
+
 
 
 
@@ -22,47 +23,171 @@
 
                     </div>
                     <br><br>
-                    <p style="color: #03A84E;"><b>TOP UP USING ANY OF THESE METHODS</b></p>
-                    <br><br>
+                    <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card" id="deposits">
+                        <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">Top Up History</span>
+                        </h3>
 
-                    Click on the wallet address to copy... <br><br><b>
-                        @foreach ($depositusdtwallet as $depositusdtwallets)
-                            <p class="clipboard cursor-pointer mt-4"
-                                data-copy="{{ $depositusdtwallets->wallet_address ?? 'Wallet Address not set contact admin' }}">
-                                {{ $depositusdtwallets->code }} Wallet: <font color="red">
-                                    {{ $depositusdtwallets->wallet_address ?? 'Wallet Address not set contact admin' }}
-                                </font>
-                            </p>
-                        @endforeach
-                    </b><br><br><br>
+                        <div class="w-full">
 
 
-                    <br><br>
-                    <form action="{{ route('user.deposits.new') }}" method="post" id="tbctransferForm">
-                        @csrf
+                            <div class="grid grid-cols-1 gap-3 mt-5">
+                                <div class="flex justify-end mb-5">
+                                    <div class="flex justify-end items-center  mb-2 mt-5">
+                                        <div class="relative">
 
-                        <input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2"><b>Required Information:</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Transaction ID</td>
-                                        <td><input type="text" name="trans_id" id="trans_id" value=""
-                                                class="form-control inputs" required>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            <span class="theme1-input-icon material-icons">
+                                                search
+                                            </span>
+                                            <input type="text" placeholder="Txn Ref" id="search-deposit-input"
+                                                class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
+                                                value="{{ request()->s }}">
+
+
+                                        </div>
+                                        <div class="simple-pagination" data-paginator="deposits">
+                                            <a id="search-deposit-button"
+                                                class="paginator-link px-3 py-2 bg-purple-500 text-white hover:scale-110 transition-all"
+                                                data-link="{{ route('user.deposits.index') }}" href="">Search</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @forelse ($deposits as $deposit)
+                                    <div
+                                        class="w-full flex justify-between items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <div class="">
+                                            <p class="local-time">{{ date('d-m-y H:i:s', strtotime($deposit->created_at)) }}
+                                            </p>
+                                            <p class="font-bold text-mono">{{ formatAmount($deposit->amount) }}</p>
+                                            <p class="flex space-x-1"><img class="w-5 h-5"
+                                                    src="{{ 'https://nowpayments.io' . $deposit->depositCoin->logo_url }}"
+                                                    alt="">
+                                                <span>{{ $deposit->depositCoin->name }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="">
+                                            <p class="flex justify-end items-center space-x-1">
+                                                @if ($deposit->status == 'waiting')
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500"
+                                                        fill="currentColor" class="bi bi-patch-exclamation-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                    </svg>
+                                                    <span
+                                                        class="text-gray-500 uppercase text-xs">{{ $deposit->status }}</span>
+                                                @elseif ($deposit->status == 'finished')
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500"
+                                                        fill="currentColor" class="bi bi-patch-check-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                                    </svg>
+                                                    <span
+                                                        class="text-green-500 uppercase text-xs">{{ $deposit->status }}</span>
+                                                @elseif ($deposit->status == 'expired' || $deposit->status == 'failed' || $deposit->status == 'refunded')
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-500"
+                                                        fill="currentColor" class="bi bi-patch-exclamation-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                    </svg>
+                                                    <span
+                                                        class="text-red-500 uppercase text-xs">{{ $deposit->status }}</span>
+                                                @else
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                                        fill="currentColor" class="bi bi-patch-exclamation-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                    </svg>
+                                                    <span
+                                                        class="text-orange-500 uppercase text-xs">{{ $deposit->status }}</span>
+                                                @endif
+                                            </p>
+                                            <p class="flex justify-end">
+                                                {{ $deposit->converted_amount . ' ' . $deposit->currency }}</p>
+                                            <p class="flex justify-end">
+                                                <button
+                                                    data-link="{{ route('user.deposits.view', ['ref' => $deposit->ref]) }}"
+                                                    class="view-single-deposit flex space-x-1 items-center text-white  hover:scale-110 transition-all hover:text-white bg-purple-500 px-1 rounded-full text-xs">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                        <path
+                                                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                                    </svg>
+                                                    <span>View</span>
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                @empty
+                                    <div
+                                        class="w-full flex justify-center items-center  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-500"
+                                            fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                        </svg>
+                                        <span>Empty Record. No depsoit found!</span>
+                                    </div>
+                                @endforelse
+
+
+
+
+
+                                <div class="w-full flex items-center text-white  p-2 rounded-lg border border-slate-800 hover:border-slate-600 cursor-pointer simple-pagination"
+                                    data-paginator="deposits">
+                                    {{ $deposits->links('paginations.simple') }}
+                                </div>
+                            </div>
                         </div>
 
-                        <br><input type="submit" value="Save" class="btn bg-blue-500 btn-primary ml-auto"> &nbsp;
-                        <input type="button" class="btn bg-red-500 btn-primary ml-auto" value="Cancel"
-                            onclick="document.location='/user/bots'">
-                    </form>
+                    </div>
+                    <div class="w-full p-5 mb-5  rounded-lg rescron-card transition-all hidden" id="new-deposit">
+                        <p style="color: #03A84E;"><b>TOP UP USING ANY OF THESE METHODS</b></p>
+                        <br><br>
 
+                        Click on the wallet address to copy... <br><br><b>
+                            @foreach ($depositusdtwallet as $depositusdtwallets)
+                                <p class="clipboard cursor-pointer mt-4"
+                                    data-copy="{{ $depositusdtwallets->wallet_address ?? 'Wallet Address not set contact admin' }}">
+                                    {{ $depositusdtwallets->code }} Wallet: <font color="red">
+                                        {{ $depositusdtwallets->wallet_address ?? 'Wallet Address not set contact admin' }}
+                                    </font>
+                                </p>
+                            @endforeach
+                        </b><br><br><br>
+
+
+                        <br><br>
+                        <form action="{{ route('user.deposits.new') }}" method="post" id="tbctransferForm">
+                            @csrf
+
+                            <input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2"><b>Required Information:</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Transaction ID</td>
+                                            <td><input type="text" name="trans_id" id="trans_id" value=""
+                                                    class="form-control inputs" required>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <br><input type="submit" value="Save" class="btn bg-blue-500 btn-primary ml-auto"> &nbsp;
+                            <input type="button" class="btn bg-red-500 btn-primary ml-auto" value="Cancel"
+                                onclick="document.location='/user/bots'">
+                        </form>
+                    </div>
 
                 </div>
             </div>
