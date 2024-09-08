@@ -11,10 +11,12 @@
                 </h5>
                 <div class="card-body">
                     <div class="row">
-                        <p>First <a href="{{ route('user.profile.edit') }}">setup username</a> before using referral link</p>
+                        <p>First <a href="{{ route('user.profile.edit') }}">
+                                <font color="blue">setup username</font>
+                            </a> before using referral link</p>
                         <br />
-                        <p>Click on referral link to copy</p>
-                        <div class="col-md-12"
+
+                        <div class="col-md-12 mt-4"
                             data-copy="{{ route('user.register', ['ref' => user()->username ?? 'notset']) }}">
                             {{ route('user.register', ['ref' => user()->username ?? 'notset']) }}
                         </div>
