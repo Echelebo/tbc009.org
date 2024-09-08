@@ -16,7 +16,7 @@
                     <table width="300" cellspacing="1" cellpadding="1">
                         <tbody>
                             <tr>
-                                <td class="item">Referrals:</td>
+                                <td class="item">Referral:</td>
                                 <td class="item">{{ user()->referredUsers->count() }}</td>
                             </tr>
                             <tr>
