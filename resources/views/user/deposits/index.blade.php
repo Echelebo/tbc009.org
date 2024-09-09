@@ -7,12 +7,12 @@
                 <h5 class="card-header bg-primary text-white">Top up your swap balance</h5>
                 <div class="card-body" id="pageContent">
                     <br><br>
-                    <div class="w-full grid grid-cols-1 gap-3 p-2">
+                    <div class="w-full-x grid-x grid-cols-1-x gap-3 p-2">
                         <a data-target="deposits" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 btn border-orange-500 px-3 hover:scale-110-x hover:text-blue-600 transition-all cursor-pointer rescron-card-trigger">
                             Top Up History</a>
                         <a data-target="new-deposit" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 btn border-orange-500 px-3 hover:scale-110-x hover:text-blue-600 transition-all cursor-pointer rescron-card-trigger">
                             Top Up</a>
 
 

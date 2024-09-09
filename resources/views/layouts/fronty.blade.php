@@ -40,27 +40,8 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-    <style>
-        .cursor-pointer {
-    cursor: pointer;
-}
 
-.transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-}
-
-.text-blue-500 {
-    --tw-text-opacity: 1;
-    color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-
-.hover\:text-blue-600:hover {
-    --tw-text-opacity: 1;
-    color: rgb(37 99 235 / var(--tw-text-opacity));
-}
-        </style>
+       
 
     <style>
         .goog-te-gadget .goog-te-combo {
@@ -9305,26 +9286,7 @@
         <script src="/code.jquery.com/jquery-3.5.1.min.js"
             integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous">
         </script>
-<script>
-//card trigger
-$(document).on('click', '.rescron-card-trigger', function (e) {
-    e.preventDefault();
-    $('.rescron-card-trigger').removeClass('text-blue-500');
-    $(this).addClass('text-blue-500');
-    var target = '#' + $(this).data('target');
-    //hide all cards
-    $('.rescron-card').addClass('hidden');
-    $(target).removeClass('hidden');
 
-    //scroll on small devices
-    if ($(window).width() < 768) {
-        var scrollTo = $(target).offset().top - 100;
-        $('html, body').animate({
-            scrollTop: scrollTo
-        }, 800);
-    }
-});
-</script>
 
         <!-- Include SweetAlert2 JavaScript file -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
@@ -9350,6 +9312,8 @@ $(document).on('click', '.rescron-card-trigger', function (e) {
 
 
         @yield('scripts')
+
+
 
         <script>
             $(document).ready(function() {
