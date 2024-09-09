@@ -28,20 +28,17 @@ class P2pController extends Controller
                 ->paginate(site('pagination'));
         }
 
-
-
         return view('user.p2p.index', compact(
             'page_title',
             'transfers',
         ));
     }
 
-
     // retrieve the user
     public function getUser(Request $request)
     {
         $request->validate([
-            'username' => 'required'
+            'username' => 'required',
         ]);
         $user = User::where('username', $request->username)->first();
 
@@ -52,9 +49,7 @@ class P2pController extends Controller
         return response()->json(validationError('User not found'), 422);
     }
 
-
-
-    //new deposit 
+    //new deposit
     public function newTransfer(Request $request)
     {
 
@@ -65,15 +60,15 @@ class P2pController extends Controller
 
         //check min and max
         $amount_before_fee = $request->amount;
-        
+
         $fee = site('transfer_fee') / 100 * $amount_before_fee;
-        $amount =  $amount_before_fee + $fee;
+        $amount = $amount_before_fee + $fee;
         if ($amount_before_fee < site('min_transfer') || $amount_before_fee > site('max_transfer')) {
             return response()->json(validationError('Min or max transfer amount not met'), 422);
         }
 
         //check for available balance
-        if (user()->balance < $amount) {
+        if (user()->exch_balance < $amount) {
             return response()->json(validationError('Insufficient balance'), 422);
         }
 
@@ -82,22 +77,19 @@ class P2pController extends Controller
             return response()->json(validationError('User not found'), 422);
         }
 
-        
         //debit the user
         $debit = User::find(user()->id);
-        $debit->balance = user()->balance - $amount;
+        $debit->exch_balance = user()->exch_balance - $amount;
         $debit->save();
 
         $ref = uniqid('trx-');
 
-
         //log transaction
         recordNewTransaction($amount, user()->id, 'debit', 'Tranfer to ' . $receiver->username);
 
-
         // credit the recever
         $credit = User::find($receiver->id);
-        $credit->balance = $receiver->balance + $amount_before_fee;
+        $credit->exch_balance = $receiver->exch_balance + $amount_before_fee;
         $credit->save();
 
         //log transaction
@@ -113,7 +105,6 @@ class P2pController extends Controller
         $transfer->amount = $amount_before_fee;
         $transfer->fee = $fee;
         $transfer->save();
-        
 
         // Notify new withdrawal
         // sendWithdrawalEmail($withdrawal);

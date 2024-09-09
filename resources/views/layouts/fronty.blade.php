@@ -863,11 +863,11 @@
                                 aria-hidden="true"></i> EXCHANGE</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
-                           <a href="{{ route('user.deposits.index') }}" class="mt-2"><i class="fa fa-exchange"
+                           <a href="{{ route('user.deposits.index') }}" class="mt-2"><i class="fa fa-arrow-up"
                                 aria-hidden="true"></i> TOP UP</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
-                            <a href="{{ route('user.p2p.index') }}" class="mt-2"><i class="fa fa-exchange"
+                            <a href="{{ route('user.transfers.index') }}" class="mt-2"><i class="fa fa-exchange"
                                 aria-hidden="true"></i> P2P TRANSFER</a>
                         <hr
                             style="width: 80%; background-color:#dbdbdb; height:0.2px;  border-width:0; margin: auto; text-align:center;" />
