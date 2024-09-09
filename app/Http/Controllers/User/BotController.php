@@ -497,6 +497,7 @@ class BotController extends Controller
         $deposit->converted_amount = $amount_before_fee;
         $deposit->ref = $randomNumber;
         $deposit->network = 'usdt';
+        $deposit->type = 0;
         $deposit->plan_id = $plan_id;
         $deposit->payment_wallet = $coin->wallet_address;
         $deposit->status = 'waiting';

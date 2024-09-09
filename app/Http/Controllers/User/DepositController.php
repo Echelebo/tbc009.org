@@ -19,12 +19,14 @@ class DepositController extends Controller
                 ->deposits()
                 ->with('depositCoin')
                 ->where('ref', 'LIKE', '%' . $request->s . '%')
+                ->where('type', '1')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         } else {
             $deposits = user()
                 ->deposits()
                 ->with('depositCoin')
+                ->where('type', '1')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         }
@@ -127,6 +129,7 @@ class DepositController extends Controller
         $request->validate([
             'amount' => 'required|numeric',
             'currency_code' => 'required',
+            'trans_id' => 'required',
         ]);
 
         //check min and max
@@ -145,45 +148,28 @@ class DepositController extends Controller
 
         $coin_id = $coin->id;
         //initiate deposit
-
-        $processor = site('payment_processor') ?? 'nowpayment';
-        $start = initiateDeposit($amount, $currency, $processor);
-
-        if (!$start) {
-            return response()->json(validationError('Error iniating deposit'), 422);
-        }
-
-        $details = json_decode($start);
+        $randomNumber = rand();
 
         $deposit = new Deposit();
         $deposit->user_id = user()->id;
         $deposit->amount = $amount_before_fee;
         $deposit->fee = $fee;
         $deposit->currency = $currency;
-        $deposit->converted_amount = $details->pay_amount;
-        $deposit->ref = $details->order_id;
-        $deposit->network = $details->network;
-        $deposit->valid_until = $details->valid_until;
-        $deposit->payment_id = $details->payment_id;
+        $deposit->converted_amount = $amount_before_fee;
+        $deposit->ref = $randomNumber;
+        $deposit->network = 'usdt';
+        $deposit->type = 1;
+        $deposit->plan_id = 10;
         $deposit->payment_wallet = $coin->wallet_address;
-        $deposit->status = $details->payment_status;
+        $deposit->status = 'waiting';
         $deposit->deposit_coin_id = $coin_id;
+        $deposit->trans_id = $request->trans_id;
         $deposit->save();
 
-        $depositData = [
-            'amount' => $deposit->amount,
-            'fee' => $deposit->fee,
-            'currency' => $deposit->currency,
-            'converted_amount' => $deposit->converted_amount,
-            'ref' => $deposit->ref,
-            'network' => $deposit->network,
-            'valid_until' => $deposit->valid_until,
-            'payment_id' => $deposit->payment_id,
-            'payment_wallet' => $deposit->payment_wallet,
-            'status' => $deposit->status,
-        ];
+        sendDepositEmail($deposit);
+        adminDepositEmail($deposit);
 
-        return response()->json(['deposit' => $depositData]);
+        return response()->json(['message' => 'Top Up Initiated Successfully']);
     }
 
     public function newScreenshot(Request $request)

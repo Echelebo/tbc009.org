@@ -24,7 +24,8 @@
                     </div>
                     <br><br>
                     <div class="w-full p-5 mb-5  rounded-lg transition-all rescron-card" id="deposits">
-                        <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">Top Up History</span>
+                        <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16" style="color: #333333;">Top
+                                Up History</span>
                         </h3>
 
                         <div class="w-full">
@@ -169,7 +170,14 @@
                             <input type="hidden" name="currency_code" id="currency_code" value="USDTTRC20">
                             <div class="table-responsive">
                                 <table class="table">
+
                                     <tbody>
+                                        <tr>
+                                            <td>Amount(USD)</td>
+                                            <td><input type="text" name="amount" id="amount" value=""
+                                                    class="form-control inputs" placeholder="Amount" required>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td colspan="2"><b>Required Information:</b></td>
                                         </tr>
@@ -183,9 +191,7 @@
                                 </table>
                             </div>
 
-                            <br><input type="submit" value="Save" class="btn bg-blue-500 btn-primary ml-auto"> &nbsp;
-                            <input type="button" class="btn bg-red-500 btn-primary ml-auto" value="Cancel"
-                                onclick="document.location='/user/bots'">
+                            <br><input type="submit" value="Save" class="btn bg-blue-500 btn-primary ml-auto">
                         </form>
                     </div>
 
@@ -451,9 +457,7 @@
             var amount = $('#amount').val() * 1;
             var currency_code = $('#currency_code').val() * 1;
             var currency = "{{ site('currency') }}" * 1;
-            var compound = $('#compound').val() * 1;
             var trans_id = $('#trans_id').val() * 1;
-            var plan_id = $('#plan_id').val() * 1;
 
             //check the currency code
             var error = null;

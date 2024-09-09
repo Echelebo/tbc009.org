@@ -9,7 +9,6 @@ class Deposit extends Model
 {
     use HasFactory;
 
-
     //user relationship
     public function user()
     {
@@ -34,5 +33,6 @@ class Deposit extends Model
         'network',
         'valid_until',
         'payment_id',
+        'type',
     ];
 }

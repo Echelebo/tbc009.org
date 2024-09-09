@@ -1,10 +1,14 @@
 <x-mail::message>
-    # Swap Deposit Confirmed
+    # Deposit Confirmed
 
     Hi {{ $deposit->user->name }},
-
-    Your swap plan deposit request of {{ formatAmount($deposit->amount) }} has been confirmed. Login into your account to confirm.
-
+    @if ($deposit->type == 1)
+        Your top up deposit request of {{ formatAmount($deposit->amount) }} has been confirmed. Login into your
+        account to confirm.
+    @else
+        Your swap plan deposit request of {{ formatAmount($deposit->amount) }} has been confirmed. Login into your
+        account to confirm.
+    @endif
 
     Thanks,<br>
     {{ site('name') }}

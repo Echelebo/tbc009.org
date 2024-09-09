@@ -85,50 +85,68 @@ class DepositController extends Controller
             return response()->json(['message' => 'Plan Deposit Deleted successfully']);
         } elseif ($action == 'approve') {
 
-            $capital = $deposit->amount;
+            if ($deposit->type == 1) {
+                $capital = $deposit->amount;
 
-            $tbccapital = $deposit->amount / 246000;
+                $debit = $user;
+                $debit->exch_balance = $user->exch_balance + $capital;
+                $debit->save();
 
-            //retrieve the bot
-            $bot = Bot::where('id', $deposit->plan_id)->first();
+                recordNewTransaction($capital, $user->id, 'credit', "Top Up");
 
-            if (!$bot) {
-                return response()->json(validationError('Error accessing plan'), 422);
-            }
+                $is_processed = processDeposit($id, 'approve');
+                if ($is_processed) {
+                    return response()->json(['message' => 'Top Up approved successfully']);
+                } else {
+                    return response()->json(validationError('Failed to process top up'));
+                }
 
-            $debit = $user;
-            $debit->balance = $user->balance - $tbccapital;
-            $debit->save();
-
-            //log transaction
-            recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
-
-            // $trade_data = tradeData($bot);
-            $duration = strtotime("+ $bot->duration $bot->duration_type");
-            //calculate total return
-            $days = floor($duration / (60 * 60 * 24));
-            //log activation
-            $activation = new BotActivation();
-            $activation->user_id = $user->id;
-            $activation->balance = $capital;
-            $activation->bot_id = $bot->id;
-            $activation->capital = $capital;
-            $activation->profit = 0;
-            $activation->expires_in = $duration;
-            $activation->daily_timestamp = now()->addDays(-1)->timestamp;
-            $activation->daily_sequence = json_encode([]);
-            $activation->gen_timestamps = json_encode([]);
-            $activation->status = 'active';
-            $activation->save();
-
-            //notify by email
-            sendNewBotActivationMail($activation);
-
-            $is_processed = processDeposit($id, 'approve');
-            if ($is_processed) {
-                return response()->json(['message' => 'Plan Deposit approved successfully']);
             } else {
-                return response()->json(validationError('Failed to process deposit'));
+                $capital = $deposit->amount;
+
+                $tbccapital = $deposit->amount / 246000;
+
+                //retrieve the bot
+                $bot = Bot::where('id', $deposit->plan_id)->first();
+
+                if (!$bot) {
+                    return response()->json(validationError('Error accessing plan'), 422);
+                }
+
+                $debit = $user;
+                $debit->balance = $user->balance - $tbccapital;
+                $debit->save();
+
+                //log transaction
+                recordNewTransaction($capital, $user->id, 'debit', "Plan [$bot->name] activation");
+
+                // $trade_data = tradeData($bot);
+                $duration = strtotime("+ $bot->duration $bot->duration_type");
+                //calculate total return
+                $days = floor($duration / (60 * 60 * 24));
+                //log activation
+                $activation = new BotActivation();
+                $activation->user_id = $user->id;
+                $activation->balance = $capital;
+                $activation->bot_id = $bot->id;
+                $activation->capital = $capital;
+                $activation->profit = 0;
+                $activation->expires_in = $duration;
+                $activation->daily_timestamp = now()->addDays(-1)->timestamp;
+                $activation->daily_sequence = json_encode([]);
+                $activation->gen_timestamps = json_encode([]);
+                $activation->status = 'active';
+                $activation->save();
+
+                //notify by email
+                sendNewBotActivationMail($activation);
+
+                $is_processed = processDeposit($id, 'approve');
+                if ($is_processed) {
+                    return response()->json(['message' => 'Plan Deposit approved successfully']);
+                } else {
+                    return response()->json(validationError('Failed to process deposit'));
+                }
             }
 
         } elseif ($action == 'reject') {

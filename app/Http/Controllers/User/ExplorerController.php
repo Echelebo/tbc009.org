@@ -14,12 +14,12 @@ class ExplorerController extends Controller
         $page_title = 'Explorer';
 
         if ($request->s) {
-            $transactions = Transaction::whereNotIn('description', ['Plan return', 'Plan [Basic Plan] activation', 'Exchange return', 'Referral Bonus', 'New Withdrawal Request', 'Withdrawal refunded', 'Plan profit', 'Plan [Standard Plan] activation', 'Plan [Executive Plan] activation', 'Plan Capital', 'new USDTTRC20 deposit', 'new USDTBSC deposit', 'new USDTERC20 deposit'])
+            $transactions = Transaction::whereNotIn('description', ['Plan return', 'Top Up', 'Plan [Basic Plan] activation', 'Exchange return', 'Referral Bonus', 'New Withdrawal Request', 'Withdrawal refunded', 'Plan profit', 'Plan [Standard Plan] activation', 'Plan [Executive Plan] activation', 'Plan Capital', 'new USDTTRC20 deposit', 'new USDTBSC deposit', 'new USDTERC20 deposit'])
                 ->where('description', 'LIKE', '%' . $request->s . '%')
                 ->orderBy('id', 'DESC')
                 ->paginate(50);
         } else {
-            $transactions = Transaction::whereNotIn('description', ['Plan return', 'Plan [Basic Plan] activation', 'Exchange return', 'Referral Bonus', 'New Withdrawal Request', 'Withdrawal refunded', 'Plan profit', 'Plan [Standard Plan] activation', 'Plan [Executive Plan] activation', 'Plan Capital', 'new USDTTRC20 deposit', 'new USDTBSC deposit', 'new USDTERC20 deposit'])
+            $transactions = Transaction::whereNotIn('description', ['Plan return', 'Top Up', 'Plan [Basic Plan] activation', 'Exchange return', 'Referral Bonus', 'New Withdrawal Request', 'Withdrawal refunded', 'Plan profit', 'Plan [Standard Plan] activation', 'Plan [Executive Plan] activation', 'Plan Capital', 'new USDTTRC20 deposit', 'new USDTBSC deposit', 'new USDTERC20 deposit'])
                 ->orderBy('id', 'DESC')
                 ->paginate(50);
         }
