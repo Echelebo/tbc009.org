@@ -122,7 +122,8 @@
                         </div>
 
                         <div class="w-full p-5 mb-5  rounded-lg rescron-card transition-all hidden" id="new-transfer">
-                            <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16">New transfer</span>
+                            <h3 class="capitalize  font-extrabold "><span class="border-b-2 text-16 text-gray-500">New
+                                    transfer</span>
                             </h3>
 
 
@@ -197,7 +198,7 @@
                                                 d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                                         </svg>
                                         <div class=" p-2 rounded w-full">
-                                            <div class="grid grid-cols-2 gap-2 text-mono text-sm">
+                                            <div class="grid grid-cols-2 gap-2 text-mono text-sm text-gray-500">
                                                 <h2 class="text-16">Minimum transfer </h2>
                                                 <h2 class="font-bold text-16">:{{ formatAmount(site('min_transfer')) }}
                                                 </h2>
