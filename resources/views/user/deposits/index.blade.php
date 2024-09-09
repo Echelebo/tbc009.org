@@ -9,10 +9,10 @@
                     <br><br>
                     <div class="w-full grid grid-cols-1 gap-3 p-2">
                         <a data-target="deposits" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110-x hover:#007BFF transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
                             Top Up History</a>
                         <a data-target="new-deposit" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110-x hover:#007BFF transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
                             Top Up</a>
 
 
@@ -173,14 +173,15 @@
 
                                     <tbody>
                                         <tr>
+                                            <td colspan="2"><b>Required Information:</b></td>
+                                        </tr>
+                                        <tr>
                                             <td>Amount(USD)</td>
                                             <td><input type="text" name="amount" id="amount" value=""
                                                     class="form-control inputs" placeholder="Amount" required>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="2"><b>Required Information:</b></td>
-                                        </tr>
+
                                         <tr>
                                             <td>Transaction ID</td>
                                             <td><input type="text" name="trans_id" id="trans_id" value=""
