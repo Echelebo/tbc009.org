@@ -482,7 +482,7 @@
                     processData: false,
                     success: function(response) {
 
-                        window.location.href = "/user/bots";
+                        window.location.href = "/user/deposits";
 
 
                         loadPage(form.attr('action'), submitButton, '#pageContent');
