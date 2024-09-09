@@ -118,7 +118,7 @@ $(document).on('submit', '.gen-form', function (e) {
                         if ($(".slider-input").length > 0) {
                             initializeSliders();
                         }
-                        
+
                     },
                     error: function () {
                         console.error('Error fetching new content');
@@ -167,8 +167,8 @@ $(document).on('submit', '.gen-form', function (e) {
 //card trigger
 $(document).on('click', '.rescron-card-trigger', function (e) {
     e.preventDefault();
-    $('.rescron-card-trigger').removeClass('text-purple-500');
-    $(this).addClass('text-purple-500');
+    $('.rescron-card-trigger').removeClass('text-blue-500');
+    $(this).addClass('text-blue-500');
     var target = '#' + $(this).data('target');
     //hide all cards
     $('.rescron-card').addClass('hidden');
