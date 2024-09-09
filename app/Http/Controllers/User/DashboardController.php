@@ -136,7 +136,7 @@ class DashboardController extends Controller
 
         $transactions = user()
             ->transactions()
-            ->whereNotIn('description', ['Plan return', 'Top Up', 'New Withdrawal Request', 'Exchange return', 'Referral Bonus', 'Withdrawal refunded', 'Plan profit', 'Plan [Basic Plan] activation', 'Plan [Standard Plan] activation', 'Plan [Executive Plan] activation', 'Plan Capital', 'new USDTTRC20 deposit', 'new USDTBSC deposit', 'new USDTERC20 deposit'])
+            ->whereIn('description', ['TBC Receive', 'TBC Send'])
             ->orderBy('id', 'DESC')
             ->paginate(site('pagination'));
 
@@ -209,7 +209,7 @@ class DashboardController extends Controller
         $ref = uniqid('trx-');
 
         //log transaction
-        recordNewTransaction($krin_amount, user()->id, 'debit', $receiver->walletaddr);
+        recordNewTransaction($krin_amount, user()->id, 'debit', 'TBC Send');
 
         // credit the recever
         $credit = User::find($receiver->id);
@@ -217,7 +217,7 @@ class DashboardController extends Controller
         $credit->save();
 
         //log transaction
-        recordNewTransaction($krin_amount, $receiver->id, 'credit', user()->walletaddr);
+        recordNewTransaction($krin_amount, $receiver->id, 'credit', 'TBC Receive');
 
         //store the transfer
         $transfer = new TbcP2p();
