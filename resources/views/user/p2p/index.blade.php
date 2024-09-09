@@ -215,7 +215,7 @@
                                             </div>
                                             <p class="text-xs text-gray-500 mt-2 ">
                                                 <span class="uppercase text-orange-500">Warning: </span>
-                                                Confirm the receipient's full name before proceeding to make transfer.
+                                                Confirm the receipient's full name before proceeding.
                                             </p>
                                         </div>
 
