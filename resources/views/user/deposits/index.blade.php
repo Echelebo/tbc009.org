@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="simple-pagination" data-paginator="deposits">
                                             <a id="search-deposit-button"
-                                                class="paginator-link px-3 py-2 bg-purple-500 text-white hover:scale-110 transition-all"
+                                                class="paginator-link px-3 py-2 bg-blue-500 text-white hover:scale-110 transition-all"
                                                 data-link="{{ route('user.deposits.index') }}" href="">Search</a>
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                             <p class="flex justify-end">
                                                 <button
                                                     data-link="{{ route('user.deposits.view', ['ref' => $deposit->ref]) }}"
-                                                    class="view-single-deposit flex space-x-1 items-center text-white  hover:scale-110 transition-all hover:text-white bg-purple-500 px-1 rounded-full text-xs">
+                                                    class="view-single-deposit flex space-x-1 items-center text-white  hover:scale-110 transition-all hover:text-white bg-blue-500 px-1 rounded-full text-xs">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />

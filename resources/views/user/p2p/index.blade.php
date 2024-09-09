@@ -9,10 +9,10 @@
                     <br><br>
                     <div class="w-full grid grid-cols-1 gap-3 p-2">
                         <a data-target="transfers" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
                             P2p History</a>
                         <a data-target="new-transfer" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-purple-700 transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
                             New P2p</a>
 
 
@@ -49,7 +49,7 @@
                                             </div>
                                             <div class="simple-pagination" data-paginator="transfers">
                                                 <a id="search-transfer-button"
-                                                    class="paginator-link px-3 py-2 bg-purple-500 hover:scale-110 transition-all"
+                                                    class="paginator-link px-3 py-2 bg-blue-500 hover:scale-110 transition-all"
                                                     data-link="{{ route('user.transfers.index') }}"
                                                     href="">Search</a>
                                             </div>
@@ -277,7 +277,7 @@
 
                                         <div class="mt-10 mb-10 px-3">
                                             <button type="submit"
-                                                class="bg-purple-500 px-2 py-1 rounded-lg hover:scale-110 transition-all">
+                                                class="bg-blue-500 px-2 py-1 rounded-lg hover:scale-110 transition-all">
                                                 Transfer
                                                 Now
                                             </button>

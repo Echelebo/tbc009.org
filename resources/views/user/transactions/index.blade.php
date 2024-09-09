@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="simple-pagination" data-paginator="transactions">
                                     <a id="search-transaction-button"
-                                        class="paginator-link px-3 py-2 bg-purple-500 hover:scale-110 transition-all"
+                                        class="paginator-link px-3 py-2 bg-blue-500 hover:scale-110 transition-all"
                                         data-link="{{ route('user.transactions.index') }}" href="">Search</a>
                                 </div>
                             </div>
