@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="col-sm-12">
             <div class="card">
-                <h5 class="card-header bg-primary text-white">Top up your swap balance</h5>
+                <h5 class="card-header bg-primary text-white">Transfers</h5>
                 <div class="card-body" id="pageContent">
                     <br><br>
                     <div class="w-full-x grid-x grid-cols-1-x gap-3 p-2">
