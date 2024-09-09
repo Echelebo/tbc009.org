@@ -7,12 +7,12 @@
                 <h5 class="card-header bg-primary text-white">Top up your swap balance</h5>
                 <div class="card-body" id="pageContent">
                     <br><br>
-                    <div class="w-full grid grid-cols-1 gap-3 p-2">
+                    <div class="w-full- grid- grid-cols-1- gap-3 p-2">
                         <a data-target="transfers" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 border-orange-500 btn px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
                             P2p History</a>
                         <a data-target="new-transfer" role="button"
-                            class="border-l-4 border-orange-500 px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
+                            class="border-l-4 border-orange-500 btn px-3 hover:scale-110 hover:text-blue-700 transition-all cursor-pointer rescron-card-trigger">
                             New P2p</a>
 
 
