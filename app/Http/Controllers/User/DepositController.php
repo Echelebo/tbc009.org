@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\DepositCoin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class DepositController extends Controller
 {
@@ -18,29 +17,29 @@ class DepositController extends Controller
         if ($request->s) {
             $deposits = user()
                 ->deposits()
-                ->with('depositCoin') 
+                ->with('depositCoin')
                 ->where('ref', 'LIKE', '%' . $request->s . '%')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         } else {
             $deposits = user()
                 ->deposits()
-                ->with('depositCoin') 
+                ->with('depositCoin')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         }
-        
 
+        $depositusdtwallet = DepositCoin::whereIn('id', [224, 221, 219])->orderBy('id', 'DESC')->get();
         $coins = DepositCoin::where('status', '1')->get();
 
         return view('user.deposits.index', compact(
             'page_title',
             'deposits',
-            'coins'
+            'coins',
+            'depositusdtwallet',
         ));
     }
-    
-    
+
     public function list(Request $request)
     {
         $page_title = 'My Deposits List';
@@ -48,18 +47,17 @@ class DepositController extends Controller
         if ($request->s) {
             $deposits = user()
                 ->deposits()
-                ->with('depositCoin') 
+                ->with('depositCoin')
                 ->where('ref', 'LIKE', '%' . $request->s . '%')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         } else {
             $deposits = user()
                 ->deposits()
-                ->with('depositCoin') 
+                ->with('depositCoin')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         }
-        
 
         $coins = DepositCoin::where('status', '1')->get();
 
@@ -69,7 +67,7 @@ class DepositController extends Controller
             'coins'
         ));
     }
-    
+
     public function history(Request $request)
     {
         $page_title = 'My Deposits History';
@@ -77,18 +75,17 @@ class DepositController extends Controller
         if ($request->s) {
             $deposits = user()
                 ->deposits()
-                ->with('depositCoin') 
+                ->with('depositCoin')
                 ->where('ref', 'LIKE', '%' . $request->s . '%')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         } else {
             $deposits = user()
                 ->deposits()
-                ->with('depositCoin') 
+                ->with('depositCoin')
                 ->orderBy('id', 'DESC')
                 ->paginate(site('pagination'));
         }
-        
 
         $coins = DepositCoin::where('status', '1')->get();
 
@@ -99,7 +96,6 @@ class DepositController extends Controller
         ));
     }
 
-
     //show only a single deposit
     public function deposit(Request $request)
     {
@@ -107,7 +103,6 @@ class DepositController extends Controller
         if (!$deposit) {
             abort(404);
         }
-
 
         $depositData = [
             'amount' => $deposit->amount,
@@ -121,12 +116,11 @@ class DepositController extends Controller
             'payment_wallet' => $deposit->payment_wallet,
             'status' => $deposit->status,
         ];
-        
+
         return response()->json(['deposit' => $depositData]);
     }
 
-
-    //new deposit 
+    //new deposit
     public function newDeposit(Request $request)
     {
 
@@ -151,10 +145,10 @@ class DepositController extends Controller
 
         $coin_id = $coin->id;
         //initiate deposit
-       
+
         $processor = site('payment_processor') ?? 'nowpayment';
         $start = initiateDeposit($amount, $currency, $processor);
-        
+
         if (!$start) {
             return response()->json(validationError('Error iniating deposit'), 422);
         }
@@ -188,31 +182,26 @@ class DepositController extends Controller
             'payment_wallet' => $deposit->payment_wallet,
             'status' => $deposit->status,
         ];
-        
+
         return response()->json(['deposit' => $depositData]);
     }
-    
-    
+
     public function newScreenshot(Request $request)
     {
         $screenshot = user()->deposits()->where('ref', $request->ref)->first();
         //initiate deposit
         $file = $request->file('screenshot');
-            $extenstion = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extenstion;
-            $file->move('assets/images/deposits', $filename);
-            $bestfilename = $filename;
-            $screenshot->screenshot = $bestfilename;
-        
+        $extenstion = $file->getClientOriginalExtension();
+        $filename = time() . '.' . $extenstion;
+        $file->move('assets/images/deposits', $filename);
+        $bestfilename = $filename;
+        $screenshot->screenshot = $bestfilename;
+
         $screenshot->save();
-        
+
         return back();
-        
-        
+
     }
-
-
-
 
     public function depositCallback()
     {
